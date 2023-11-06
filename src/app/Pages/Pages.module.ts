@@ -8,11 +8,12 @@ import { FooterComponent } from '../Components/footer/footer.component';
 import { HeaderComponent } from '../Components/header/header.component';
 import { ContentComponent } from '../Components/content/content.component';
 import { ComponentModule } from '../Components/component.module';
+import { ThirdPageComponent } from './third-page/third-page.component';
 
 
 
 @NgModule({
-  declarations: [ErrorComponent,FirstPageComponent,HomeComponent,SecondPageComponent],
+  declarations: [ErrorComponent,FirstPageComponent,HomeComponent,SecondPageComponent, ThirdPageComponent],
   imports: [
     CommonModule,
     ComponentModule
