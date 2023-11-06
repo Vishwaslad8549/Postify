@@ -63,7 +63,8 @@
               "browserTarget": "Fullstack:build:production"
             },
             "development": {
-              "browserTarget": "Fullstack:build:development"
+              "browserTarget": "Fullstack:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -72,6 +73,7 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "Fullstack:build"
+            
           }
         },
         "test": {
