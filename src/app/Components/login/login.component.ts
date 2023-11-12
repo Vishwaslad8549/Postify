@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
   username = 'Vishwas'
-  password = ''
+  password = '123456'
   errorMessage = 'Invalid Credentials'
   invalidLogin = false
 

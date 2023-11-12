@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 import { ComponentModule } from './Components/component.module';
 import { PageModule } from './Pages/Pages.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
+    
     
   ],
   imports: [

@@ -7,17 +7,17 @@ import { TodoComponent } from './todo/todo.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { WelcomeComponent } from './welcome/welcome.component';
-
+import { FormComponent } from './form/form.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent,ContentComponent, TodoComponent, LoginComponent, WelcomeComponent],
+  declarations: [HeaderComponent, FooterComponent,ContentComponent, TodoComponent, LoginComponent, WelcomeComponent,FormComponent],
  
   imports: [
     CommonModule,
     FormsModule
   ],
   exports:[HeaderComponent, FooterComponent,ContentComponent,TodoComponent,
-    LoginComponent]
+    LoginComponent,FormComponent]
 })
 export class ComponentModule { }
