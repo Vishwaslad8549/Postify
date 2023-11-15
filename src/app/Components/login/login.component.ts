@@ -13,9 +13,6 @@ export class LoginComponent {
   errorMessage = 'Invalid Credentials'
   invalidLogin = false
 
-  //Router
-  //Angular.giveMeRouter
-  //Dependency Injection
   constructor(private router: Router,private authservice:AuthService) { }
 
   ngOnInit() {
@@ -25,10 +22,10 @@ export class LoginComponent {
     
     if(this.authservice.authenticate(this.username, this.password)) {
       //Redirect to Welcome Page
-      this.router.navigate(['welcome', this.username])
+      this.router.navigate(['home'])
       this.invalidLogin = false
     } else {
       this.invalidLogin = true
     }
-  }
+   }
 }

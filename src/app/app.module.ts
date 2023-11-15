@@ -7,9 +7,12 @@ import { ComponentModule } from './Components/component.module';
 import { PageModule } from './Pages/Pages.module';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
+    
     
     
   ],
@@ -18,7 +21,8 @@ import { PageModule } from './Pages/Pages.module';
     AppRoutingModule,
     HttpClientModule,
     ComponentModule,
-    PageModule
+    PageModule,
+   
     
   ],
   providers: [],

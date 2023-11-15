@@ -8,16 +8,21 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { FormComponent } from './form/form.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { RouterModule } from '@angular/router'
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent,ContentComponent, TodoComponent, LoginComponent, WelcomeComponent,FormComponent],
+  declarations: [HeaderComponent, FooterComponent,ContentComponent, TodoComponent,
+     LoginComponent, WelcomeComponent,FormComponent,
+     NavbarComponent,],
  
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   exports:[HeaderComponent, FooterComponent,ContentComponent,TodoComponent,
-    LoginComponent,FormComponent]
+    LoginComponent,FormComponent,NavbarComponent,WelcomeComponent]
 })
 export class ComponentModule { }

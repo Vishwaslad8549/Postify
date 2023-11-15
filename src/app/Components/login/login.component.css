@@ -1,0 +1,19 @@
+h1{
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.container{
+    position: relative;
+    margin-top: 100px;
+    margin: auto;
+    width: 50%;
+    top: 100px;
+}
+.container button{
+    position: relative;
+    width: 50%;
+    margin: auto;
+    
+    display: block;
+    margin-top: 20px;
+}

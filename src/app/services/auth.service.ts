@@ -4,13 +4,16 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-
+  Isloggedin!:boolean;
   constructor() { }
   authenticate(username:string,password:string){
     if(username=="Vishwas" && password=="zyNxx"){
-      console.log("Authenticated")
+      this.Isloggedin=true
       return true
     }
     else return false
+  }
+  isloggedin(){
+    return this.Isloggedin;
   }
 }
