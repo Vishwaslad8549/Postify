@@ -1,0 +1,39 @@
+<h1> Todo </h1>
+
+
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>UserId</th>
+        <th>isComplete</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+        
+               <tr *ngFor="let todo of todos">
+               
+                <td>{{todo.name}}</td>
+                <td>{{todo.userId}}</td>
+                <td>{{todo.completed}}</td>
+                <td><button (click)="updateTodo(todo.id)" class="btn btn-success">Update</button></td>
+                <td><button (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button></td>
+                
+                
+              </tr>
+       
+    </tbody>
+
+  </table>
+<button class="btn btn-info" type="submit" (click)="oncreate()">Add Todo</button>
+<button (click)="click()">click</button>
+  <!-- <div class="row">
+    <td><button (click)="createNewItem()" class="btn btn-warning">Create</button></td>
+  </div>
+
+</div>
+<button (click)="addTodo()">Add todo</button> -->

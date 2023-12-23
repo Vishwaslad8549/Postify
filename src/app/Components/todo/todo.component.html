@@ -1,38 +1,33 @@
-<h1> Todo </h1>
-
-
-
-<div class="container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>UserId</th>
-        <th>isComplete</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-        
-               <tr *ngFor="let todo of todos">
-               
-                <td>{{todo.name}}</td>
-                <td>{{todo.userId}}</td>
-                <td>{{todo.completed}}</td>
-                <td><button (click)="updateTodo(todo.id)" class="btn btn-success">Update</button></td>
-                <td><button (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button></td>
-                
-                
-              </tr>
-       
-    </tbody>
-
-  </table>
-
-  <div class="row">
-    <td><button (click)="createNewItem()" class="btn btn-warning">Create</button></td>
-  </div>
-
-</div>
-<button (click)="addTodo()">Add todo</button>
+<form #myform="ngForm" (ngSubmit)="onSubmit(myform)">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="field1">Item Id:</label>
+                <input type="text" class="form-control" id="itemId" name="itemId" [(ngModel)]="formData.itemId">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="field2">User Id:</label>
+                <input type="text" class="form-control" id="userId" name="userId" [(ngModel)]="formData.userId">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="field3">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="formData.name">
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="field4">Completed:</label>
+                <input type="text" class="form-control" id="completed" name="completed" [(ngModel)]="formData.completed">
+            </div>
+        </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>

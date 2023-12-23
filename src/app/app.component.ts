@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PostService } from './services/post/post.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,9 @@ export class AppComponent {
   title = 'Fullstack';
   helloWorld(){
     alert("zzzzzzzzzz")
+  }
+
+  constructor(){
+    
   }
 }

@@ -8,12 +8,14 @@ export class AuthService {
   constructor() { }
   authenticate(username:string,password:string){
     if(username=="Vishwas" && password=="zyNxx"){
-      this.Isloggedin=true
+      sessionStorage.setItem('authenticatedUser',username)
+      this.Isloggedin=true;
       return true
     }
     else return false
   }
   isloggedin(){
-    return this.Isloggedin;
+    let user = sessionStorage.getItem('authenticaterUser')
+    return (user === null)
   }
 }

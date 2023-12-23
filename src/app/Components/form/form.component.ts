@@ -21,5 +21,6 @@ export class FormComponent {
   }
 onSubmit(form:NgForm){
 this.todoservice.setFormData(form.value)
+console.log(form.value)
 }
 }

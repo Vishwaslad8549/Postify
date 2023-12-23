@@ -5,14 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ComponentModule } from './Components/component.module';
 import { PageModule } from './Pages/Pages.module';
-
+import { DxButtonModule } from 'devextreme-angular';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    
     
     
   ],
@@ -22,6 +21,8 @@ import { PageModule } from './Pages/Pages.module';
     HttpClientModule,
     ComponentModule,
     PageModule,
+    DxButtonModule
+
    
     
   ],

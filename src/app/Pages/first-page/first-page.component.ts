@@ -7,11 +7,6 @@ import { TodoserviceService } from 'src/app/services/todoservice.service';
   styleUrls: ['./first-page.component.css']
 })
 export class FirstPageComponent  {
-  formData!:any;
-constructor(private todoservice:TodoserviceService){
 
-}
-click(){
-  this.formData=this.todoservice.getFormData();
-}
+
 }

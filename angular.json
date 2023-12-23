@@ -13,6 +13,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+            "devexpress-diagram",
+            "devexpress-gantt",
+            "devextreme-quill",
+            "jszip"
+          ],
             "outputPath": "dist/fullstack",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -25,7 +31,7 @@
               "src/assets"
             ],
             "styles": [
-              
+              "node_modules/devextreme/dist/css/dx.light.css",
               "src/styles.css"
             ],
             "scripts": []

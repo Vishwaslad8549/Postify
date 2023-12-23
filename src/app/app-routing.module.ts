@@ -8,12 +8,17 @@ import { WelcomeComponent } from './Components/welcome/welcome.component';
 import { ThirdPageComponent } from './Pages/third-page/third-page.component';
 import { LoginComponent } from './Components/login/login.component';
 import { authGuard } from './Guards/auth.guard';
+import { LogoutComponent } from './Components/logout/logout.component';
+import { TodoComponent } from './Components/todo/todo.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: 'home', component: HomeComponent,canActivate:[authGuard] },
   { path: 'first', component: FirstPageComponent },
   { path: 'second', component: SecondPageComponent },
+  {path:"todos/:id",component:TodoComponent},
   { path: 'third', component: ThirdPageComponent },
   { path: 'welcome/:user', component: WelcomeComponent },
   { path: '', component: HomeComponent },
