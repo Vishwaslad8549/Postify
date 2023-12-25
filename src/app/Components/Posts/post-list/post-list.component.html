@@ -1,1 +1,43 @@
-<p>post-list works!</p>
+
+<!-- <div>
+    <dx-accordion #accordion [dataSource]="Posts" [collapsible]="true" [deferRendering]="false" [animationDuration]="300"
+        [selectedItems]="[Posts[0]]" id="accordion-container">
+
+        <div *dxTemplate="let post of 'item'">
+            <div>
+                    
+                    <b>{{ post.content }}</b>
+                    <div class="button">
+                        <dx-button
+                            
+                            type="required"
+                            text="Edit"
+                            [routerLink]="['/edit','/post.id']">
+                        </dx-button>
+                        <a [routerLink]="['/edit',post.id]">Edit</a>
+                        <dx-button
+                            (onClick)="onDelete(post.id)"
+                            type="required"
+                            text="Delete">
+                        </dx-button>
+                    </div>
+                    
+                
+            </div>
+        </div>
+        
+    </dx-accordion>
+
+   
+</div> -->
+
+{{Posts|json}}
+<div *ngFor="let p of Posts">
+{{p.title}}
+<br>
+{{p.content}}
+    <div class="button">
+        <button class="btn btn-primary" dxButton text="Edit" (click)="onEdit(p.id)">Edit</button>
+        <button class="btn btn-danger" dxButton text="Delete" (click)="onDelete(p.id)">Delete</button>
+    </div>
+</div>

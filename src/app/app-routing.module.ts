@@ -10,6 +10,9 @@ import { LoginComponent } from './Components/login/login.component';
 import { authGuard } from './Guards/auth.guard';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { TodoComponent } from './Components/todo/todo.component';
+import { PostComponent } from './Pages/post/post.component';
+import { PostCreateComponent } from './Components/Posts/post-create/post-create.component';
+import { PostListComponent } from './Components/Posts/post-list/post-list.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -17,12 +20,15 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path: 'home', component: HomeComponent,canActivate:[authGuard] },
   { path: 'first', component: FirstPageComponent },
-  { path: 'second', component: SecondPageComponent },
+  // { path: 'post', component: PostComponent },
+  { path: 'home/create', component: PostCreateComponent },
+  { path: 'home/edit/:postId', component: PostCreateComponent},
+  { path: 'home/list', component: PostListComponent },
   {path:"todos/:id",component:TodoComponent},
   { path: 'third', component: ThirdPageComponent },
   { path: 'welcome/:user', component: WelcomeComponent },
   { path: '', component: HomeComponent },
-  { path: '**', component: ErrorComponent }
+  
 
 
 ];

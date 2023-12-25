@@ -4,19 +4,19 @@ import { ErrorComponent } from './error/error.component';
 import { FirstPageComponent } from './first-page/first-page.component';
 import { HomeComponent } from './home/home.component';
 import { SecondPageComponent } from './second-page/second-page.component';
-import { FooterComponent } from '../Components/footer/footer.component';
-import { HeaderComponent } from '../Components/header/header.component';
-import { ContentComponent } from '../Components/content/content.component';
 import { ComponentModule } from '../Components/component.module';
 import { ThirdPageComponent } from './third-page/third-page.component';
+import { PostComponent } from './post/post.component';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [ErrorComponent,FirstPageComponent,HomeComponent,SecondPageComponent, ThirdPageComponent],
+  declarations: [ErrorComponent,FirstPageComponent,HomeComponent,SecondPageComponent, ThirdPageComponent, PostComponent],
   imports: [
     CommonModule,
-    ComponentModule
+    ComponentModule,
+    RouterModule
   ],
   exports:[ErrorComponent,FirstPageComponent,HomeComponent,SecondPageComponent]
 })

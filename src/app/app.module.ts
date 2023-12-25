@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ComponentModule } from './Components/component.module';
 import { PageModule } from './Pages/Pages.module';
 import { DxButtonModule } from 'devextreme-angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -21,7 +22,8 @@ import { DxButtonModule } from 'devextreme-angular';
     HttpClientModule,
     ComponentModule,
     PageModule,
-    DxButtonModule
+    DxButtonModule,
+    BrowserAnimationsModule
 
    
     

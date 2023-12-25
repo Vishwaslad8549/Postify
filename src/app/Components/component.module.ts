@@ -14,7 +14,10 @@ import { LogoutComponent } from './logout/logout.component';
 import { TodoComponent } from './todo/todo.component';
 import { PostCreateComponent } from './Posts/post-create/post-create.component';
 import { PostListComponent } from './Posts/post-list/post-list.component';
-
+import { DxFormModule,DxTextAreaModule,DxButtonModule,DxAccordionModule} from 'devextreme-angular';
+import { MatExpansionModule} from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @NgModule({
   declarations: [HeaderComponent, FooterComponent,ContentComponent, ListTodoComponent,
      LoginComponent, WelcomeComponent,FormComponent,
@@ -26,8 +29,15 @@ import { PostListComponent } from './Posts/post-list/post-list.component';
     CommonModule,
     FormsModule,
     RouterModule,
-    FormsModule
-  ],
+    FormsModule,
+    DxFormModule,
+    DxTextAreaModule,
+    DxButtonModule,
+    DxAccordionModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatCardModule],
+
   exports:[HeaderComponent, FooterComponent,ContentComponent,ListTodoComponent,
     LoginComponent,FormComponent,NavbarComponent,WelcomeComponent,LogoutComponent,FooterDirective, PostCreateComponent,PostListComponent]
 })
