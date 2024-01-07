@@ -6,13 +6,12 @@ import { HomeComponent } from './home/home.component';
 import { SecondPageComponent } from './second-page/second-page.component';
 import { ComponentModule } from '../Components/component.module';
 import { ThirdPageComponent } from './third-page/third-page.component';
-import { PostComponent } from './post/post.component';
 import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [ErrorComponent,FirstPageComponent,HomeComponent,SecondPageComponent, ThirdPageComponent, PostComponent],
+  declarations: [ErrorComponent,FirstPageComponent,HomeComponent,SecondPageComponent, ThirdPageComponent],
   imports: [
     CommonModule,
     ComponentModule,

@@ -18,11 +18,13 @@ import { DxFormModule,DxTextAreaModule,DxButtonModule,DxAccordionModule} from 'd
 import { MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { PostComponent } from './Posts/post/post.component';
 @NgModule({
   declarations: [HeaderComponent, FooterComponent,ContentComponent, ListTodoComponent,
      LoginComponent, WelcomeComponent,FormComponent,
      NavbarComponent,
-     LogoutComponent,FooterDirective, TodoComponent, PostCreateComponent,PostListComponent],
+     LogoutComponent,FooterDirective, TodoComponent, PostCreateComponent,PostListComponent,
+     PostComponent],
     
  
   imports: [
@@ -36,9 +38,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     DxAccordionModule,
     MatExpansionModule,
     MatFormFieldModule,
-    MatCardModule],
+    MatCardModule,
+    DxAccordionModule,
+  ],
 
   exports:[HeaderComponent, FooterComponent,ContentComponent,ListTodoComponent,
-    LoginComponent,FormComponent,NavbarComponent,WelcomeComponent,LogoutComponent,FooterDirective, PostCreateComponent,PostListComponent]
+    LoginComponent,FormComponent,NavbarComponent,WelcomeComponent,LogoutComponent,
+    FooterDirective, PostCreateComponent,PostListComponent,PostComponent]
 })
 export class ComponentModule { }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -6,15 +6,53 @@
     
       
     <ul class="navbar-nav">
-      <li><a  *ngIf="authservice.isloggedin()" routerLink="/home" class="nav-link">Home</a></li>
-      <li><a  *ngIf="authservice.isloggedin()" routerLink="/first" class="nav-link">FirstPage</a></li>
-      <!-- <li><a  *ngIf="authservice.isloggedin()" routerLink="/post" class="nav-link">Posts</a></li> -->
+      <li><a  *ngIf="authservice.Isloggedin" routerLink="/home" class="nav-link">Home</a></li>
+      <li><a  *ngIf="authservice.Isloggedin" routerLink="/first" class="nav-link">FirstPage</a></li>
+      
     </ul>
 
         <ul class="navbar-nav navbar-collapse justify-content-end">
-          <li><a *ngIf="!authservice.isloggedin()" routerLink="/login" class="nav-link">Login</a></li>
-          <li><a  *ngIf="authservice.isloggedin()" routerLink="/logout" class="nav-link">Logout</a></li>
+          <li><a *ngIf="!authservice.Isloggedin" routerLink="/login" class="nav-link">Login</a></li>
+          <li><a  *ngIf="authservice.Isloggedin" routerLink="/login" class="nav-link">Logout</a></li>
     </ul>
       
   
+  </nav> -->
+
+<!-- <li><a  *ngIf="authservice.isloggedin()" routerLink="/post" class="nav-link">Posts</a></li> -->
+
+<!-- <nav class="bg-black p-1">
+    <div class="container">
+      
+      <a href="#" class="text-white text-lg font-semibold">Your Company</a>
+      <a href="#" class="text-white hover:text-#49c5b6 transition duration-300">About</a>
+      
+      <div class="space-x-4 flex justify-end">
+        
+        
+        <a href="#" class="text-white hover:text-#49c5b6 transition duration-300">Services</a>
+        <a href="#" class="text-white hover:text-#49c5b6 transition duration-300">Contact</a>
+      </div>
+    </div>
   </nav>
+   -->
+
+
+<nav class="bg-gradient-to-r from-teal-800 to-purple-800 p-2">
+  <div class="container mx-auto flex justify-between items-center">
+    
+    <a href="#" class="text-white text-lg font-semibold">Kira Kart</a>
+
+  
+    <div class="space-x-4">
+      <a routerLink="/home" *ngIf="authservice.Isloggedin"
+        class="text-white hover:text-#49c5b6 transition duration-300 ">Home</a>
+      <a routerLink="/first" *ngIf="authservice.Isloggedin"
+        class="text-white hover:text-#49c5b6 transition duration-300">FirstPage</a>
+      <a routerLink="/login" *ngIf="!authservice.Isloggedin"
+        class="text-white hover:text-#49c5b6 transition duration-300">Login</a>
+      <a routerLink="/logout" *ngIf="authservice.Isloggedin"
+        class="text-white hover:text-#49c5b6 transition duration-300">Logout</a>
+    </div>
+  </div>
+</nav>

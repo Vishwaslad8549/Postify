@@ -1,5 +1,15 @@
 
-<!-- <div>
+<!--  
+  <div class="relative">
+ 
+    <a routerLink="create" class="fixed top-0 right-0 mt-14 mr-4  p-2 text-white bg-gradient-to-r from-teal-500 to-purple-500 rounded-full shadow-lg hover:opacity-90 transition duration-300">
+      New Post
+    </a>
+  </div> -->
+  <div class="container mt-16">
+ <div *ngIf="Posts.length===0">
+<h1 class="flex items-center justify-center  font-bold">No data to display</h1></div>
+ <div *ngIf="Posts">
     <dx-accordion #accordion [dataSource]="Posts" [collapsible]="true" [deferRendering]="false" [animationDuration]="300"
         [selectedItems]="[Posts[0]]" id="accordion-container">
 
@@ -12,9 +22,9 @@
                             
                             type="required"
                             text="Edit"
-                            [routerLink]="['/edit','/post.id']">
+                            (onClick)="onEdit(post.id)">
                         </dx-button>
-                        <a [routerLink]="['/edit',post.id]">Edit</a>
+                        <!-- <a [routerLink]="['/edit',post.id]">Edit</a> -->
                         <dx-button
                             (onClick)="onDelete(post.id)"
                             type="required"
@@ -29,9 +39,10 @@
     </dx-accordion>
 
    
-</div> -->
+</div> 
+</div>
 
-{{Posts|json}}
+<!-- {{Posts|json}}
 <div *ngFor="let p of Posts">
 {{p.title}}
 <br>
@@ -40,4 +51,4 @@
         <button class="btn btn-primary" dxButton text="Edit" (click)="onEdit(p.id)">Edit</button>
         <button class="btn btn-danger" dxButton text="Delete" (click)="onDelete(p.id)">Delete</button>
     </div>
-</div>
+</div> -->

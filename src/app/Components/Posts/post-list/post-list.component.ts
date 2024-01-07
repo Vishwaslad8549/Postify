@@ -17,20 +17,23 @@ constructor(private postservice:PostService,private router:Router){
  
 }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
+   // console.log(changes)
   }
 
 ngOnInit() {
+ 
   this.postservice.getPosts();
   this.postsSub = this.postservice.getPostUpdateListener()
   .subscribe((posts: Post[]) => {
-    console.log(posts)
+    //console.log(posts)
     this.Posts = posts;
   });
 }
 onEdit(id:string){
   //this.postservice.mode="edit"
   this.router.navigateByUrl("home/edit/"+id)
+  console.log("Edit clicked",id)
+  
 }
 onDelete(id:string){
   

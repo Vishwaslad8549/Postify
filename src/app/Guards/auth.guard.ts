@@ -6,10 +6,11 @@ export function authGuard(): CanActivateFn {
   return () => {
     const authService: AuthService = inject(AuthService);
     
-    if (authService.isloggedin() ) {
+    if (authService.Isloggedin ) {
+      console.log(" AuthGuard true");
       return true;
     }
     else
-    return true;
+    return false;
   };
 }

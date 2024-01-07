@@ -22,11 +22,13 @@
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
     "@material/card": "^14.0.0",
+    "autoprefixer": "^10.4.16",
     "body-parser": "^1.20.2",
     "devextreme": "23.1.6",
     "devextreme-angular": "23.1.6",
     "express": "^4.18.2",
     "mongoose": "^8.0.3",
+    "postcss": "^8.4.32",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
@@ -43,6 +45,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "nodemon": "^3.0.2",
+    "tailwindcss": "^3.4.0",
     "typescript": "~5.1.3"
   }
 }
