@@ -18,7 +18,9 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/images", express.static(path.join("Backend/images")));
-
+app.use("/",(req,res)=>{
+res.json({message:"Hello from Postify"})
+})
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
