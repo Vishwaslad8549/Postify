@@ -1,0 +1,5 @@
+{
+    "env":{
+"Mongo_DB_PW":"YBh1JlMEP7rzuVjH",
+"JWT_KEY":"secret_this_should_be_longer"
+}}

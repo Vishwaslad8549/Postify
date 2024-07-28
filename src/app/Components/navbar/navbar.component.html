@@ -45,14 +45,17 @@
 
   
     <div class="space-x-4">
-      <a routerLink="/home" *ngIf="authservice.Isloggedin"
-        class="text-white hover:text-#49c5b6 transition duration-300 ">Home</a>
-      <a routerLink="/first" *ngIf="authservice.Isloggedin"
-        class="text-white hover:text-#49c5b6 transition duration-300">FirstPage</a>
-      <a routerLink="/login" *ngIf="!authservice.Isloggedin"
+  
+      <a routerLink="/login" *ngIf="!Isloggedin"
         class="text-white hover:text-#49c5b6 transition duration-300">Login</a>
-      <a routerLink="/logout" *ngIf="authservice.Isloggedin"
-        class="text-white hover:text-#49c5b6 transition duration-300">Logout</a>
+
+        <a routerLink="/home/create" *ngIf="Isloggedin"
+        class="text-white hover:text-#49c5b6 transition duration-300">New Post</a>
+
+        <a routerLink="/home/list" *ngIf="Isloggedin"
+        class="text-white hover:text-#49c5b6 transition duration-300">Posts</a>
+      <button (click)="onLogout()" class="text-white hover:text-#49c5b6 transition duration-300" *ngIf="Isloggedin"> 
+        Logout</button>
     </div>
   </div>
 </nav>

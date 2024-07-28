@@ -1,5 +1,6 @@
 const path = require("path");
 const express = require("express");
+const functions = require('firebase-functions');
 const bodyParser = require("body-parser");
 const postsRoutes= require("./routes/posts");
 const userRoutes= require("./routes/user");
@@ -11,16 +12,20 @@ mongoose.connect("mongodb+srv://vishwas:"+process.env.Mongo_DB_PW+"@cluster0.vpm
 .then(()=>{
   console.log("Connected to Db")
 }).catch(()=>{
-  console.log("Connection failed")
+  console.log("Connection faileddddd")
 })
+
+app.use(express.static(path.join(__dirname, 'dist/FULLSTACK')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/FULLSTACK/Backend/index.html'));
+});
 const cors =require('cors')
 app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/images", express.static(path.join("Backend/images")));
-app.use("/",(req,res)=>{
-res.json({message:"Hello from Postify"})
-})
+
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -37,3 +42,4 @@ app.use((req, res, next) => {
 app.use("/api/posts",postsRoutes);
 app.use("/api/user",userRoutes)
 module.exports = app;
+exports.app = functions.https.onRequest(app);

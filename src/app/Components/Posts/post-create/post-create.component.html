@@ -27,17 +27,52 @@
       Post List
     </a>
   </div> -->
-  <div class="container mt-16">
+  <!-- <div class="container mt-16">
   <form (submit)="onSavePost()">
 <dx-form #myform [(formData)]="Post">
     <dxi-item itemType="group" caption="Posts" [colCount]="3">
         <dxi-item dataField="title" [editorOptions]="{width:'75%'}"></dxi-item>
         <dxi-item dataField="content" [editorOptions]="{width:'100%'}"></dxi-item>    
-    </dxi-item>
-    
-    <dxi-item>
+        
+      </dxi-item>
+      <dxi-item itemType="group">
+        <dx-file-uploader
+      selectButtonText="Select photo"
+      labelText=""
+      accept="image/*"
+      uploadMode="useForm"
+     (onValueChanged)="onUpload($event)"
+    >
+    </dx-file-uploader>
+      </dxi-item>
+      <div *ngIf="imagePreview">
+      <img src="imagePreview" >
+    </div>
+      <dxi-item>
         <dx-button text="Submit" [useSubmitBehavior]="true"></dx-button>
     </dxi-item>
 </dx-form>
 </form>
-</div>
+</div> -->
+<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()" class="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
+  <!-- Name input -->
+  <div class="mb-4">
+    <label for="name" class="block text-gray-600 text-sm font-medium mb-2">Name:</label>
+    <input type="text" id="name" formControlName="name" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+  </div>
+
+  <!-- Content input -->
+  <div class="mb-4">
+    <label for="content" class="block text-gray-600 text-sm font-medium mb-2">Content:</label>
+    <textarea id="content" formControlName="content" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"></textarea>
+  </div>
+
+  <!-- Image file input -->
+  <div class="mb-4">
+    <label for="image" class="block text-gray-600 text-sm font-medium mb-2">Image:</label>
+    <input type="file" id="image" (change)="onUpload($event)" formControlName="image" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+  </div>
+
+  <!-- Submit button -->
+  <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Submit</button>
+</form>

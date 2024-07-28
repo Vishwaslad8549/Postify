@@ -14,18 +14,23 @@
         [selectedItems]="[Posts[0]]" id="accordion-container">
 
         <div *dxTemplate="let post of 'item'">
-            <div>
+            <div>   
+                    <div class="flex flex-row justify-center items-center  ">
+                    <img [src]="post.imagePath" class=" w-80 h-80 rounded-lg ">
                     
-                    <b>{{ post.content }}</b>
+                     </div>
+                     <span class=" flex flex-row justify-center text-lg font-semibold">{{ post.content }}</span>
+                    
                     <div class="button">
                         <dx-button
-                            
+                            *ngIf="isauthenticated"
                             type="required"
                             text="Edit"
                             (onClick)="onEdit(post.id)">
                         </dx-button>
-                        <!-- <a [routerLink]="['/edit',post.id]">Edit</a> -->
+                        
                         <dx-button
+                        *ngIf="isauthenticated"
                             (onClick)="onDelete(post.id)"
                             type="required"
                             text="Delete">
