@@ -15,11 +15,11 @@ mongoose.connect("mongodb+srv://vishwas:"+process.env.Mongo_DB_PW+"@cluster0.vpm
   console.log("Connection faileddddd")
 })
 
-app.use(express.static(path.join(__dirname, 'dist')));
+// app.use(express.static(path.join(__dirname, 'dist')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'dist/index.html'));
+// });
 const cors =require('cors')
 app.use(cors())
 app.use(bodyParser.json());
