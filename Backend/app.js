@@ -8,7 +8,9 @@ const app = express();
 const mongoose =require("mongoose")
 
 
-mongoose.connect("mongodb+srv://vishwas:"+process.env.Mongo_DB_PW+"@cluster0.vpma65k.mongodb.net/node-angular?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://vishwas:"+
+  process.env.Mongo_DB_PW+
+  "@cluster0.vpma65k.mongodb.net/node-angular?retryWrites=true&w=majority")
 .then(()=>{
   console.log("Connected to Db")
 }).catch(()=>{
@@ -24,7 +26,7 @@ const cors =require('cors')
 app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/images", express.static(path.join("Backend/images")));
+app.use("/images", express.static(path.join("images")));
 
 
 app.use((req, res, next) => {
