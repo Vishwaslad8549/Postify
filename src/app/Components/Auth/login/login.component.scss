@@ -1,0 +1,171 @@
+// Colors and styling variables
+$primary-color: #ff6f61;
+$accent-color: #60a5fa;
+$background-color: linear-gradient(135deg, #ffffff 0%, #fffc53 100%);
+
+$card-background: rgba(0, 0, 0, 0.15);
+$backdrop-filter: blur(20px);
+$button-glow: 0px 8px 15px rgba(255, 111, 97, 0.5);
+
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  background: $background-color;
+  position: relative;
+  color: white;
+
+  // Parallax Background Layer
+  .background-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/src/assets/loginpage.jpg') no-repeat center center/cover;
+    filter: blur(8px);
+    transform: scale(1.05);
+    z-index: -2;
+  }
+
+  // Floating Background Shapes
+  .background-shapes {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+
+    .circle, .triangle, .square {
+      position: absolute;
+      opacity: 0.3;
+      animation: float 10s infinite ease-in-out alternate;
+    }
+
+    .circle {
+      background-color: #ffbc67;
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      top: -40%;
+      left: -50%;
+    }
+
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 80px solid transparent;
+      border-right: 80px solid transparent;
+      border-bottom: 140px solid #60a5fa;
+      top: 30%;
+      right: -30%;
+      transform: rotate(15deg);
+    }
+
+    .square {
+      background-color: #ff758c;
+      width: 100px;
+      height: 100px;
+      bottom: -30%;
+      left: 40%;
+      transform: rotate(45deg);
+    }
+  }
+}
+
+// Floating animation for background shapes
+@keyframes float {
+  from {
+    transform: translateY(-20px);
+  }
+  to {
+    transform: translateY(20px);
+  }
+}
+
+.login-card {
+  background: $card-background;
+  border-radius: 15px;
+  padding: 30px 40px;
+  max-width: 400px;
+  width: 100%;
+  backdrop-filter: $backdrop-filter;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  z-index: 100;
+  
+  h1 {
+    font-size: 2rem;
+    margin: 0 0 10px;
+  }
+  p {
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+
+  label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: border 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $accent-color;
+      box-shadow: 0 0 8px rgba($accent-color, 0.5);
+    }
+  }
+}
+
+.login-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  background: $primary-color;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $button-glow;
+  }
+
+  &:disabled {
+    background-color: lighten($primary-color, 20%);
+    cursor: not-allowed;
+  }
+}
+
+.login-footer {
+  margin-top: 15px;
+  font-size: 0.9rem;
+
+  a {
+    color: $accent-color;
+    text-decoration: underline;
+    font-weight: bold;
+
+    &:hover {
+      color: lighten($accent-color, 10%);
+    }
+  }
+}

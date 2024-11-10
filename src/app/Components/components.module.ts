@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './Auth/login/login.component';
 import { SignupComponent } from './Auth/signup/signup.component';
@@ -20,6 +20,7 @@ import { PostListComponent } from './Posts/post-list/post-list.component';
         CommonModule,
         FormsModule,
         RouterModule,
+        ReactiveFormsModule
          ],
     exports:[
         LoginComponent,
