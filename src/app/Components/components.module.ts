@@ -16,6 +16,7 @@ import { PostListComponent } from './Posts/post-list/post-list.component';
         PostListComponent               
     ],
     imports:[
+        
         CommonModule,
         FormsModule,
         RouterModule,

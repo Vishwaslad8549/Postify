@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { PostPageComponent } from './post-page/post-page.component';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -10,8 +12,10 @@ import { PostPageComponent } from './post-page/post-page.component';
         PostPageComponent
     ],
     imports:[   
-        NgModule,
-        CommonModule
+        
+        CommonModule,
+        FormsModule,
+        RouterModule,
     ],
     exports:[HomeComponent,
         PostPageComponent]
