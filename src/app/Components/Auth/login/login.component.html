@@ -1,36 +1,28 @@
-<div class="login-wrapper">
-    <div class="background-layer"></div>
-    <div class="background-shapes">
-      <div class="circle"></div>
-      <div class="triangle"></div>
-      <div class="square"></div>
-    </div>
-  
-    <section class="login-card">
-      <header class="login-header">
-        <h1>Log In</h1>
-        <p>Welcome back! Please enter your details.</p>
-      </header>
-  
-      <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" aria-label="Login Form">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input id="username" type="text" formControlName="username" placeholder="Username" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input id="password" type="password" formControlName="password" placeholder="Password" required />
-        </div>
-  
-        <button type="submit" class="login-button" [disabled]="!loginForm.valid">
-          Log In
-        </button>
-      </form>
-  
-      <footer class="login-footer">
-        <p>New here? <a href="#">Sign Up</a></p>
-      </footer>
-    </section>
+<div class="login-page">
+  <div class="login-container">
+    <h2>Login</h2>
+    <form (submit)="handleLogin(loginForm)" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" placeholder="Enter your E-Mail" name="email"
+        ngModel
+        type="email"
+        #emailInput="ngModel"
+        required/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" placeholder="Enter your password" type="password"
+        name="password"
+        ngModel
+        placeholder="Password"
+        #passwordInput="ngModel"
+        required />
+      </div>
+      <button type="submit" class="login-button">Login</button>
+    </form>
+    <p class="signup-link">
+      Don't have an account? <a routerLink="/signup">Sign up</a>
+    </p>
   </div>
-  
+</div>

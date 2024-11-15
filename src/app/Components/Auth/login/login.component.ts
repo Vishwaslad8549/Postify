@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ServiceService } from 'src/app/services/auth/service.service';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -8,18 +10,21 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
+  constructor(private router: Router,private authservice:ServiceService) { }
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      console.log('Form Submitted', this.loginForm.value);
+  handleLogin(formvalue:NgForm) {
+    this.authservice.loginUser(formvalue.value.email,formvalue.value.password)
+    //this.token=this.authservice.getToken()
+  
+    
+  //   if(this.authservice.authenticate(formvalue.value.email, formvalue.value.password)) {
+  //     //Redirect to Welcome Page
+  //     this.router.navigate(['home'])
+  //     this.invalidLogin = false
+  //   } else {
+  //     this.invalidLogin = true
+  //   }
     }
 }
-}
+
