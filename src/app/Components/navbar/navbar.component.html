@@ -1,11 +1,13 @@
 <nav class="navbar">
     <div class="navbar-logo">Postify</div>
     <ul class="navbar-links">
+      
+      <li><a routerLink="/home/create" *ngIf="Isloggedin">Create Post</a></li>
+      <li><a routerLink="/home/list" *ngIf="Isloggedin">Posts</a></li>
+      <li><a routerLink="/login" *ngIf="Isloggedin" (click)="onLogout()">Logout</a></li>
       <li><a routerLink="/login" *ngIf="!Isloggedin">Login</a>
       </li>
-      <li><a routerLink="/home/create" *ngIf="Isloggedin">Create Post</a></li>
-      <li><a routerLink="/home/list" *ngIf="Isloggedin">Logout</a></li>
-      <button (click)="onLogout()" class="text-white hover:text-#49c5b6 transition duration-300" *ngIf="Isloggedin"> 
-        Logout</button>
+      <!-- <button (click)="onLogout()" class="text-white hover:text-#49c5b6 transition duration-300" *ngIf="Isloggedin"> 
+        Logout</button> -->
     </ul>
   </nav>

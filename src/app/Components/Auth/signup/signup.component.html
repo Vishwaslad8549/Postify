@@ -26,5 +26,8 @@
         </div>
         <button type="submit" class="login-button">Signup</button>
       </form>
+      <div *ngIf="isSignup" class="popup">
+        <p>Your account has been created successfully</p>
+      </div>
     </div>
   </div>
