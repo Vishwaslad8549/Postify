@@ -5,7 +5,8 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 
-const url="https://latest-backend-node.onrender.com/api/";
+const url=environment.apiUrl;
+//const url="http://localhost:3000/api/"
 @Injectable({
   providedIn: 'root'
 })

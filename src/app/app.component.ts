@@ -10,10 +10,7 @@ import { PostService } from './services/post.service';
 export class AppComponent {
   title = 'latest-angular-postify';
   data: any;
-  constructor(private postservice:PostService){}
+  constructor(){}
   oninit(){
-    this.postservice.getPosts().subscribe(d=>{
-      this.data=d
-    })
   }
 }
