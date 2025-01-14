@@ -1,1 +1,39 @@
-<p>post-list works!</p>
+<div >
+    <div *ngIf="Posts.length===0">
+   <h1 >No data to display</h1></div>
+    <div *ngIf="Posts">
+       <dx-accordion #accordion [dataSource]="Posts" [collapsible]="true" [deferRendering]="false" [animationDuration]="300"
+           [selectedItems]="[Posts[0]]" id="accordion-container">
+   
+           <div *dxTemplate="let post of 'item'">
+               <div>   
+                <span >{{ post.content }}</span>
+                       <div >
+                       <img [src]="post.imagePath" >
+                       
+                        </div>
+                       <div class="button">
+                           <dx-button
+                               *ngIf="isauthenticated"
+                               type="required"
+                               text="Edit"
+                               (onClick)="onEdit(post.id)">
+                           </dx-button>
+                           
+                           <dx-button
+                           *ngIf="isauthenticated"
+                               (onClick)="onDelete(post.id)"
+                               type="required"
+                               text="Delete">
+                           </dx-button>
+                       </div>
+                       
+                   
+               </div>
+           </div>
+           
+       </dx-accordion>
+   
+      
+   </div> 
+   </div>

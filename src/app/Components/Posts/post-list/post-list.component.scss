@@ -1,0 +1,87 @@
+// Container styling
+#accordion-container {
+    margin: 20px auto;
+    padding: 10px;
+    max-width: 800px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+    // Accordion items
+    .dx-accordion-item {
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 6px;
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+  
+      &:hover {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        border-color: #bdbdbd;
+      }
+    }
+  }
+  
+  // Image styling
+  img {
+    width: 100%; // Adjust to container's width or a specific value
+  max-width: 150px; // Maximum width for the image
+  height: auto; // Automatically adjust height to maintain aspect ratio
+  border-radius: 8px; // Optional: Adds rounded corners
+  object-fit: contain; // Ensures the entire image is visible without cropping
+  transition: transform 0.3s ease-in-out;
+  
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  // Content text
+  span {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+  }
+  
+  // Button container
+  .button {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 15px;
+  
+    dx-button {
+      background-color: #0288d1; // Blue shade
+      color: white;
+      border-radius: 4px;
+      font-weight: bold;
+  
+      &:hover {
+        background-color: #0277bd; // Darker blue
+      }
+  
+      &:active {
+        background-color: #01579b; // Even darker
+      }
+    }
+  
+    // Delete button with distinct color
+    dx-button:nth-of-type(2) {
+      background-color: #d32f2f; // Red shade
+      &:hover {
+        background-color: #c62828; // Darker red
+      }
+    }
+  }
+  
+  // Message when no data is displayed
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #757575;
+    margin: 40px 0;
+  }
+  
