@@ -8,7 +8,10 @@ import { PostComponent } from './Posts/post/post.component';
 import { PostCreateComponent } from './Posts/post-create/post-create.component';
 import { PostListComponent } from './Posts/post-list/post-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { DxAccordionModule,DxButtonModule } from 'devextreme-angular';
+import { FooterComponent } from './footer/footer.component';
+
+
+
 @NgModule({
     declarations: 
     [   LoginComponent,
@@ -16,16 +19,16 @@ import { DxAccordionModule,DxButtonModule } from 'devextreme-angular';
         PostComponent,
         PostCreateComponent,
         PostListComponent,
-        NavbarComponent               
+        NavbarComponent,
+        FooterComponent               
     ],
     imports:[
         
         CommonModule,
         FormsModule,
         RouterModule,
-        ReactiveFormsModule,
-        DxButtonModule,
-        DxAccordionModule
+        ReactiveFormsModule
+
          ],
     exports:[
         LoginComponent,
@@ -34,8 +37,7 @@ import { DxAccordionModule,DxButtonModule } from 'devextreme-angular';
         PostCreateComponent,
         PostListComponent,
         NavbarComponent,
-        DxButtonModule,
-        DxAccordionModule]
+        FooterComponent]
 })
 
 export class ComponentsModule { }

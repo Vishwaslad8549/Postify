@@ -1,0 +1,173 @@
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: calc(100vh - var(--header-height));
+    padding: 0;
+    margin: 0;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Variable for header height */
+  :root {
+    --header-height: 100px; /* Adjust this value to match your header's height */
+  }
+  
+  /* Hero Section */
+  .hero {
+    flex: 1; /* Ensures the hero section takes up the available space */
+    background-color: #0288d1;
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+  
+    .title {
+      font-size: 4rem;
+      margin-bottom: 10px;
+    }
+  
+    .subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+  
+    button {
+      font-size: 1.2rem;
+      padding: 10px 30px;
+    }
+  }
+  
+  /* Features Section */
+  .features {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  
+    .feature-item {
+      max-width: 300px;
+      text-align: center;
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+  
+      &:hover {
+        transform: scale(1.05);
+      }
+  
+      img {
+        max-width: 100%;
+        border-radius: 6px;
+        margin-bottom: 10px;
+      }
+  
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+  
+      p {
+        font-size: 1rem;
+        color: #666;
+      }
+    }
+  }
+.home-footer{
+    
+        position: fixed; /* Fixes the element at a specific position */
+        bottom: 0;       /* Positions the element at the bottom of the viewport */
+        left: 0;         /* Aligns the element to the left edge */
+        width: 100%;     /* Makes the div span the full width of the page */
+        background-color: #000000; /* Background color for visibility */
+        color: white;           /* Text color */
+        text-align: center;     /* Centers the text */       /* Adds some padding for spacing */
+        z-index: 1000;          /* Ensures it stays above other elements */
+      
+      
+}
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero .title {
+      font-size: 2.5rem;
+    }
+  
+    .hero .subtitle {
+      font-size: 1.2rem;
+    }
+  
+    .features {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .footer {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      
+      @keyframes slide-up {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      
+      @keyframes zoom-in {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      
+      /* Apply Animations */
+      .animate-fade-in {
+        animation: fade-in 1s ease-in-out;
+      }
+      
+      .animate-slide-up {
+        animation: slide-up 1s ease-in-out;
+      }
+      
+      .animate-bounce {
+        animation: bounce 1s infinite;
+      }
+      
+      .animate-zoom-in {
+        animation: zoom-in 0.8s ease-in-out;
+      }
+      
+  

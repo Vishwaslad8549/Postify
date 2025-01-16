@@ -1,39 +1,51 @@
-<div >
-    <div *ngIf="Posts.length===0">
-   <h1 >No data to display</h1></div>
-    <div *ngIf="Posts">
-       <dx-accordion #accordion [dataSource]="Posts" [collapsible]="true" [deferRendering]="false" [animationDuration]="300"
-           [selectedItems]="[Posts[0]]" id="accordion-container">
-   
-           <div *dxTemplate="let post of 'item'">
-               <div>   
-                <span >{{ post.content }}</span>
-                       <div >
-                       <img [src]="post.imagePath" >
-                       
-                        </div>
-                       <div class="button">
-                           <dx-button
-                               *ngIf="isauthenticated"
-                               type="required"
-                               text="Edit"
-                               (onClick)="onEdit(post.id)">
-                           </dx-button>
-                           
-                           <dx-button
-                           *ngIf="isauthenticated"
-                               (onClick)="onDelete(post.id)"
-                               type="required"
-                               text="Delete">
-                           </dx-button>
-                       </div>
-                       
-                   
-               </div>
-           </div>
-           
-       </dx-accordion>
-   
+<div class="post-grid">
+<div class="post-card" *ngFor="let post of Posts">
+    <img
+      [src]="post.imagePath"
+      alt="User Photo"
+      class="post-photo"
+      (click)="openImage(post.imagePath)"
+    />
+    <div class="post-info">
+      <h3>{{ post.content }}</h3>
       
-   </div> 
-   </div>
+      <div class="actions">
+        <button class="btn-update" (click)="onEdit(post.id)">Update</button>
+        <button class="btn-delete" (click)="onDelete(post.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="image-modal"
+    *ngIf="selectedImage"
+    (click)="closeImage()"
+  >
+    <img [src]="selectedImage" alt="Enlarged Image" />
+  </div>
+</div>
+  <!-- <div class="user-card" *ngFor="let user of users">
+    <img
+      [src]="user.photoUrl"
+      alt="User Photo"
+      class="user-photo"
+      (click)="openImage(user.photoUrl)"
+    />
+    <div class="user-info">
+      <h3>{{ user.name }}</h3>
+      <p>{{ user.description }}</p>
+      <div class="actions">
+        <button class="btn-update" (click)="updatePost(user)">Update</button>
+        <button class="btn-delete" (click)="deletePost(user)">Delete</button>
+      </div>
+    </div>
+  </div>
+  
+   Modal for Enlarged Image -->
+  <!-- <div
+    class="image-modal"
+    *ngIf="selectedImage"
+    (click)="closeImage()"
+  >
+    <img [src]="selectedImage" alt="Enlarged Image" />
+  </div> --> 
+  

@@ -1,0 +1,33 @@
+.footer {
+    background-color: #000000;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  
+    .about,
+    .social-media {
+      flex: 1;
+      min-width: 200px;
+  
+      h3 {
+        margin-bottom: 10px;
+      }
+  
+      p {
+        font-size: 0.9rem;
+        color: #ccc;
+      }
+  
+      a {
+        display: inline-block;
+        margin-right: 10px;
+  
+        img {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }

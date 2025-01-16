@@ -17,6 +17,15 @@ export class PostListComponent {
   isauthenticated: boolean=false;
 constructor(private postservice:PostService,private router:Router,private authService:ServiceService){
 }
+selectedImage: string | null = null;
+
+  openImage(imageUrl: string) {
+    this.selectedImage = imageUrl;
+  }
+
+  closeImage() {
+    this.selectedImage = null;
+  }
 
 ngOnInit() {
  
