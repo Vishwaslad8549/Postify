@@ -6,17 +6,20 @@ import { HomeComponent } from './Pages/home/home.component';
 import { PostCreateComponent } from './Components/Posts/post-create/post-create.component';
 import { PostListComponent } from './Components/Posts/post-list/post-list.component';
 import { AuthGuard } from './guards/auth.guard';
+import { PostPageComponent } from './Pages/post-page/post-page.component';
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   {path:"signup",component:SignupComponent},
   { path: 'logout', component: LoginComponent,canActivate:[AuthGuard] },
-  { path: 'home', component: HomeComponent,canActivate:[AuthGuard],
-  children: [
-    { path: 'create', component: PostCreateComponent },
-    { path: 'edit/:id', component: PostCreateComponent},
-    { path: 'list', component: PostListComponent }
-  ]},
+  { path: 'home', component: HomeComponent,canActivate:[AuthGuard]},
+  {path:'post',component:PostPageComponent,canActivate:[AuthGuard],
+    children: [
+      { path: 'create', component: PostCreateComponent },
+      { path: 'edit/:id', component: PostCreateComponent},
+      { path: 'list', component: PostListComponent }
+    ]
+  },
   { path: '**', redirectTo: 'login'}
   
 ];

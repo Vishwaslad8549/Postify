@@ -44,7 +44,7 @@ ngOnInit() {
 }
 onEdit(id:string){
   //this.postservice.mode="edit"
-  this.router.navigateByUrl("home/edit/"+id)
+  this.router.navigateByUrl("post/edit/"+id)
   console.log("Edit clicked",id)
   
 }

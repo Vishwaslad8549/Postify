@@ -18,12 +18,10 @@
   /* Hero Section */
   .hero {
     flex: 1; /* Ensures the hero section takes up the available space */
-    background-color: #0288d1;
+    background-color: #000000;
     color: white;
     padding: 50px 20px;
     text-align: center;
-    border-radius: 8px 8px 0 0;
-  
     .title {
       font-size: 4rem;
       margin-bottom: 10px;
@@ -37,6 +35,8 @@
     button {
       font-size: 1.2rem;
       padding: 10px 30px;
+      background-color: #00f2fe;
+      color:black;
     }
   }
   
@@ -63,8 +63,10 @@
       }
   
       img {
-        max-width: 100%;
-        border-radius: 6px;
+        width: 250px; /* Set the desired width */
+        height: 200px; /* Set the desired height */
+        object-fit: cover; /* Adjusts how the image fits into the given dimensions */
+        border-radius: 8px;
         margin-bottom: 10px;
       }
   
