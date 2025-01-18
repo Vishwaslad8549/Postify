@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { ServiceService } from 'src/app/services/auth/service.service';
 import { PostService } from 'src/app/services/post.service';
 
@@ -10,11 +11,33 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-
-  constructor(private router: Router,private authservice:ServiceService) { }
+  loginFailed: boolean = false;
+  authSub:Subscription;
+  errorMessage:string="";
+  constructor(private router: Router,public authservice:ServiceService) { }
 
   handleLogin(formvalue:NgForm) {
-    this.authservice.loginUser(formvalue.value.email,formvalue.value.password)
+    this.authservice.loginUser(formvalue.value.email,formvalue.value.password).subscribe({
+      next: (response) => {
+        // Handle successful login
+        console.log('Login successful', response);
+        if(response.token){
+          this.authservice.isauthenticated=true
+          this.authservice.isUserAuthenticated.next(true)
+          this.router.navigate(['home'])
+          this.errorMessage = null; 
+        }
+         // Clear error message
+      },
+      error: (err) => {
+        // Handle error
+        this.errorMessage = err.message;
+      }
+    })
+    this.authSub=this.authservice.getUserAuthenticated().subscribe(isauth=>{
+      this.loginFailed=isauth
+      console.log(this.loginFailed)
+    })
     //this.token=this.authservice.getToken()
   
     

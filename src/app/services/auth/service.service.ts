@@ -1,7 +1,7 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthData } from '../../../app/models/auth';
-import { Subject } from 'rxjs';
+import { catchError, Observable, Subject, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 
@@ -13,7 +13,7 @@ const url="http://localhost:3000/api/"
 export class ServiceService {
   public isUserAuthenticated = new Subject<boolean>
   private token!: string;
-  private isauthenticated!: boolean;
+  public isauthenticated!: boolean;
   constructor(private http:HttpClient ,private router:Router) { }
   createUser(email:string,password:string){
     const AuthData:AuthData={email:email,password:password}
@@ -31,21 +31,36 @@ export class ServiceService {
   getUserAuthenticated(){
     return this.isUserAuthenticated.asObservable()
   }
-  loginUser(email:string,password:string){
-    const AuthData:AuthData={email:email,password:password}
-    this.http.post<{token:string}>(url+"user/login",AuthData)
-    .subscribe((response)=>{
-      console.log(response)
-      const token= response.token
-      this.token=token
-      if(token){
-        this.isauthenticated=true;
-        this.isUserAuthenticated.next(true)
-      this.router.navigate(['home'])
-      }
+  // loginUser(email:string,password:string){
+  //   const AuthData:AuthData={email:email,password:password}
+  //   this.http.post<{token:string}>(url+"user/login",AuthData)
+  //   .subscribe((response)=>{
+  //     console.log(response)
+  //     const token= response.token
+  //     this.token=token
+  //     if(token){
+  //       this.isauthenticated=true;
+  //       this.isUserAuthenticated.next(true)
+  //       this.router.navigate(['home'])
+  //     }
       
-    })
-  }
+  //   })
+  // }
+  loginUser(email:string,password:string):Observable<any>{
+      const AuthData:AuthData={email:email,password:password}
+      return this.http.post<{token:string}>(url+"user/login",AuthData).pipe(
+        catchError(this.handleError)
+      );
+    }
+    private handleError(error: HttpErrorResponse) {
+      if (error.status === 401) {
+        // Unauthorized error
+        return throwError(() => new Error('Invalid username or password.'));
+      } else {
+        // Other errors
+        return throwError(() => new Error('Something went wrong. Please try again later.'));
+      }
+    }
   logout(){
         this.token=""
         this.isauthenticated=false;

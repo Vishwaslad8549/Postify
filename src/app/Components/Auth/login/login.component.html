@@ -20,6 +20,9 @@
         required />
       </div>
       <button type="submit" class="login-button">Login</button>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
     </form>
     <p class="signup-link">
       Don't have an account? <a routerLink="/signup">Sign up</a>
