@@ -25,27 +25,18 @@ export class ServiceService {
   getToken(){
     return this.token;
   }  
+  setToken(token){
+    this.token=token;
+  }
   isAuth(){
     return this.isauthenticated;
+  }
+  setisAuth(isauthenticated){
+    this.isauthenticated=isauthenticated
   }
   getUserAuthenticated(){
     return this.isUserAuthenticated.asObservable()
   }
-  // loginUser(email:string,password:string){
-  //   const AuthData:AuthData={email:email,password:password}
-  //   this.http.post<{token:string}>(url+"user/login",AuthData)
-  //   .subscribe((response)=>{
-  //     console.log(response)
-  //     const token= response.token
-  //     this.token=token
-  //     if(token){
-  //       this.isauthenticated=true;
-  //       this.isUserAuthenticated.next(true)
-  //       this.router.navigate(['home'])
-  //     }
-      
-  //   })
-  // }
   loginUser(email:string,password:string):Observable<any>{
       const AuthData:AuthData={email:email,password:password}
       return this.http.post<{token:string}>(url+"user/login",AuthData).pipe(
@@ -66,18 +57,7 @@ export class ServiceService {
         this.isauthenticated=false;
         this.isUserAuthenticated.next(false)
   }
-  // authenticate(username:string,password:string){
-  //   if(username=="Vishwas" && password=="zyNxx"){
-  //     sessionStorage.setItem('authenticatedUser',username)
-  //     this.Isloggedin=true;
-  //     return true
-  //   }
-  //   else return false
-  // }
-  // isloggedin(){
-  //   let user = sessionStorage.getItem('authenticaterUser')
-  //   return (user === null)
-  // }
+
   get jsondata(){
     return (this.http.get("https://jsonplaceholder.typicode.com/posts"))
   }

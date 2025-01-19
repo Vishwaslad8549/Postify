@@ -22,7 +22,8 @@ export class LoginComponent {
         // Handle successful login
         console.log('Login successful', response);
         if(response.token){
-          this.authservice.isauthenticated=true
+          this.authservice.setisAuth(true);
+          this.authservice.setToken(response.token);
           this.authservice.isUserAuthenticated.next(true)
           this.router.navigate(['home'])
           this.errorMessage = null; 
