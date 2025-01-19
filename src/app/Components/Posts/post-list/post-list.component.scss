@@ -4,52 +4,113 @@
   gap: 15px;
   margin: 0 auto; // Center the grid in the container
   max-width: 1200px;
+// .post-card {
+//   border: 1px solid #ddd;
+//   border-radius: 8px;
+//   padding: 15px;
+//   background-color: #fff;
+//   text-align: center;
+//   margin-bottom: 15px;
+//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+//   .post-photo {
+//     width: 80px;
+//     height: 80px;
+//     border-radius: 50%;
+//     object-fit: cover;
+//     margin-bottom: 10px;
+//     cursor: pointer;
+
+//     &:hover {
+//       transform: scale(1.1);
+//       transition: 0.3s ease;
+//     }
+//   }
+
+//   .post-info {
+//     h3 {
+//       margin: 0;
+//       font-size: 18px;
+//     }
+
+//     p {
+//       margin: 5px 0 10px;
+//       color: #777;
+//       font-size: 14px;
+//     }
+
+//     .actions {
+//       display: flex;
+//       justify-content: center;
+//       gap: 10px;
+
+//       button {
+//         padding: 5px 10px;
+//         border: none;
+//         border-radius: 5px;
+//         cursor: pointer;
+//         font-size: 14px;
+
+//         &.btn-update {
+//           background-color: #007bff;
+//           color: #fff;
+
+//           &:hover {
+//             background-color: #0056b3;
+//           }
+//         }
+
+//         &.btn-delete {
+//           background-color: #dc3545;
+//           color: #fff;
+
+//           &:hover {
+//             background-color: #a71d2a;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 .post-card {
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 15px;
+  padding: 0; /* Remove padding for Instagram-like layout */
   background-color: #fff;
-  text-align: center;
+  text-align: left; /* Align content to the left */
   margin-bottom: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Prevent content overflow */
 
   .post-photo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
+    width: 100%; /* Make the image fill the card width */
+    height: 300px; /* Set a fixed height */
+    object-fit: cover; /* Ensure the image scales and crops appropriately */
     cursor: pointer;
-
-    &:hover {
-      transform: scale(1.1);
-      transition: 0.3s ease;
-    }
   }
 
   .post-info {
-    h3 {
-      margin: 0;
-      font-size: 18px;
-    }
+    padding: 15px; /* Add padding around the text content */
 
-    p {
-      margin: 5px 0 10px;
-      color: #777;
-      font-size: 14px;
+    h3 {
+      margin: 0 0 10px; /* Add space below the content */
+      font-size: 18px;
     }
 
     .actions {
       display: flex;
-      justify-content: center;
+      justify-content: space-between; /* Space out the buttons */
       gap: 10px;
+      margin-top: 10px; /* Add space above the buttons */
 
       button {
-        padding: 5px 10px;
+        flex: 1; /* Make buttons take equal width */
+        padding: 10px; /* Add more padding for larger buttons */
         border: none;
         border-radius: 5px;
         cursor: pointer;
         font-size: 14px;
+        text-align: center;
 
         &.btn-update {
           background-color: #007bff;
@@ -72,6 +133,7 @@
     }
   }
 }
+
 
 .image-modal {
   position: fixed;

@@ -83,7 +83,8 @@ export class PostService {
       })
   }
   updatePost(id: string, Post: Post) {
-    const post: Post = { id: id, title: Post.title, content: Post.content,imagePath:null };
+    const post: Post = { id: id, title: Post.title, content: Post.content,imagePath:Post.imagePath };
+    console.log(post)
     this.http
       .put(url +"posts/" + id, post)
       .subscribe(response => console.log(response));

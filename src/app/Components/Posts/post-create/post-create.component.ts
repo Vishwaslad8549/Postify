@@ -67,6 +67,7 @@ export class PostCreateComponent implements OnInit{
     this.Post.title= this.reactiveForm.get('name').value;
     this.Post.content = this.reactiveForm.get('content').value;
     this.Post.image = this.reactiveForm.get('image').value;
+    console.log(this.Post)
     if (this.mode === "create") {
       
             this.postsService.addPost(this.Post);
