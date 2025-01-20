@@ -1,5 +1,5 @@
 <div class="post-grid">
-<div class="post-card" *ngFor="let post of Posts">
+<div class="post-card" *ngFor="let post of Posts, let i = index">
     <img
       [src]="post.imagePath"
       alt="User Photo"
@@ -7,8 +7,13 @@
       (click)="openImage(post.imagePath)"
     />
     <div class="post-info">
-      <h3>{{ post.content }}</h3>
-      
+      <h3>{{ post.title }}</h3>
+      <h4>
+        {{ post.content.length > 15 ? (post.isExpanded ? post.content : (post.content | slice: 0:50) + '...') : post.content }}
+      </h4>
+      <button *ngIf="post.content.length>15" class="btn-read-more" (click)="toggleReadMore(i)">
+        {{ post.isExpanded ? 'Read Less' : 'Read More' }}
+      </button>
       <div class="actions">
         <button class="btn-update" (click)="onEdit(post.id)">Update</button>
         <button class="btn-delete" (click)="onDelete(post.id)">Delete</button>

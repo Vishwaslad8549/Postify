@@ -52,6 +52,9 @@ onDelete(id:string){
   
 this.postservice.deletePost(id)
 }
+toggleReadMore(index: number) {
+  this.Posts[index].isExpanded = !this.Posts[index].isExpanded;
+}
 ngOnDestroy(): void {
   this.postsSub.unsubscribe()
   this.authSub.unsubscribe()

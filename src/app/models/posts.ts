@@ -3,6 +3,7 @@ export interface Post {
     title: string;
     content: string;
     image?:any,
-    imagePath:string|null
+    imagePath:string|null,
+    isExpanded?:boolean
   }
   
