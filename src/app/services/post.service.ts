@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { Subject, map } from 'rxjs';
 import { Post } from '../models/posts';
 import { environment } from 'src/environments/environment';
- //const url = environment.apiUrl;
-const url="http://localhost:3000/api/"
+const url = environment.apiUrl;
+//nst url="http://localhost:3000/api/"
 @Injectable({
   providedIn: 'root'
 })
