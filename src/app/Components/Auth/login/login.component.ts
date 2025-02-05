@@ -14,6 +14,8 @@ export class LoginComponent {
   loginFailed: boolean = false;
   authSub:Subscription;
   errorMessage:string="";
+  expiresInDuration:number;
+  tokenTimer:any
   constructor(private router: Router,public authservice:ServiceService) { }
 
   handleLogin(formvalue:NgForm) {
@@ -24,9 +26,15 @@ export class LoginComponent {
         if(response.token){
           this.authservice.setisAuth(true);
           this.authservice.setToken(response.token);
+          this.expiresInDuration=response.expiresIn
           this.authservice.isUserAuthenticated.next(true)
-          this.router.navigate(['home'])
           this.errorMessage = null; 
+          this.tokenTimer=setTimeout(()=>{
+            this.authservice.logout()
+            this.router.navigate(['/'])
+          },this.expiresInDuration*1000)
+          this.router.navigate(['home'])
+          
         }
          // Clear error message
       },
