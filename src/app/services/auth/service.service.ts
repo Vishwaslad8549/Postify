@@ -11,9 +11,10 @@ const url=environment.apiUrl;
   providedIn: 'root'
 })
 export class ServiceService {
-  public isUserAuthenticated = new Subject<boolean>
+  public authStatusListener = new Subject<boolean>
   private token!: string;
   public isauthenticated!: boolean;
+  private tokenTimer: any;
   constructor(private http:HttpClient ,private router:Router) { }
   createUser(email:string,password:string){
     const AuthData:AuthData={email:email,password:password}
@@ -34,15 +35,36 @@ export class ServiceService {
   setisAuth(isauthenticated){
     this.isauthenticated=isauthenticated
   }
-  getUserAuthenticated(){
-    return this.isUserAuthenticated.asObservable()
+  getAuthStatusListener(){
+    return this.authStatusListener.asObservable()
   }
-  loginUser(email:string,password:string):Observable<any>{
+  loginUser(email:string,password:string){
       const AuthData:AuthData={email:email,password:password}
-      return this.http.post<{token:string}>(url+"user/login",AuthData).pipe(
-        catchError(this.handleError)
-      );
+      this.http.post<{token:string,expiresIn:number}>(
+        url+"user/login",AuthData).pipe(
+          catchError(error=>{
+            console.log(error)
+            return this.handleError(error);
+          })
+        ).subscribe(response=>{
+          console.log('Login successful', response);
+        if(response.token){
+          this.setisAuth(true);
+          this.setToken(response.token);
+          const expiresInDuration=response.expiresIn
+          this.authStatusListener.next(true)
+          this.isauthenticated=true;
+          this.setAuthTimer(expiresInDuration);
+          const now = new Date();
+          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
+          console.log(expirationDate);
+          this.saveAuthData(this.token, expirationDate);
+          this.router.navigate(["home"]);
+          
+        }
+        })
     }
+  
     private handleError(error: HttpErrorResponse) {
       if (error.status === 401) {
         // Unauthorized error
@@ -55,10 +77,53 @@ export class ServiceService {
   logout(){
         this.token=""
         this.isauthenticated=false;
-        this.isUserAuthenticated.next(false)
+        this.authStatusListener.next(false)
+        clearTimeout(this.tokenTimer);
+        this.clearAuthData();
+        this.router.navigate(["/"]);
+  }
+  autoAuthUser() {
+    const authInformation = this.getAuthData();
+    if (!authInformation) {
+      return;
+    }
+    const now = new Date();
+    const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
+    if (expiresIn > 0) {
+      this.token = authInformation.token;
+      this.isauthenticated = true;
+      this.setAuthTimer(expiresIn / 1000);
+      this.authStatusListener.next(true);
+    }
   }
 
-  get jsondata(){
-    return (this.http.get("https://jsonplaceholder.typicode.com/posts"))
+
+  private setAuthTimer(duration: number) {
+    console.log("Setting timer: " + duration);
+    this.tokenTimer = setTimeout(() => {
+      this.logout();
+    }, duration * 1000);
+  }
+
+  private saveAuthData(token: string, expirationDate: Date) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("expiration", expirationDate.toISOString());
+  }
+
+  private clearAuthData() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("expiration");
+  }
+
+  private getAuthData() {
+    const token = localStorage.getItem("token");
+    const expirationDate = localStorage.getItem("expiration");
+    if (!token || !expirationDate) {
+      return null;
+    }
+    return {
+      token: token,
+      expirationDate: new Date(expirationDate)
+    }
   }
 }

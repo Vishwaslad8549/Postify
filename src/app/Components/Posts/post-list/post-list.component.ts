@@ -36,7 +36,7 @@ ngOnInit() {
     this.Posts = posts;
   });
   this.isauthenticated=this.authService.isAuth()
-  this.authSub=this.authService.getUserAuthenticated().subscribe(isauth=>{
+  this.authSub=this.authService.getAuthStatusListener().subscribe(isauth=>{
     this.isauthenticated=isauth
     console.log(isauth)
   })

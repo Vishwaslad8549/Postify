@@ -14,7 +14,7 @@ export class NavbarComponent {
 constructor(public authservice:ServiceService){
 }
   ngOnInit(): void {
-    this.authSubs=this.authservice.getUserAuthenticated().subscribe((res)=>{
+    this.authSubs=this.authservice.getAuthStatusListener().subscribe((res)=>{
       this.Isloggedin=res
     })
   }
