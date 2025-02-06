@@ -15,7 +15,7 @@ export class SignupComponent {
     if(formData.invalid){
       return
     }
-    this.authservice.createUser(formData.value.email,formData.value.password);
+    this.authservice.createUser(formData.value.email,formData.value.password,formData.value.name);
     this.isSignup=true
     setTimeout(()=>{
       this.isSignup=false

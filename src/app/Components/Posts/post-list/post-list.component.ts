@@ -15,6 +15,7 @@ export class PostListComponent {
   private postsSub!: Subscription;
   private authSub:Subscription;
   isauthenticated: boolean=false;
+  userId:string;
 constructor(private postservice:PostService,private router:Router,private authService:ServiceService){
 }
 selectedImage: string | null = null;
@@ -30,22 +31,25 @@ selectedImage: string | null = null;
 ngOnInit() {
  
   this.postservice.getPosts();
+  this.userId=this.authService.getloggedUserId()
   this.postsSub = this.postservice.getPostUpdateListener()
   .subscribe((posts: Post[]) => {
-    console.log(posts)
+    //console.log(posts)
     this.Posts = posts;
   });
   this.isauthenticated=this.authService.isAuth()
-  this.authSub=this.authService.getAuthStatusListener().subscribe(isauth=>{
+  this.authSub=this.authService.getAuthStatusListener().
+  subscribe(isauth=>{
+    this.userId=this.authService.getloggedUserId()
     this.isauthenticated=isauth
-    console.log(isauth)
+    //console.log(isauth)
   })
   
 }
 onEdit(id:string){
   //this.postservice.mode="edit"
   this.router.navigateByUrl("post/edit/"+id)
-  console.log("Edit clicked",id)
+  //console.log("Edit clicked",id)
   
 }
 onDelete(id:string){
