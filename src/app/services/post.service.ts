@@ -91,4 +91,7 @@ export class PostService {
       .put(url +"posts/" + id, post)
       .subscribe(response => console.log(response));
   }
+  getcloudImage(){
+    
+  }
 }

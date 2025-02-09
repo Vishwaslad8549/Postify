@@ -16,6 +16,7 @@ export class ServiceService {
   private token!: string;
   public isauthenticated!: boolean;
   private tokenTimer: any;
+  public userName:string;
   constructor(private http:HttpClient ,private router:Router) { }
   createUser(email:string,password:string,userName:string){
     const AuthData:AuthData={email:email,password:password,userName:userName}
@@ -41,7 +42,7 @@ export class ServiceService {
   }
   loginUser(email:string,password:string){
       const AuthData:AuthData={email:email,password:password}
-      this.http.post<{token:string,expiresIn:number,userId:string}>(
+      this.http.post<{token:string,expiresIn:number,userId:string,userName:string}>(
         url+"user/login",AuthData).pipe(
           catchError(error=>{
             //console.log(error)
@@ -56,7 +57,8 @@ export class ServiceService {
           this.authStatusListener.next(true)
           this.isauthenticated=true;
           this.userId=response.userId;
-          console.log(this.userId)
+          this.userName=response.userName;
+          console.log(this.userName)
           this.setAuthTimer(expiresInDuration);
           const now = new Date();
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
