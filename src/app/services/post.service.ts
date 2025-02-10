@@ -24,7 +24,7 @@ export class PostService {
 
   getPosts() {
     this.http.
-    get<{ message: string, posts: any }>(url+"posts")
+    get<{ message: string, posts: any }>(url+"cloud")
       .pipe(
         map(postData => {
         return postData.posts.map((post: any) => {
@@ -45,7 +45,7 @@ export class PostService {
   }
   getPost(id: string) {
     return this.http.get<{ _id: string; title: string; content: string,imagePath:string,creator:string}>(
-      url+"posts/"+ id
+      url+"cloud/"+ id
     );
 
   }
@@ -60,7 +60,7 @@ export class PostService {
     postData.append("image", Post.image, Post.title)
     //const post: Post = {id:null,title: Post.title, content: Post.content};
     //console.log(postData)
-     this.http.post<{ message: string, post: Post }>(url+"posts", postData)
+     this.http.post<{ message: string, post: Post }>(url+"cloud", postData)
       .subscribe(responsedata => {
         const post: Post = {
           id: responsedata.post.id,
@@ -75,7 +75,7 @@ export class PostService {
       })
   }
   deletePost(id: string) {
-    this.http.delete(url +"posts/" + id)
+    this.http.delete(url +"cloud/" + id)
       .subscribe(() => {
 
         const updatedpost = this.posts.filter(post => post.id !== id)
@@ -88,7 +88,7 @@ export class PostService {
     const post: Post = { id: id, title: Post.title, content: Post.content,imagePath:Post.imagePath,creator:null };
     //console.log(post)
     this.http
-      .put(url +"posts/" + id, post)
+      .put(url +"cloud/" + id, post)
       .subscribe(response => console.log(response));
   }
   getcloudImage(){
