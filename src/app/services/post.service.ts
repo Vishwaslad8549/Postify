@@ -85,10 +85,14 @@ export class PostService {
       })
   }
   updatePost(id: string, Post: Post) {
-    const post: Post = { id: id, title: Post.title, content: Post.content,imagePath:Post.imagePath,creator:null };
+    const postData = new FormData()
+    postData.append("title", Post.title)
+    postData.append("content", Post.content)
+    postData.append("image", Post.image)
+    //const post: Post = { id: id, title: Post.title, content: Post.content,imagePath:Post.imagePath,creator:null };
     //console.log(post)
     this.http
-      .put(url +"cloud/" + id, post)
+      .put(url +"cloud/" + id, postData)
       .subscribe(response => console.log(response));
   }
   getcloudImage(){

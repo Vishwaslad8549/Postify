@@ -1,7 +1,7 @@
 footer.footer {
   background-color: black; /* Black background */
   color: white; /* White text */
-  padding: 20px; /* Add padding around the footer */
+  padding: 10px 20px 10px 20px; /* Add padding around the footer */
   display: flex; /* Use flexbox for alignment */
   justify-content: space-between; /* Space between About and Follow Us sections */
   align-items: center; /* Align items vertically */
@@ -20,10 +20,15 @@ footer.footer .social-media h3 {
 footer.footer .about p {
   font-size: 14px; /* Adjust paragraph font size */
   line-height: 1.6; /* Improve readability with line height */
+  width:25rem;  
 }
 
 footer.footer .social-media {
   text-align: right; /* Align Follow Us section to the right */
+}
+footer.footer .social-media .follow{
+  position: relative;
+  right:20px
 }
 
 footer.footer .social-media a {
@@ -38,7 +43,6 @@ footer.footer .social-media img {
   transition: transform 0.3s ease; /* Add hover effect */
   background: none; /* Remove background */
 }
-
 footer.footer .social-media img:hover {
   transform: scale(1.2); /* Enlarge icon slightly on hover */
   filter: brightness(1.2); /* Make icon slightly brighter on hover */
