@@ -1,5 +1,5 @@
-<div class="login-page">
-    <div class="login-container">
+<div class="signup-page">
+    <div class="signup-container">
       <h2>Signup</h2>
       <form (submit)="handleSignup(signupForm)" #signupForm="ngForm">
         <div class="form-group">
@@ -24,8 +24,11 @@
           #passwordInput="ngModel"
           required />
         </div>
-        <button type="submit" class="login-button">Signup</button>
+        <button type="submit" class="signup-button">Signup</button>
       </form>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
       <div *ngIf="isSignup" class="popup">
         <p>Your account has been created successfully</p>
       </div>

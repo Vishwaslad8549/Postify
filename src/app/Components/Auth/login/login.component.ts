@@ -21,7 +21,10 @@ export class LoginComponent {
   handleLogin(formvalue:NgForm) {
     if(formvalue.invalid){
       return
-    }
+    } 
+    this.authservice.loginerrorMessage.subscribe(err=>{
+      this.errorMessage=err
+     });
      this.authservice.loginUser(formvalue.value.email,formvalue.value.password)
   }
      // .subscribe({

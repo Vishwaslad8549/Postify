@@ -1,7 +1,7 @@
 import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthData } from '../../../app/models/auth';
-import { catchError, Observable, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, Subject, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment'
 
@@ -17,13 +17,20 @@ export class ServiceService {
   public isauthenticated!: boolean;
   private tokenTimer: any;
   public userName:string;
+  public loginerrorMessage=new BehaviorSubject<string>(null);
+  public signuperrorMessage=new BehaviorSubject<string>(null);
   constructor(private http:HttpClient ,private router:Router) { }
   createUser(email:string,password:string,userName:string){
     const AuthData:AuthData={email:email,password:password,userName:userName}
     this.http.post(url+"user/signup",AuthData)
-    .subscribe(res=>{
+    .subscribe(
+      (res)=>{
       console.log(res)
-    })
+      this.signuperrorMessage.next(null)
+    },
+   (err)=>{
+    this.signuperrorMessage.next(err.error.message)
+   })
   }
   getToken(){
     return this.token;
@@ -50,7 +57,8 @@ export class ServiceService {
           })
         ).subscribe(response=>{
           console.log('Login successful', response);
-        if(response.token){
+          if(response.token){
+            this.loginerrorMessage.next(null)
           this.setisAuth(true);
           this.setToken(response.token);
           const expiresInDuration=response.expiresIn
@@ -73,9 +81,12 @@ export class ServiceService {
     private handleError(error: HttpErrorResponse) {
       if (error.status === 401) {
         // Unauthorized error
+        console.log(error)
+        this.loginerrorMessage.next(error.error.message) ;
         return throwError(() => new Error('Invalid username or password.'));
       } else {
         // Other errors
+        this.loginerrorMessage.next(error.error.message) ;
         return throwError(() => new Error('Something went wrong. Please try again later.'));
       }
     }

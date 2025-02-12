@@ -10,11 +10,16 @@ import { ServiceService } from 'src/app/services/auth/service.service';
 })
 export class SignupComponent {
   isSignup:boolean=false;
+  errorMessage:string="";
   constructor(private router: Router,private authservice:ServiceService) { }
   handleSignup(formData:NgForm){
     if(formData.invalid){
       return
     }
+    this.authservice.signuperrorMessage.subscribe(res=>{
+      this.errorMessage=res
+      this.isSignup=false
+    })
     this.authservice.createUser(formData.value.email,formData.value.password,formData.value.name);
     this.isSignup=true
     setTimeout(()=>{
