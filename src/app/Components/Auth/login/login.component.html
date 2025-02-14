@@ -28,4 +28,7 @@
       Don't have an account? <a routerLink="/signup">Sign up</a>
     </p>
   </div>
+  <div *ngIf="loaderService.loading$ | async" class="loader-overlay">
+    <div class="loader"></div>
+  </div>
 </div>

@@ -4,6 +4,7 @@ import { AuthData } from '../../../app/models/auth';
 import { BehaviorSubject, catchError, Observable, Subject, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment'
+import { LoaderService } from '../loader.service';
 
 const url=environment.apiUrl;
 //const url="http://localhost:3000/api/"
@@ -19,7 +20,7 @@ export class ServiceService {
   public userName:string;
   public loginerrorMessage=new BehaviorSubject<string>(null);
   public signuperrorMessage=new BehaviorSubject<string>(null);
-  constructor(private http:HttpClient ,private router:Router) { }
+  constructor(private http:HttpClient ,private router:Router, private loaderService:LoaderService) { }
   createUser(email:string,password:string,userName:string){
     const AuthData:AuthData={email:email,password:password,userName:userName}
     this.http.post(url+"user/signup",AuthData)
@@ -72,6 +73,7 @@ export class ServiceService {
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
           //console.log(expirationDate);
           this.saveAuthData(this.token, expirationDate,this.userId);
+          this.loaderService.hide();
           this.router.navigate(["home"]);
           
         }
@@ -83,10 +85,12 @@ export class ServiceService {
         // Unauthorized error
         console.log(error)
         this.loginerrorMessage.next(error.error.message) ;
+        this.loaderService.hide();
         return throwError(() => new Error('Invalid username or password.'));
       } else {
         // Other errors
         this.loginerrorMessage.next(error.error.message) ;
+        this.loaderService.hide();
         return throwError(() => new Error('Something went wrong. Please try again later.'));
       }
     }
