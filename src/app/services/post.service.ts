@@ -6,7 +6,7 @@ import { Subject, map } from 'rxjs';
 import { Post } from '../models/posts';
 import { environment } from 'src/environments/environment';
 const url = environment.apiUrl;
-//nst url="http://localhost:3000/api/"
+//const url="http://localhost:3000/api/"
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +24,7 @@ export class PostService {
 
   getPosts() {
     this.http.
-    get<{ message: string, posts: any }>(url+"posts")
+    get<{ message: string, posts: any }>(url+"cloud")
       .pipe(
         map(postData => {
         return postData.posts.map((post: any) => {
@@ -32,7 +32,8 @@ export class PostService {
             title: post.title,
             content: post.content,
             id: post._id,
-            imagePath:post.imagePath
+            imagePath:post.imagePath,
+            creator:post.creator
           };
         });
       }))
@@ -43,8 +44,8 @@ export class PostService {
       });
   }
   getPost(id: string) {
-    return this.http.get<{ _id: string; title: string; content: string,imagePath:string }>(
-      url+"posts/"+ id
+    return this.http.get<{ _id: string; title: string; content: string,imagePath:string,creator:string}>(
+      url+"cloud/"+ id
     );
 
   }
@@ -58,35 +59,43 @@ export class PostService {
     postData.append("content", Post.content)
     postData.append("image", Post.image, Post.title)
     //const post: Post = {id:null,title: Post.title, content: Post.content};
-    console.log(postData)
-     this.http.post<{ message: string, post: Post }>(url+"posts", postData)
+    //console.log(postData)
+     this.http.post<{ message: string, post: Post }>(url+"cloud", postData)
       .subscribe(responsedata => {
         const post: Post = {
           id: responsedata.post.id,
           title: responsedata.post.title,
           content: responsedata.post.content,
-          imagePath:responsedata.post.imagePath
+          imagePath:responsedata.post.imagePath,
+          creator:responsedata.post.creator
         }
-        console.log(post)
+        //console.log(post)
         this.posts.push(post);
         this.postsUpdated.next([...this.posts]);
       })
   }
   deletePost(id: string) {
-    this.http.delete(url +"posts/" + id)
+    this.http.delete(url +"cloud/" + id)
       .subscribe(() => {
 
         const updatedpost = this.posts.filter(post => post.id !== id)
         this.posts = updatedpost
-        console.log(this.posts)
+        //console.log(this.posts)
         this.postsUpdated.next([...this.posts])
       })
   }
   updatePost(id: string, Post: Post) {
-    const post: Post = { id: id, title: Post.title, content: Post.content,imagePath:Post.imagePath };
-    console.log(post)
+    const postData = new FormData()
+    postData.append("title", Post.title)
+    postData.append("content", Post.content)
+    postData.append("image", Post.image)
+    //const post: Post = { id: id, title: Post.title, content: Post.content,imagePath:Post.imagePath,creator:null };
+    //console.log(post)
     this.http
-      .put(url +"posts/" + id, post)
+      .put(url +"cloud/" + id, postData)
       .subscribe(response => console.log(response));
+  }
+  getcloudImage(){
+    
   }
 }

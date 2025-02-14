@@ -5,5 +5,6 @@ export interface Post {
     image?:any,
     imagePath:string|null,
     isExpanded?:boolean
+    creator:string
   }
   

@@ -15,8 +15,8 @@
         {{ post.isExpanded ? 'Read Less' : 'Read More' }}
       </button>
       <div class="actions">
-        <button class="btn-update" (click)="onEdit(post.id)">Update</button>
-        <button class="btn-delete" (click)="onDelete(post.id)">Delete</button>
+        <button class="btn-update" *ngIf="isauthenticated && userId===post.creator" (click)="onEdit(post.id)">Update</button>
+        <button class="btn-delete" *ngIf="isauthenticated && userId===post.creator" (click)="onDelete(post.id)">Delete</button>
       </div>
     </div>
 </div>

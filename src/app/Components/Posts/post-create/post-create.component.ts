@@ -16,7 +16,8 @@ export class PostCreateComponent implements OnInit{
     id: '',
     title: '',
     content: '',
-    imagePath:""
+    imagePath:"",
+    creator:""
   };
   reactiveForm!: FormGroup;
   private mode:string="";
@@ -36,20 +37,22 @@ export class PostCreateComponent implements OnInit{
             if(params.has('id')){
                this.postId=params.get('id') as string
               this.mode='edit';
-              console.log(this.postId)
+              //console.log(this.postId)
               this.postsService.getPost(this.postId).subscribe(postData => {
                 
                 this.Post = {
                   id: postData._id, 
                   title: postData.title, 
                   content: postData.content,
-                  imagePath:postData.imagePath};
+                  imagePath:postData.imagePath,
+                  creator:postData.creator  
+                };
 
                 this.reactiveForm.get('name').setValue(postData.title);
                 this.reactiveForm.get('content').setValue(postData.content);
                 this.reactiveForm.get('image').setValue(postData.imagePath)
               });
-              console.log(this.Post)
+              //console.log(this.Post)
             }
             else{
               this.mode='create'
@@ -67,7 +70,7 @@ export class PostCreateComponent implements OnInit{
     this.Post.title= this.reactiveForm.get('name').value;
     this.Post.content = this.reactiveForm.get('content').value;
     this.Post.image = this.reactiveForm.get('image').value;
-    console.log(this.Post)
+    //console.log(this.Post)
     if (this.mode === "create") {
       
             this.postsService.addPost(this.Post);
