@@ -36,5 +36,8 @@
       <p>Email: {{ userData.email }}</p>
     </div>
   </div>
- 
+  <div *ngIf="loaderService.loading$ | async" class="loader-overlay">
+    <div class="loader"></div>
+  </div>
+
 </div>

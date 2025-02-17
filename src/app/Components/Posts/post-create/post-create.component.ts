@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models/posts';
+import { LoaderService } from 'src/app/services/loader.service';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class PostCreateComponent implements OnInit{
   formdata= new FormData
   private postId!:string;
   imagePreview!: string | ArrayBuffer;
-  constructor(private fb: FormBuilder,private postsService:PostService,private http:HttpClient,private activateroute:ActivatedRoute,private router:Router){
+  constructor(private fb: FormBuilder,private postsService:PostService,private http:HttpClient,private activateroute:ActivatedRoute,private router:Router,public loaderService: LoaderService){
     //this.postsService.mode="create"
   }
   ngOnInit(): void {
@@ -72,10 +73,11 @@ export class PostCreateComponent implements OnInit{
     this.Post.image = this.reactiveForm.get('image').value;
     //console.log(this.Post)
     if (this.mode === "create") {
-      
+            this.loaderService.show();
             this.postsService.addPost(this.Post);
             
           } else {
+            this.loaderService.show();
             this.postsService.updatePost(
               this.postId,
               this.Post

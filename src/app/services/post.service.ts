@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { API_URL } from '../app.constants';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpErrorResponse} from '@angular/common/http'
 import { Router } from '@angular/router';
-import { Subject, map } from 'rxjs';
+import { Subject, catchError, map, throwError } from 'rxjs';
 import { Post } from '../models/posts';
 import { environment } from 'src/environments/environment';
+
 //const url = environment.apiUrl;
 const url="http://localhost:3000/api/"
+//const url = environment.apiUrl;
+const url="http://localhost:3000/api/"
+import { LoaderService } from './loader.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +21,7 @@ export class PostService {
   //   return this.http.get(API_URL+"/api/posts")
   // }
   mode: string = ""
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,private loaderService:LoaderService) { }
 
   private posts: Post[] = []
   private postsUpdated = new Subject<Post[]>();
@@ -58,10 +63,15 @@ export class PostService {
     postData.append("title", Post.title)
     postData.append("content", Post.content)
     postData.append("image", Post.image, Post.title)
-    //const post: Post = {id:null,title: Post.title, content: Post.content};
-    //console.log(postData)
      this.http.post<{ message: string, post: Post }>(url+"cloud", postData)
+     .pipe(
+      catchError((error: HttpErrorResponse) => {
+        //console.error("Error occurred while adding post:", error);
+        return throwError(() => error);
+      })
+    )
       .subscribe(responsedata => {
+        this.loaderService.hide();
         const post: Post = {
           id: responsedata.post.id,
           title: responsedata.post.title,
@@ -72,6 +82,7 @@ export class PostService {
         //console.log(post)
         this.posts.push(post);
         this.postsUpdated.next([...this.posts]);
+        
       })
   }
   deletePost(id: string) {
@@ -93,7 +104,10 @@ export class PostService {
     //console.log(post)
     this.http
       .put(url +"cloud/" + id, postData)
-      .subscribe(response => console.log(response));
+      .subscribe(response => {
+        console.log(response)
+        this.loaderService.hide();  
+      });
   }
   getcloudImage(){
     

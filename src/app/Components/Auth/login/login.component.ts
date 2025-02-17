@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { ServiceService } from 'src/app/services/auth/service.service';
 import { GoogleAuthService } from 'src/app/services/google-auth.service';
+import { LoaderService } from 'src/app/services/loader.service';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -21,13 +22,14 @@ export class LoginComponent implements AfterViewInit {
   userData: any = null;
   formData:any;
   routingObs=new Subject<boolean>
-  constructor(private http:HttpClient,private router: Router,public authservice:ServiceService,private googleAuthService: GoogleAuthService, private ngZone: NgZone) { }
+  constructor(private http:HttpClient,private router: Router,public authservice:ServiceService,private googleAuthService: GoogleAuthService, private ngZone: NgZone,public loaderService: LoaderService) { }
 
   handleLogin(formvalue:NgForm) {
     this.formData=formvalue
     if(formvalue.invalid){
       return
     } 
+    this.loaderService.show();
     this.authservice.loginerrorMessage.subscribe(err=>{
       this.errorMessage=err
      });
