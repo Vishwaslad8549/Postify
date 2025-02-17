@@ -31,7 +31,8 @@ selectedImage: string | null = null;
 ngOnInit() {
  
   this.postservice.getPosts();
-  this.userId=this.authService.getloggedUserId()
+  this.userId=localStorage.getItem("userId");
+  console.log(this.userId)
   this.postsSub = this.postservice.getPostUpdateListener()
   .subscribe((posts: Post[]) => {
     console.log(posts)

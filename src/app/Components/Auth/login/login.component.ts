@@ -53,12 +53,13 @@ export class LoginComponent implements AfterViewInit {
   handleCredentialResponse(response: any): void {
     const token = response.credential;  // Google ID token
 
-    this.http.post('http://localhost:3000/api/user/auth/google', { token })
+    this.http.post('http://localhost:3000/api/user/googleauth', { token })
       .subscribe(
         (res: any) => {
           console.log(res);
           this.authservice.setToken(res.token);
           localStorage.setItem("token", res.token);
+          localStorage.setItem("userId",res.userId)
           this.routingObs.next(true)
           this.ngZone.run(() => {
             this.userData = res.user;
