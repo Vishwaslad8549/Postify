@@ -5,8 +5,8 @@ import { BehaviorSubject, catchError, Observable, Subject, throwError } from 'rx
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment'
 
-const url=environment.apiUrl;
-//const url="http://localhost:3000/api/"
+//const url=environment.apiUrl;
+const url="http://localhost:3000/api/"
 @Injectable({
   providedIn: 'root'
 })
@@ -48,6 +48,7 @@ export class ServiceService {
     return this.authStatusListener.asObservable()
   }
   loginUser(email:string,password:string){
+    console.log(email,password)
       const AuthData:AuthData={email:email,password:password}
       this.http.post<{token:string,expiresIn:number,userId:string,userName:string}>(
         url+"user/login",AuthData).pipe(
@@ -95,6 +96,7 @@ export class ServiceService {
         this.isauthenticated=false;
         this.authStatusListener.next(false)
         this.userId=null;
+        this.userName=null;
         clearTimeout(this.tokenTimer);
         this.clearAuthData();
         this.router.navigate(["/"]);

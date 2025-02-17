@@ -34,7 +34,7 @@ ngOnInit() {
   this.userId=this.authService.getloggedUserId()
   this.postsSub = this.postservice.getPostUpdateListener()
   .subscribe((posts: Post[]) => {
-    //console.log(posts)
+    console.log(posts)
     this.Posts = posts;
   });
   this.isauthenticated=this.authService.isAuth()

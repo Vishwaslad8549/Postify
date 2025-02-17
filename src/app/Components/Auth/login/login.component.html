@@ -27,5 +27,14 @@
     <p class="signup-link">
       Don't have an account? <a routerLink="/signup">Sign up</a>
     </p>
+    <div id="googleSignInBtn"></div>
+
+    <!-- User Info -->
+    <div *ngIf="userData">
+      <h3>Welcome, {{ userData.name }}</h3>
+      <img [src]="userData.picture" alt="Profile Image" />
+      <p>Email: {{ userData.email }}</p>
+    </div>
   </div>
+ 
 </div>
