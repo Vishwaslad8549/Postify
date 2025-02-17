@@ -6,8 +6,8 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment'
 import { LoaderService } from '../loader.service';
 
-//const url=environment.apiUrl;
-const url="http://localhost:3000/api/"
+const url=environment.apiUrl;
+//const url="http://localhost:3000/api/"
 @Injectable({
   providedIn: 'root'
 })
