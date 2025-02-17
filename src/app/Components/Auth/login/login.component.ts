@@ -7,6 +7,7 @@ import { ServiceService } from 'src/app/services/auth/service.service';
 import { GoogleAuthService } from 'src/app/services/google-auth.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { PostService } from 'src/app/services/post.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements AfterViewInit {
   userData: any = null;
   formData:any;
   routingObs=new Subject<boolean>
+  url=environment.apiUrl;
   constructor(private http:HttpClient,private router: Router,public authservice:ServiceService,private googleAuthService: GoogleAuthService, private ngZone: NgZone,public loaderService: LoaderService) { }
 
   handleLogin(formvalue:NgForm) {
@@ -55,7 +57,7 @@ export class LoginComponent implements AfterViewInit {
   handleCredentialResponse(response: any): void {
     const token = response.credential;  // Google ID token
 
-    this.http.post('http://localhost:3000/api/user/googleauth', { token })
+    this.http.post(this.url+'user/googleauth', { token })
       .subscribe(
         (res: any) => {
           console.log(res);
