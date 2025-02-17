@@ -1,5 +1,14 @@
+<div class="search-sort-container">
+  <input id="search" type="text" [(ngModel)]="searchTerm" (input)="filterPosts()" placeholder="Enter title...">
+  <select id="sortOrder" [(ngModel)]="sortOrder" (change)="sortPostsByDate()">
+    <option value="newest">Newest</option>
+    <option value="oldest">Oldest</option>
+  </select>
+</div>
+
+
 <div class="post-grid">
-<div class="post-card" *ngFor="let post of Posts, let i = index">
+<div class="post-card" *ngFor="let post of filteredPosts, let i = index">
     <img
       [src]="post.imagePath"
       alt="User Photo"
@@ -11,6 +20,7 @@
       <h4>
         {{ post.content }}
       </h4>
+      <small>{{ post.creationDate | date: 'short' }}</small>
       <div class="actions">
         <button class="btn-update" *ngIf="isauthenticated && userId===post.creator" (click)="onEdit(post.id)">Update</button>
         <button class="btn-delete" *ngIf="isauthenticated && userId===post.creator" (click)="onDelete(post.id)">Delete</button>

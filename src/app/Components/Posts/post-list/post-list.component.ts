@@ -16,6 +16,9 @@ export class PostListComponent {
   private authSub:Subscription;
   isauthenticated: boolean=false;
   userId:string;
+  filteredPosts:Post[]
+  searchTerm: string = '';
+  sortOrder: string = 'newest';
 constructor(private postservice:PostService,private router:Router,private authService:ServiceService){
 }
 selectedImage: string | null = null;
@@ -37,6 +40,8 @@ ngOnInit() {
   .subscribe((posts: Post[]) => {
     console.log(posts)
     this.Posts = posts;
+    this.filteredPosts = [...this.Posts];
+    this.sortPostsByDate();
   });
   this.isauthenticated=this.authService.isAuth()
   this.authSub=this.authService.getAuthStatusListener().
@@ -63,5 +68,24 @@ toggleReadMore(index: number) {
 ngOnDestroy(): void {
   this.postsSub.unsubscribe()
   this.authSub.unsubscribe()
+}
+filterPosts(): void {
+  this.filteredPosts = this.Posts.filter(post =>
+    post.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+  );
+  this.sortPostsByDate(); // Re-sort after filtering
+}
+
+sortPostsByDate(): void {
+  this.filteredPosts = [...this.filteredPosts].sort((a, b) => {
+    const dateA = new Date(a.creationDate).getTime();
+    const dateB = new Date(b.creationDate).getTime();
+
+    if (this.sortOrder === 'newest') {
+      return dateB - dateA; // Newest first
+    } else {
+      return dateA - dateB; // Oldest first
+    }
+  });
 }
 }

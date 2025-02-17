@@ -5,6 +5,7 @@ export interface Post {
     image?:any,
     imagePath:string|null,
     isExpanded?:boolean
-    creator:string
+    creator:string,
+    creationDate:string
   }
   

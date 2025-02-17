@@ -37,7 +37,8 @@ export class PostService {
             content: post.content,
             id: post._id,
             imagePath:post.imagePath,
-            creator:post.creator
+            creator:post.creator,
+            creationDate:post.creationDate
           };
         });
       }))
@@ -48,7 +49,7 @@ export class PostService {
       });
   }
   getPost(id: string) {
-    return this.http.get<{ _id: string; title: string; content: string,imagePath:string,creator:string}>(
+    return this.http.get<{ _id: string; title: string; content: string,imagePath:string,creator:string,creationDate:string}>(
       url+"cloud/"+ id
     );
 
@@ -76,7 +77,8 @@ export class PostService {
           title: responsedata.post.title,
           content: responsedata.post.content,
           imagePath:responsedata.post.imagePath,
-          creator:responsedata.post.creator
+          creator:responsedata.post.creator,
+          creationDate:responsedata.post.creationDate
         }
         //console.log(post)
         this.posts.push(post);
