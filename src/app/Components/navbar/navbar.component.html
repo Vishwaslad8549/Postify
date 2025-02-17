@@ -1,7 +1,7 @@
 <nav class="navbar">
     <div class="navbar-logo" routerLink="/home">Postify</div>
     <ul class="navbar-links">
-      <li><a routerLink="/home" *ngIf="Isloggedin">Welcome,{{authservice.userName}}</a></li>
+      <li><a routerLink="/home" *ngIf="Isloggedin && authservice.userName">Welcome,{{authservice.userName}}</a></li>
       <li><a routerLink="/home" *ngIf="Isloggedin">Home</a></li>
       <li><a routerLink="/post/create" *ngIf="Isloggedin">Create Post</a></li>
       <li><a routerLink="/post/list" *ngIf="Isloggedin">Posts</a></li>
