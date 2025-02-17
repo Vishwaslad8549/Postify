@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 import { Subject, catchError, map, throwError } from 'rxjs';
 import { Post } from '../models/posts';
 import { environment } from 'src/environments/environment';
-const url = environment.apiUrl;
-//const url="http://localhost:3000/api/"
+
 import { LoaderService } from './loader.service';
 @Injectable({
   providedIn: 'root'
