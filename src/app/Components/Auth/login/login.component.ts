@@ -23,7 +23,8 @@ export class LoginComponent implements AfterViewInit {
   userData: any = null;
   formData:any;
   routingObs=new Subject<boolean>
-  url=environment.apiUrl;
+  // url=environment.apiUrl;
+  url="http://localhost:3000/api/"
   constructor(private http:HttpClient,private router: Router,public authservice:ServiceService,private googleAuthService: GoogleAuthService, private ngZone: NgZone,public loaderService: LoaderService) { }
 
   handleLogin(formvalue:NgForm) {
