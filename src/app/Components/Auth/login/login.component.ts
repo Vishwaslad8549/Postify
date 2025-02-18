@@ -40,16 +40,16 @@ export class LoginComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.routingObs.subscribe(res=>{
       if(res) {
+        this.loaderService.hide();
+        this.router.navigate(['home'])
         this.authservice.setisAuth(true)
         this.authservice.authStatusListener.next(true);
-        this.router.navigate(['home'])
-        
       }
   })
     this.googleAuthService.attachSignin(
       document.getElementById('googleSignInBtn') as HTMLElement,
       (response) => {
-        console.log(response)
+          this.loaderService.show();
           this.handleCredentialResponse(response)
   });
   }
@@ -67,7 +67,7 @@ export class LoginComponent implements AfterViewInit {
           this.routingObs.next(true)
           this.ngZone.run(() => {
             this.userData = res.user;
-            console.log('User Logged In:', this.userData);
+            
             
           });
           
@@ -75,44 +75,6 @@ export class LoginComponent implements AfterViewInit {
         (error) => console.error('Login Failed:', error)
       );
   }
-     // .subscribe({
-  //     next: (response) => {
-  //       // Handle successful login
-  //       console.log('Login successful', response);
-  //       if(response.token){
-  //         this.authservice.setisAuth(true);
-  //         this.authservice.setToken(response.token);
-  //         this.expiresInDuration=response.expiresIn
-  //         this.authservice.authStatusListener.next(true)
-  //         this.errorMessage = null; 
-  //         this.tokenTimer=setTimeout(()=>{
-  //           this.authservice.logout()
-  //           this.router.navigate(['/'])
-  //         },this.expiresInDuration*1000)
-  //         this.router.navigate(['home'])
-          
-  //       }
-  //        // Clear error message
-  //     },
-  //     error: (err) => {
-  //       // Handle error
-  //       this.errorMessage = err.message;
-  //     }
-  //   })
-  //   this.authSub=this.authservice.getAuthStatusListener().subscribe(isauth=>{
-  //     this.loginFailed=isauth
-  //     console.log(this.loginFailed)
-  //   })
-  //   //this.token=this.authservice.getToken()
-  
-    
-  // //   if(this.authservice.authenticate(formvalue.value.email, formvalue.value.password)) {
-  // //     //Redirect to Welcome Page
-  // //     this.router.navigate(['home'])
-  // //     this.invalidLogin = false
-  // //   } else {
-  // //     this.invalidLogin = true
-  // //   }
-  //}
+
 }
 

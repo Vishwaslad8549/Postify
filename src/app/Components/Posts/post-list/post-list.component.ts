@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Post } from 'src/app/models/posts';
 import { ServiceService } from 'src/app/services/auth/service.service';
+import { LoaderService } from 'src/app/services/loader.service';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class PostListComponent {
   filteredPosts:Post[]
   searchTerm: string = '';
   sortOrder: string = 'newest';
-constructor(private postservice:PostService,private router:Router,private authService:ServiceService){
+constructor(private postservice:PostService,public loaderservice:LoaderService,private router:Router,private authService:ServiceService){
 }
 selectedImage: string | null = null;
 
@@ -32,15 +33,17 @@ selectedImage: string | null = null;
   }
 
 ngOnInit() {
- 
+  
   this.postservice.getPosts();
   this.userId=localStorage.getItem("userId");
   console.log(this.userId)
+  this.loaderservice.show()
   this.postsSub = this.postservice.getPostUpdateListener()
   .subscribe((posts: Post[]) => {
     console.log(posts)
     this.Posts = posts;
     this.filteredPosts = [...this.Posts];
+    this.loaderservice.hide()
     this.sortPostsByDate();
   });
   this.isauthenticated=this.authService.isAuth()
@@ -50,10 +53,12 @@ ngOnInit() {
     this.isauthenticated=isauth
     //console.log(isauth)
   })
+
+    
   
 }
 onEdit(id:string){
-  //this.postservice.mode="edit"
+  
   this.router.navigateByUrl("post/edit/"+id)
   //console.log("Edit clicked",id)
   
@@ -73,7 +78,7 @@ filterPosts(): void {
   this.filteredPosts = this.Posts.filter(post =>
     post.title.toLowerCase().includes(this.searchTerm.toLowerCase())
   );
-  this.sortPostsByDate(); // Re-sort after filtering
+  this.sortPostsByDate(); 
 }
 
 sortPostsByDate(): void {
@@ -82,9 +87,9 @@ sortPostsByDate(): void {
     const dateB = new Date(b.creationDate).getTime();
 
     if (this.sortOrder === 'newest') {
-      return dateB - dateA; // Newest first
+      return dateB - dateA; 
     } else {
-      return dateA - dateB; // Oldest first
+      return dateA - dateB; 
     }
   });
 }

@@ -8,31 +8,34 @@
 
 
 <div class="post-grid">
-<div class="post-card" *ngFor="let post of filteredPosts, let i = index">
-    <img
-      [src]="post.imagePath"
-      alt="User Photo"
-      class="post-photo"
-      (click)="openImage(post.imagePath)"
-    />
-    <div class="post-info">
-      <h3>{{ post.title }}</h3>
-      <h4>
-        {{ post.content }}
-      </h4>
-      <small>{{ post.creationDate | date: 'short' }}</small>
-      <div class="actions">
-        <button class="btn-update" *ngIf="isauthenticated && userId===post.creator" (click)="onEdit(post.id)">Update</button>
-        <button class="btn-delete" *ngIf="isauthenticated && userId===post.creator" (click)="onDelete(post.id)">Delete</button>
+  <div class="post-card" *ngFor="let post of filteredPosts, let i = index">
+      <img
+        [src]="post.imagePath"
+        alt="User Photo"
+        class="post-photo"
+        (click)="openImage(post.imagePath)"
+      />
+      <div class="post-info">
+        <h3>{{ post.title }}</h3>
+        <h4>
+          {{ post.content }}
+        </h4>
+        <small>{{ post.creationDate | date: 'short' }}</small>
+        <div class="actions">
+          <button class="btn-update" *ngIf="isauthenticated && userId===post.creator" (click)="onEdit(post.id)">Update</button>
+          <button class="btn-delete" *ngIf="isauthenticated && userId===post.creator" (click)="onDelete(post.id)">Delete</button>
+        </div>
       </div>
-    </div>
-</div>
+  </div>
   <div
     class="image-modal"
     *ngIf="selectedImage"
     (click)="closeImage()"
   >
     <img [src]="selectedImage" alt="Enlarged Image" />
+  </div>
+  <div *ngIf="loaderservice.loading$ | async" class="loader-overlay">
+    <div class="loader"></div>
   </div>
 </div>
   <!-- <div class="user-card" *ngFor="let user of users">
