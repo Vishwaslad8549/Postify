@@ -12,11 +12,11 @@
 
   <!-- Navbar Links -->
   <ul class="navbar-links" [class.active]="isMenuOpen">
-    <li><a routerLink="/home" *ngIf="Isloggedin && authservice.userName">Welcome, {{authservice.userName}}</a></li>
-    <li><a routerLink="/home" *ngIf="Isloggedin">Home</a></li>
-    <li><a routerLink="/post/create" *ngIf="Isloggedin">Create Post</a></li>
-    <li><a routerLink="/post/list" *ngIf="Isloggedin">Posts</a></li>
-    <li><a routerLink="/login" *ngIf="Isloggedin" (click)="onLogout()">Logout</a></li>
-    <li><a routerLink="/login" *ngIf="!Isloggedin">Login</a></li>
+    <li><a routerLink="/home" *ngIf="authservice.isLoggedIn() && authservice.userName">Welcome, {{authservice.userName}}</a></li>
+    <li><a routerLink="/home" *ngIf="authservice.isLoggedIn()">Home</a></li>
+    <li><a routerLink="/post/create" *ngIf="authservice.isLoggedIn()">Create Post</a></li>
+    <li><a routerLink="/post/list" *ngIf="authservice.isLoggedIn()">Posts</a></li>
+    <li><a routerLink="/login" *ngIf="authservice.isLoggedIn()" (click)="onLogout()">Logout</a></li>
+    <li><a routerLink="/login" *ngIf="!authservice.isLoggedIn()">Login</a></li>
   </ul>
 </nav>

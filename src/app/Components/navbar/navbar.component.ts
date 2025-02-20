@@ -12,12 +12,15 @@ export class NavbarComponent {
   authSubs!:Subscription;
   isMenuOpen = false;
   @ViewChild('navbar') navbar!: ElementRef;
+  istoken:boolean;
 constructor(public authservice:ServiceService){
 }
   ngOnInit(): void {
     this.authSubs=this.authservice.getAuthStatusListener().subscribe((res)=>{
       this.Isloggedin=res
     })
+    this.istoken=localStorage.getItem('token')?true:false;
+    console.log(this.istoken)
   }
   ngOnDestroy(): void {
       this.authSubs.unsubscribe()

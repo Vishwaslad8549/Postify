@@ -51,6 +51,9 @@ export class ServiceService {
   getAuthStatusListener(){
     return this.authStatusListener.asObservable()
   }
+  isLoggedIn(){
+    return !!localStorage.getItem('token')
+  }
   loginUser(email:string,password:string){
     console.log(email,password)
       const AuthData:AuthData={email:email,password:password}
