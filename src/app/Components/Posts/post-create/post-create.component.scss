@@ -82,10 +82,11 @@ form {
   }
   
   // Responsive design: Make form responsive for smaller screens
-  @media (max-width: 600px) {
+  @media (max-width: 480px) {
     form {
       padding: 15px;
       width: 100%;
+      max-width: 350px;
     }
   
     label {
@@ -94,6 +95,19 @@ form {
   
     input[type="text"], textarea, input[type="file"], button[type="submit"] {
       font-size: 14px;
+      width: 100%;
+      max-width: 330px;
+    }
+    .form .button{
+      width: 100%;
+      max-width: 100px;
+      align-self: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    form{
+      padding: 15px;
     }
   }
   .loader-overlay {

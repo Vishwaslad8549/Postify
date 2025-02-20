@@ -5,9 +5,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   margin: 0;
+  min-height: 100vh; // Ensure it takes the full height of the viewport
+  padding: 1rem;
   font-family: 'Poppins', sans-serif;
 
   .login-container {
@@ -16,10 +18,25 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     padding: 2rem;
-    width: 350px;
+    max-width: 400px;
+    width: 100%;
     text-align: center;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 
+    @media (max-width: 768px) {
+      width: 90%; 
+      position: relative;
+      align-self: center;
+      right: 1rem;
+    }
+
+    
+    @media (max-width: 480px) {
+      width: 80%;
+        position: relative;
+        align-self: center;
+        right: 1rem;
+    }
     h2 {
       color: #ffffff;
       margin-bottom: 1.5rem;
@@ -53,6 +70,10 @@
           outline: none;
           border: 2px solid #4facfe;
           box-shadow: 0 0 8px rgba(79, 172, 254, 0.5);
+        }
+        @media (max-width: 480px) {
+          width: 90%; 
+          padding: 1rem; 
         }
       }
     }
@@ -130,3 +151,228 @@
     100% { transform: rotate(360deg); }
   }
 }
+
+
+
+
+
+
+
+// .login-page {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   min-height: 100vh; // Full viewport height
+//   padding: 1rem; // Add padding for smaller screens
+//   background: linear-gradient(135deg, #1a1a2e, #16213e); // Light background color
+
+//   // Styles for the login container
+//   .login-container {
+//     width: 100%;
+//     max-width: 400px; // Max width for larger screens
+//     padding: 2rem;
+//     background-color: #fff; // White background
+//     border-radius: 8px; // Rounded corners
+//     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Subtle shadow
+//     text-align: center;
+
+//     // Heading style
+//     h2 {
+//       margin-bottom: 1.5rem;
+//       font-size: 1.75rem;
+//       color: #333; // Dark text color
+//     }
+
+//     // Form group styles
+//     .form-group {
+//       margin-bottom: 1.5rem;
+//       text-align: left;
+
+//       label {
+//         display: block;
+//         margin-bottom: 0.5rem;
+//         font-size: 0.9rem;
+//         color: #555; // Medium-dark text color
+//       }
+
+//       input {
+//         width: 100%;
+//         padding: 0.75rem;
+//         font-size: 1rem;
+//         border: 1px solid #ddd; // Light border
+//         border-radius: 4px; // Rounded corners
+//         outline: none;
+//         transition: border-color 0.3s ease;
+
+//         &:focus {
+//           border-color: #49c5b6; // Highlight border on focus
+//         }
+
+//         &::placeholder {
+//           color: #999; // Placeholder text color
+//         }
+//       }
+//     }
+
+//     // Login button styles
+//     .login-button {
+//       width: 100%;
+//       padding: 0.75rem;
+//       font-size: 1rem;
+//       color: #fff; // White text
+//       background-color: #49c5b6; // Primary button color
+//       border: none;
+//       border-radius: 4px; // Rounded corners
+//       cursor: pointer;
+//       transition: background-color 0.3s ease;
+
+//       &:hover {
+//         background-color: #3aa99e; // Darker shade on hover
+//       }
+//     }
+
+//     // Error message styles
+//     .error-message {
+//       margin-top: 1rem;
+//       color: #ff4d4d; // Red error text
+//       font-size: 0.9rem;
+//     }
+
+//     // Signup link styles
+//     .signup-link {
+//       margin-top: 1.5rem;
+//       font-size: 0.9rem;
+//       color: #555; // Medium-dark text color
+
+//       a {
+//         color: #49c5b6; // Link color
+//         text-decoration: none;
+//         transition: color 0.3s ease;
+
+//         &:hover {
+//           color: #3aa99e; // Darker shade on hover
+//         }
+//       }
+//     }
+
+//     // Google Sign-In button container
+//     #googleSignInBtn {
+//       margin-top: 1.5rem;
+//     }
+
+//     // User info styles
+//     .user-info {
+//       margin-top: 1.5rem;
+
+//       h3 {
+//         font-size: 1.25rem;
+//         color: #333; // Dark text color
+//       }
+
+//       img {
+//         width: 80px;
+//         height: 80px;
+//         border-radius: 50%; // Circular image
+//         margin-top: 1rem;
+//       }
+
+//       p {
+//         margin-top: 0.5rem;
+//         font-size: 0.9rem;
+//         color: #555; // Medium-dark text color
+//       }
+//     }
+//   }
+
+//   // Loader overlay styles
+//   .loader-overlay {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-color: rgba(255, 255, 255, 0.8); // Semi-transparent white
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     z-index: 1000; // Ensure it's above other elements
+
+//     .loader {
+//       border: 4px solid #f3f3f3; // Light gray border
+//       border-top: 4px solid #49c5b6; // Primary color for the loader
+//       border-radius: 50%;
+//       width: 40px;
+//       height: 40px;
+//       animation: spin 1s linear infinite; // Spin animation
+//     }
+//   }
+// }
+
+// // Keyframes for loader animation
+// @keyframes spin {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
+
+// Responsive adjustments
+// @media (max-width: 768px) {
+//   .login-page {
+//     padding: 0.5rem; // Reduce padding for smaller screens
+
+//     .login-container {
+//       padding: 1.5rem; // Reduce container padding
+//       width: 90%; // Take up 90% of the screen width
+
+//       h2 {
+//         font-size: 1.5rem; // Smaller heading
+//       }
+
+//       .form-group {
+//         margin-bottom: 1rem; // Reduce spacing between form groups
+
+//         input {
+//           padding: 0.5rem; // Smaller input padding
+//         }
+//       }
+
+//       .login-button {
+//         padding: 0.5rem; // Smaller button padding
+//       }
+
+//       .signup-link {
+//         font-size: 0.8rem; // Smaller font size
+//       }
+//     }
+//   }
+// }
+
+// @media (max-width: 480px) {
+//   .login-page {
+//     .login-container {
+//       width: 95%; // Take up 95% of the screen width
+//       padding: 1rem; // Further reduce padding
+
+//       h2 {
+//         font-size: 1.25rem; // Even smaller heading
+//       }
+
+//       .form-group {
+//         input {
+//           font-size: 0.9rem; // Smaller font size for inputs
+//         }
+//       }
+
+//       .login-button {
+//         font-size: 0.9rem; // Smaller font size for button
+//       }
+
+//       .signup-link {
+//         font-size: 0.75rem; // Smaller font size for signup link
+//       }
+//     }
+//   }
+// }

@@ -47,3 +47,26 @@ footer.footer .social-media img:hover {
   transform: scale(1.2); /* Enlarge icon slightly on hover */
   filter: brightness(1.2); /* Make icon slightly brighter on hover */
 }
+@media(max-width:768px){
+  footer.footer .about p{
+    font-size: 10px; /* Adjust paragraph font size */
+  line-height: 1.6; /* Improve readability with line height */
+  width:12rem;
+  }
+  footer.footer .social-media img {
+    width: 20px; /* Set fixed size for icons */
+    height: 20px; /* Ensure icons are square */
+    object-fit: contain; /* Prevent distortion */
+    transition: transform 0.3s ease; /* Add hover effect */
+    background: none; /* Remove background */
+  }
+  footer.footer .social-media img:hover {
+    transform: scale(1.2); /* Enlarge icon slightly on hover */
+    filter: brightness(1.2); /* Make icon slightly brighter on hover */
+  }
+  footer.footer .social-media .follow{
+    position: relative;
+    left: 1px;
+    bottom: 15px;
+  }
+}
