@@ -36,6 +36,9 @@ export class ServiceService {
   getToken(){
     return this.token;
   }  
+  getlocaltoken(){
+    return localStorage.getItem('token')
+  }
   setToken(token){
     this.token=token;
   }

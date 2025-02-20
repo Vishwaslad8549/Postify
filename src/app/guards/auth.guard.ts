@@ -11,7 +11,11 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router,private auth:ServiceService) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
    boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    const isAuth=this.auth.isAuth()
+    
+    // const isAuth=this.auth.isAuth()
+    // console.log(isAuth)
+    const isAuth=this.auth.getlocaltoken()?true:false
+    console.log(isAuth)
     if(!isAuth){
       this.router.navigate(['/'])
     }
