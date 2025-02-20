@@ -66,7 +66,7 @@ export class PostService {
      this.http.post<{ message: string, post: Post }>(url+"cloud", postData)
      .pipe(
       catchError((error: HttpErrorResponse) => {
-        //console.error("Error occurred while adding post:", error);
+        console.log("Error occurred while adding post:", error.message);
         return throwError(() => error);
       })
     )
