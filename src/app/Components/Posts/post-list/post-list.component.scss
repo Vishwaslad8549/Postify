@@ -5,7 +5,8 @@
   align-items: center; /* Vertically center items */
   gap: 20px; /* Space between search and select box */
   position: relative;
-  top:2.5rem /* For positioning the select box */
+  top:2.5rem;/* For positioning the select box */
+  padding: 0px 20px 0px 20px
 }
 
 /* Search input styling */
@@ -61,12 +62,12 @@
 }
 .post-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); // 3 columns
-  gap: 15px;
-  margin: 0 auto; // Center the grid in the container
-  max-width: 1200px;
-  position: relative;
-  top: 5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px;
+    top: 4rem;
 // .post-card {
 //   border: 1px solid #ddd;
 //   border-radius: 8px;

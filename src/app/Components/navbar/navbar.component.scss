@@ -1,44 +1,96 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 .navbar {
-  background-color: #000; /* Black background */
-  color: #fff; /* White text */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 2rem;
-  font-family: 'Poppins', sans-serif;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  background-color: #000000;
+  color: white;
+  position: relative; // Ensure the navbar is a positioning context
 
-  .navbar-logo {
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+  .navbar-logo{
     cursor: pointer;
-    transition: color 0.3s ease;
+    z-index: 1000;
+    a {
+      color: rgb(255, 255, 255);
+      text-decoration: none;
+      transition: color 0.3s;
 
-    &:hover {
-      color: #00f2fe; /* Light blue on hover */
+      &:hover {
+        color: #01e0e7;
+      }
+    }
+  }
+  .navbar-toggle {
+    display: none; // Hide by default
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1000; // Ensure it's above other elements
+    position: relative; // Ensure it stays in the flow but can be positioned
+
+    .dot {
+      width: 5px;
+      height: 5px;
+      background-color: white;
+      border-radius: 50%;
+      margin: 2px 0;
     }
   }
 
   .navbar-links {
-    list-style: none;
     display: flex;
-    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
     li {
+      margin-left: 1.5rem;
+
       a {
+        color: rgb(255, 255, 255);
         text-decoration: none;
-        color: #fff;
-        font-weight: 500;
-        font-size: 1rem;
-        transition: color 0.3s ease, transform 0.3s ease;
+        transition: color 0.3s;
 
         &:hover {
-          color: #00f2fe; /* Gradient-inspired blue */
-          transform: scale(1.1); /* Slight scaling effect */
+          color: #01e0e7;
+        }
+      }
+    }
+  }
+
+  // Responsive Styles for Mobile and Tablet
+  @media (max-width: 768px) {
+    .navbar-toggle {
+      
+      display: flex; // Show the toggle button
+    }
+
+    .navbar-links {
+      display: none; // Hide the links by default
+      flex-direction: column;
+      position: absolute;
+      top: 60px; // Adjust based on your navbar height
+      right: 1rem;
+      background-color: #000000;
+      padding: 1rem;
+      border-radius: 5px;
+      z-index: 999;
+      border-width: 1px;
+      border-style: solid;
+      border-color: white;
+
+      &.active {
+        display: flex; // Show the links when menu is open
+      }
+      &.hover {
+        color:#01e0e7// Show the links when menu is open
+      }
+
+      li {
+        margin: 0.5rem 0;
+        a{
+          color:white;
         }
       }
     }
