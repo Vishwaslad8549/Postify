@@ -63,6 +63,7 @@ export class LoginComponent implements AfterViewInit {
         (res: any) => {
           console.log(res);
           this.authservice.setToken(res.token);
+          this.authservice.userName=res.userName;
           localStorage.setItem("token", res.token);
           localStorage.setItem("userId",res.userId)
           this.routingObs.next(true)
