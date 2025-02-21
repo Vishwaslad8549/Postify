@@ -6,7 +6,7 @@
     [(ngModel)]="searchTerm"
     
     (input)="filterPosts()"
-    placeholder="Enter title..."
+    placeholder="Search..."
   />
   <select id="sortOrder" class="custom-select"[(ngModel)]="sortOrder" (change)="sortPostsByDate()">
     <option value="newest">Newest</option>

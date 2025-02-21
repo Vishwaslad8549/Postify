@@ -131,9 +131,12 @@
   padding: 10px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 680px) {
   .post-info {
     padding: 10px;
+  }
+  .post-card{
+    width:350px;
   }
 }
 
