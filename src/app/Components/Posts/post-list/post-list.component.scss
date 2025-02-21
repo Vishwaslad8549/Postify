@@ -41,8 +41,8 @@
 }
 
 @media (max-width: 680px) {
-  .custom-button {
-    width: 25%;
+  .custom-update,.custom-delete {
+    margin: 0px 10px 10px 0px;
   }
 }
 
@@ -133,7 +133,7 @@
 
 @media (max-width: 480px) {
   .post-info {
-    padding: 0px;
+    padding: 10px;
   }
 }
 
@@ -193,7 +193,10 @@
   font-size: 1.2rem;
   color: #272727;
 }
-
+.buttons{
+  display: flex;
+  gap:10px;
+}
 .image-modal, .loader-overlay {
   position: fixed;
   top: 0;
