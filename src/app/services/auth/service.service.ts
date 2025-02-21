@@ -36,6 +36,9 @@ export class ServiceService {
   getToken(){
     return this.token;
   }  
+  getlocaltoken(){
+    return localStorage.getItem('token')
+  }
   setToken(token){
     this.token=token;
   }
@@ -47,6 +50,9 @@ export class ServiceService {
   }
   getAuthStatusListener(){
     return this.authStatusListener.asObservable()
+  }
+  isLoggedIn(){
+    return !!localStorage.getItem('token')
   }
   loginUser(email:string,password:string){
     console.log(email,password)

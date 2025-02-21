@@ -20,7 +20,7 @@ const routes: Routes = [
       { path: 'list', component: PostListComponent }
     ]
   },
-  { path: '**', redirectTo: 'login'}
+  { path: '**', redirectTo: 'home' }
   
 ];
 

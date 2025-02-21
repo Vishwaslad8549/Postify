@@ -1,14 +1,22 @@
-<nav class="navbar">
-    <div class="navbar-logo" routerLink="/home">Postify</div>
-    <ul class="navbar-links">
-      <li><a routerLink="/home" *ngIf="Isloggedin && authservice.userName">Welcome,{{authservice.userName}}</a></li>
-      <li><a routerLink="/home" *ngIf="Isloggedin">Home</a></li>
-      <li><a routerLink="/post/create" *ngIf="Isloggedin">Create Post</a></li>
-      <li><a routerLink="/post/list" *ngIf="Isloggedin">Posts</a></li>
-      <li><a routerLink="/login" *ngIf="Isloggedin" (click)="onLogout()">Logout</a></li>
-      <li><a routerLink="/login" *ngIf="!Isloggedin">Login</a>
-      </li>
-      <!-- <button (click)="onLogout()" class="text-white hover:text-#49c5b6 transition duration-300" *ngIf="Isloggedin"> 
-        Logout</button> -->
-    </ul>
-  </nav>
+<nav class="navbar"  #navbar>
+  <div class="navbar-logo" routerLink="/home">
+    <a>Postify</a>
+  </div>
+  
+  <!-- Hamburger Icon (Three Dots) -->
+  <div class="navbar-toggle" (click)="toggleMenu()">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+  <!-- Navbar Links -->
+  <ul class="navbar-links" [class.active]="isMenuOpen">
+    <li><a routerLink="/home" *ngIf="authservice.isLoggedIn() && authservice.userName">Welcome, {{authservice.userName}}</a></li>
+    <li><a routerLink="/home" *ngIf="authservice.isLoggedIn()">Home</a></li>
+    <li><a routerLink="/post/create" *ngIf="authservice.isLoggedIn()">Create Post</a></li>
+    <li><a routerLink="/post/list" *ngIf="authservice.isLoggedIn()">Posts</a></li>
+    <li><a routerLink="/login" *ngIf="authservice.isLoggedIn()" (click)="onLogout()">Logout</a></li>
+    <li><a routerLink="/login" *ngIf="!authservice.isLoggedIn()">Login</a></li>
+  </ul>
+</nav>
