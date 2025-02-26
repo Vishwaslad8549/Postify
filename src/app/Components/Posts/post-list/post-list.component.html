@@ -44,14 +44,14 @@
         <div class="buttons">
           <button
             class="custom-button" id="custom-update"
-            *ngIf="isauthenticated && userId === post.creator"
+            *ngIf="userId === post.creator"
             (click)="onEdit(post.id)"
           >
             Update
           </button>
           <button
             class="custom-button"id="custom-delete"
-            *ngIf="isauthenticated && userId === post.creator"
+            *ngIf=" userId === post.creator"
             (click)="onDelete(post.id)"
           >
             Delete
