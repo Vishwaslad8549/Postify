@@ -47,7 +47,7 @@
 }
 
 .custom-search, .custom-select {
-  padding: 10px;
+  padding: 10px 10px 10px 0px;
   border: 2px solid black;
   background-color: white;
   color: black;
@@ -85,7 +85,7 @@
   font-weight: 600;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='black' d='M7 10l5 5 5-5H7z'/></svg>");
   background-repeat: no-repeat;
-  background-position: right 10px center;
+  background-position: right -3px center;
   background-size: 16px;
 }
 

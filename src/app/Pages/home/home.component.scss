@@ -64,8 +64,8 @@
       }
   
       img {
-        width: 250px; /* Set the desired width */
-        height: 200px; /* Set the desired height */
+        width: 300px; /* Set the desired width */
+        height: 250px; /* Set the desired height */
         object-fit: cover; /* Adjusts how the image fits into the given dimensions */
         border-radius: 8px;
         margin-bottom: 10px;
@@ -73,12 +73,13 @@
   
       h2 {
         font-size: 1.5rem;
-        margin-bottom: 10px;
+        margin: 0px;
       }
   
       p {
         font-size: 1rem;
-        color: #ffffff;
+        color: #000000;
+        margin: 0px;
       }
     }
   }
