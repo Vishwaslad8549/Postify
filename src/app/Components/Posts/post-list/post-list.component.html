@@ -16,6 +16,119 @@
   <button class="custom-button" role="button" (click)="getMypost()">MyPosts</button>
   
 </div>
+<div *ngIf="filteredPosts.length === 0; else postsList">
+  <ng-container *ngTemplateOutlet="noPostsTemplate"></ng-container>
+</div>
+
+<div *ngIf="loaderservice.loading$ | async" class="loader-overlay">
+  <div class="loader"></div>
+</div>
+
+
+
+
+<ng-template #noPostsTemplate>
+  <div class="no-posts">
+    No posts available.
+  </div>
+</ng-template>
+
+<ng-template #postsList>
+  <div class="post-grid">
+    <!-- {{filteredPosts|json}}
+    <ng-template *ngIf="!filteredPosts">
+      <h1>No Posts</h1>
+    </ng-template> -->
+    <div class="post-card" *ngFor="let post of filteredPosts; let i = index">
+      <img
+        [src]="post.imagePath"
+        alt="User Photo"
+        class="post-photo"
+        (click)="openImage(post.imagePath)"
+      />
+      <div class="post-info">
+        <div class="content">
+          <h3>{{ post.title }}</h3>
+          <h4>{{ post.content }}</h4>
+          <small>{{ post.creationDate | date : "short" }}</small>
+        </div>
+  
+        <div class="actions">
+          <div class="engagement">
+            <span (click)="onLike(post._id)">
+              {{isLiked(post)}}
+              <i class="fa-regular fa-heart" [ngClass]="{'fa-solid text-red': isLiked(post), 'fa-regular': !isLiked(post)}"></i> {{post.likes.length}}
+            </span>
+            <span (click)="onComment(post._id)">
+              <i class="fa-regular fa-comment"></i>
+            </span>
+          </div>
+          <div class="buttons">
+            <button
+              class="custom-button" id="custom-update"
+              *ngIf=" userId === post.creator._id"
+              (click)="onEdit(post._id)"
+            >
+              Update
+            </button>
+            <button
+              class="custom-button"id="custom-delete"
+              *ngIf="userId === post.creator._id"
+              (click)="onDelete(post._id)"
+            >
+              Delete
+            </button>
+          </div>
+        
+        </div>
+      </div>
+      <div class="image-modal" *ngIf="selectedImage" (click)="closeImage()">
+        <img [src]="selectedImage" alt="Enlarged Image" />
+      </div>
+    </div>
+  </div>
+  </ng-template>
+
+  <div *ngIf="isCommentPopup">
+    <ng-container *ngTemplateOutlet="commentPopup"></ng-container>
+  </div>
+  <ng-template #commentPopup>
+    <!-- <app-popup [isOpen]="isCommentPopup" (close)="closepopup($event)">    
+      
+      
+      <h1>Comments</h1>
+      <div class="comments-container">
+        <div class="comments-list" *ngFor="let comment of (commentsMap[selectedPostId]?.asObservable() | async)">
+          <h3>{{comment.text}}</h3>
+          
+        </div>
+      </div>
+  
+      <div class="comment-input">
+        <input type="text" [(ngModel)]="newComment" placeholder="Add a comment..." />
+        <button (click)="addComment()">Add</button>
+      </div>
+    </app-popup> -->
+    <app-popup [isOpen]="isCommentPopup" (close)="closepopup($event)">
+      <!-- Comment List -->
+      <div class="popup-content">
+        <h1>Comments</h1>
+        <div class="comments-container">
+          <div class="comments-list" *ngFor="let comment of (commentsMap[selectedPostId]?.asObservable() | async)">
+            <div class="comment-item">
+              <p class="comment-text">{{comment.text}}</p>
+              <span class="comment-time">{{comment.timestamp | date:'short'}}</span>
+            </div>
+          </div>
+        </div>
+        <!-- Input for New Comment -->
+        <div class="comment-input">
+          <input type="text" [(ngModel)]="newComment" placeholder="Add a comment..." />
+          <button (click)="addComment()">Add</button>
+        </div>
+      </div>
+    </app-popup>
+    </ng-template>
 
 
 <div class="post-grid">

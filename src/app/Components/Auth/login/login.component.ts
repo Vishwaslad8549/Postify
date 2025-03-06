@@ -26,7 +26,7 @@ export class LoginComponent implements AfterViewInit,OnInit{
   //url=environment.apiUrl;
   url="http://localhost:3000/api/"
   constructor(private http:HttpClient,private router: Router,public authservice:ServiceService,private googleAuthService: GoogleAuthService, private ngZone: NgZone,public loaderService: LoaderService) { }
-  ngOnInit(): void {
+  ngOnInit() {
     this.googleAuthService.attachSignin(
       document.getElementById('googleSignInBtn') as HTMLElement,
       (response) => {
@@ -34,6 +34,7 @@ export class LoginComponent implements AfterViewInit,OnInit{
           this.handleCredentialResponse(response)
   });
   }
+
   handleLogin(formvalue:NgForm) {
     this.formData=formvalue
     if(formvalue.invalid){
