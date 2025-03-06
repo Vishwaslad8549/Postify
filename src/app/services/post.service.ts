@@ -6,8 +6,8 @@ import { Subject, catchError, map, throwError } from 'rxjs';
 import { Post } from '../models/posts';
 import { environment } from 'src/environments/environment';
 import { LoaderService } from './loader.service';
-const url = environment.apiUrl;
-//const url="http://localhost:3000/api/"
+//const url = environment.apiUrl;
+const url="http://localhost:3000/api/"
 
 
 
@@ -28,20 +28,7 @@ export class PostService {
 
   getPosts() {
     this.http.
-    get<{ message: string, posts: any }>(url+"cloud")
-      .pipe(
-        map(postData => {
-        return postData.posts.map((post: any) => {
-          return {
-            title: post.title,
-            content: post.content,
-            id: post._id,
-            imagePath:post.imagePath,
-            creator:post.creator,
-            creationDate:post.creationDate
-          };
-        });
-      }))
+    get(url+"posts")
       .subscribe((transformedPost: Post[]) => {
         this.posts = transformedPost;
         //console.log(this.posts)
@@ -50,7 +37,7 @@ export class PostService {
   }
   getPost(id: string) {
     return this.http.get<{ _id: string; title: string; content: string,imagePath:string,creator:string,creationDate:string}>(
-      url+"cloud/"+ id
+      url+"posts/"+ id
     );
 
   }
@@ -63,7 +50,7 @@ export class PostService {
     postData.append("title", Post.title)
     postData.append("content", Post.content)
     postData.append("image", Post.image, Post.title)
-     this.http.post<{ message: string, post: Post }>(url+"cloud", postData)
+     this.http.post<{ message: string, post: Post }>(url+"posts", postData)
      .pipe(
       catchError((error: HttpErrorResponse) => {
         console.log("Error occurred while adding post:", error.message);
@@ -87,13 +74,16 @@ export class PostService {
       })
   }
   deletePost(id: string) {
-    this.http.delete(url +"cloud/" + id)
-      .subscribe(() => {
-
-        const updatedpost = this.posts.filter(post => post.id !== id)
-        this.posts = updatedpost
-        //console.log(this.posts)
-        this.postsUpdated.next([...this.posts])
+    const options = {
+      body: {creator:localStorage.getItem('userId')} // Payload sent in the body
+    };
+    this.http.delete(url +"posts/" + id, options)
+      .subscribe((post) => {
+        console.log(this.posts)
+         const updatedpost = this.posts.filter(post => post._id !== id)
+        // this.posts = updatedpost
+        // //console.log(this.posts)
+         this.postsUpdated.next([...updatedpost])
       })
   }
   updatePost(id: string, Post: Post) {
@@ -104,7 +94,7 @@ export class PostService {
     //const post: Post = { id: id, title: Post.title, content: Post.content,imagePath:Post.imagePath,creator:null };
     //console.log(post)
     this.http
-      .put(url +"cloud/" + id, postData)
+      .put(url +"posts/" + id, postData)
       .subscribe(response => {
         console.log(response)
         this.loaderService.hide();  

@@ -1,0 +1,9 @@
+<div class="popup-overlay"  (click)="closePopup()"></div>
+
+<!-- Popup Container -->
+<div class="popup-container" >
+  <div class="popup-content">
+    <ng-content></ng-content>  <!-- Content Projection -->
+    <button class="close-btn" (click)="closePopup()">Close</button>
+  </div>
+</div>

@@ -111,10 +111,10 @@
   min-width: 300px;
 }
 
-.post-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
+// .post-card:hover {
+//   transform: translateY(-5px);
+//   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+// }
 
 .post-photo {
   width: 100%;  
@@ -176,6 +176,9 @@
   align-items: center;
   gap: 15px;
   margin-top: 10px;
+  .text-red {
+    color: red;
+  }
 }
 
 .engagement span {
@@ -200,7 +203,7 @@
   display: flex;
   gap:10px;
 }
-.image-modal, .loader-overlay {
+.image-modal{
   position: fixed;
   top: 0;
   left: 0;
@@ -231,4 +234,137 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.no-posts {
+  text-align: center;
+  font-size: 18px;
+  color: rgb(0, 0, 0);
+  margin-top: 20rem
+}
+app-popup {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.popup-content {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 20px;
+  animation: slideIn 0.3s ease-in-out;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+/* Comments Container */
+.comments-container {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.comment-item {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  animation: fadeInUp 0.3s ease-in-out;
+}
+
+.comment-text {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+.comment-time {
+  font-size: 12px;
+  color: #999;
+  display: block;
+  margin-top: 5px;
+}
+
+/* Comment Input Section */
+.comment-input {
+  display: flex;
+  gap: 10px;
+}
+
+.comment-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.comment-input input:focus {
+  border-color: #007bff;
+}
+
+.comment-input button {
+  padding: 10px 20px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.comment-input button:hover {
+  background: #0056b3;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

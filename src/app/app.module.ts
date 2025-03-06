@@ -7,7 +7,7 @@ import { ComponentsModule } from './Components/components.module';
 import { PagesModule } from './Pages/pages.module';
 import { AuthInterceptor } from './services/interceptor/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ComponentsModule,
     ComponentsModule,
     PagesModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
     
   ],
   providers: [

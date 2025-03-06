@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements AfterViewInit,OnInit {
+export class LoginComponent implements AfterViewInit,OnInit{
   loginFailed: boolean = false;
   authSub:Subscription;
   errorMessage:string="";
@@ -23,8 +23,8 @@ export class LoginComponent implements AfterViewInit,OnInit {
   userData: any = null;
   formData:any;
   routingObs=new Subject<boolean>
-  url=environment.apiUrl;
-  //url="http://localhost:3000/api/"
+  //url=environment.apiUrl;
+  url="http://localhost:3000/api/"
   constructor(private http:HttpClient,private router: Router,public authservice:ServiceService,private googleAuthService: GoogleAuthService, private ngZone: NgZone,public loaderService: LoaderService) { }
   ngOnInit(): void {
     this.googleAuthService.attachSignin(
@@ -34,7 +34,6 @@ export class LoginComponent implements AfterViewInit,OnInit {
           this.handleCredentialResponse(response)
   });
   }
-
   handleLogin(formvalue:NgForm) {
     this.formData=formvalue
     if(formvalue.invalid){

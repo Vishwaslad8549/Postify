@@ -5,9 +5,16 @@ export interface Post {
     image?:any,
     imagePath:string|null,
     isExpanded?:boolean
-    creator:string,
+    creator:any,
     creationDate:string
-    likes?:number;
-    comments?:string[]
+    likes?:string[];
+    comments?:any[]
+    _id?:string
   }
+  export interface Comment{
+    user:object
+    text: string,
+    _id: string,
+    createdAt: string
+ }
   

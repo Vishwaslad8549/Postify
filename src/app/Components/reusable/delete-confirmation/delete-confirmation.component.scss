@@ -1,0 +1,63 @@
+/* Dialog Container */
+.dialog-container {
+    background-color: white;
+    padding: 10rem;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .dialog-container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .dialog-container p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  /* Dialog Action Buttons */
+  .dialog-actions {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+  }
+  
+  .dialog-actions button {
+    width: 120px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Styling for 'No' and 'Yes' Buttons */
+  .dialog-actions button:first-child {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+  }
+  
+  .dialog-actions button:last-child {
+    background-color: #f44336;  /* Material Red */
+    color: white;
+    border: 1px solid #f44336;
+  }
+  
+  /* Button hover effects */
+  .dialog-actions button:hover {
+    opacity: 0.8;
+  }
+  
+  .dialog-actions button:first-child:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .dialog-actions button:last-child:hover {
+    background-color: #d32f2f;
+  }
+  
