@@ -28,7 +28,7 @@ export class PostService {
 
   getPosts() {
     this.http.
-    get<{ message: string, posts: any }>(url+"cloud")
+    get<{ message: string, posts: any }>(url+"posts")
       .pipe(
         map(postData => {
         return postData.posts.map((post: any) => {
@@ -38,7 +38,9 @@ export class PostService {
             id: post._id,
             imagePath:post.imagePath,
             creator:post.creator,
-            creationDate:post.creationDate
+            creationDate:post.creationDate,
+            comments:post.comments,
+            likes:post.likes
           };
         });
       }))
@@ -49,7 +51,7 @@ export class PostService {
       });
   }
   getPost(id: string) {
-    return this.http.get<{ _id: string; title: string; content: string,imagePath:string,creator:string,creationDate:string}>(
+    return this.http.get<{ _id: string; title: string; content: string,imagePath:string,creator:string,creationDate:string,comments:string[],likes:string[]}>(
       url+"cloud/"+ id
     );
 
@@ -63,7 +65,7 @@ export class PostService {
     postData.append("title", Post.title)
     postData.append("content", Post.content)
     postData.append("image", Post.image, Post.title)
-     this.http.post<{ message: string, post: Post }>(url+"cloud", postData)
+     this.http.post<{ message: string, post: Post }>(url+"posts", postData)
      .pipe(
       catchError((error: HttpErrorResponse) => {
         console.log("Error occurred while adding post:", error.message);
@@ -78,7 +80,9 @@ export class PostService {
           content: responsedata.post.content,
           imagePath:responsedata.post.imagePath,
           creator:responsedata.post.creator,
-          creationDate:responsedata.post.creationDate
+          creationDate:responsedata.post.creationDate,
+          comments:[],
+          likes:[]
         }
         //console.log(post)
         this.posts.push(post);
@@ -87,7 +91,7 @@ export class PostService {
       })
   }
   deletePost(id: string) {
-    this.http.delete(url +"cloud/" + id)
+    this.http.delete(url +"posts/" + id)
       .subscribe(() => {
 
         const updatedpost = this.posts.filter(post => post.id !== id)
@@ -104,7 +108,7 @@ export class PostService {
     //const post: Post = { id: id, title: Post.title, content: Post.content,imagePath:Post.imagePath,creator:null };
     //console.log(post)
     this.http
-      .put(url +"cloud/" + id, postData)
+      .put(url +"posts/" + id, postData)
       .subscribe(response => {
         console.log(response)
         this.loaderService.hide();  

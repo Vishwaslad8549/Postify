@@ -8,6 +8,7 @@ import { PostCreateComponent } from './Posts/post-create/post-create.component';
 import { PostListComponent } from './Posts/post-list/post-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { PopupComponent } from './reusable/popup/popup.component';
 
 
 
@@ -18,7 +19,8 @@ import { FooterComponent } from './footer/footer.component';
         PostCreateComponent,
         PostListComponent,
         NavbarComponent,
-        FooterComponent               
+        FooterComponent,
+        PopupComponent               
     ],
     imports:[
         

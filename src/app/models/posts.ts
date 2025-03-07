@@ -7,7 +7,7 @@ export interface Post {
     isExpanded?:boolean
     creator:string,
     creationDate:string
-    likes?:number;
-    comments?:string[]
+    likes:string[];
+    comments:string[]
   }
   

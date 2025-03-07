@@ -35,10 +35,10 @@
       <div class="actions">
         <div class="engagement">
           <span (click)="onLike(post.id)">
-            <i class="fa-regular fa-heart"></i> {{ post.likes }}
+            <i class="fa-regular fa-heart"></i> 
           </span>
-          <span (click)="onComment(post.id)">
-            <i class="fa-regular fa-comment"></i> {{ post.comments }}
+          <span (click)="onCommentClick(post.id)">
+            <i class="fa-regular fa-comment"></i> 
           </span>
         </div>
         <div class="buttons">
@@ -67,3 +67,34 @@
 <div *ngIf="loaderservice.loading$ | async" class="loader-overlay">
   <div class="loader"></div>
 </div>
+
+<ng-template [ngIf]="isCommentPopup">
+  <div class="popup-overlay">
+    <!-- <div class="popup-content">
+        <h3>Add a Comment</h3>
+        <textarea placeholder="Write your comment here..."></textarea>
+        <div class="popup-actions">
+            <button >Submit</button>
+            <button (click)="closeCommentPopup()">Close</button>
+        </div>
+    </div> -->
+    <app-popup [isOpen]="isCommentPopup" (close)="closepopup($event)">
+      <!-- Comment List -->
+      <div class="popup-content">
+        <div class="comments-container">
+          <div class="comments-list" *ngFor="let comment of (commentsMap[selectedPostId]?.asObservable() | async)">
+            <div class="comment-item">
+              <p class="comment-text">{{comment.text}}</p>
+              <span class="comment-time">{{comment.createdAt | date:'short'}}</span>
+            </div>
+          </div>
+        </div>
+        <!-- Input for New Comment -->
+        <div class="comment-input">
+          <input type="text" [(ngModel)]="newComment" placeholder="Add a comment..." />
+          <button (click)="addComment()">Add</button>
+        </div>
+      </div>
+    </app-popup>
+</div>
+</ng-template>

@@ -19,7 +19,9 @@ export class PostCreateComponent implements OnInit{
     content: '',
     imagePath:"",
     creator:"",
-    creationDate:""
+    creationDate:"",
+    comments:[],
+    likes:[]
   };
   reactiveForm!: FormGroup;
   private mode:string="";
@@ -48,7 +50,9 @@ export class PostCreateComponent implements OnInit{
                   content: postData.content,
                   imagePath:postData.imagePath,
                   creator:postData.creator,
-                  creationDate:postData.creationDate
+                  creationDate:postData.creationDate,
+                  comments:postData.comments,
+                  likes:postData.likes
                 };
 
                 this.reactiveForm.get('name').setValue(postData.title);
