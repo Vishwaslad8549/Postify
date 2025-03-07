@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements AfterViewInit {
+export class LoginComponent implements AfterViewInit,OnInit {
   loginFailed: boolean = false;
   authSub:Subscription;
   errorMessage:string="";
@@ -26,6 +26,14 @@ export class LoginComponent implements AfterViewInit {
   url=environment.apiUrl;
   //url="http://localhost:3000/api/"
   constructor(private http:HttpClient,private router: Router,public authservice:ServiceService,private googleAuthService: GoogleAuthService, private ngZone: NgZone,public loaderService: LoaderService) { }
+  ngOnInit(): void {
+    this.googleAuthService.attachSignin(
+      document.getElementById('googleSignInBtn') as HTMLElement,
+      (response) => {
+          this.loaderService.show();
+          this.handleCredentialResponse(response)
+  });
+  }
 
   handleLogin(formvalue:NgForm) {
     this.formData=formvalue
@@ -47,12 +55,7 @@ export class LoginComponent implements AfterViewInit {
         this.authservice.authStatusListener.next(true);
       }
   })
-    this.googleAuthService.attachSignin(
-      document.getElementById('googleSignInBtn') as HTMLElement,
-      (response) => {
-          this.loaderService.show();
-          this.handleCredentialResponse(response)
-  });
+    
   }
 
   handleCredentialResponse(response: any): void {
@@ -63,6 +66,7 @@ export class LoginComponent implements AfterViewInit {
         (res: any) => {
           console.log(res);
           this.authservice.setToken(res.token);
+          this.authservice.userName=res.userName;
           localStorage.setItem("token", res.token);
           localStorage.setItem("userId",res.userId)
           this.routingObs.next(true)

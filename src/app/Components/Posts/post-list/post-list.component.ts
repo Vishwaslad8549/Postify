@@ -67,6 +67,14 @@ onDelete(id:string){
   
 this.postservice.deletePost(id)
 }
+getMypost(){
+  
+  this.filteredPosts=[...this.filteredPosts.filter(user=>user.creator==localStorage.getItem('userId'))]
+}
+getAllpost(){
+  this.filteredPosts=[...this.Posts];
+  this.sortPostsByDate(); 
+}
 toggleReadMore(index: number) {
   this.Posts[index].isExpanded = !this.Posts[index].isExpanded;
 }
@@ -92,5 +100,11 @@ sortPostsByDate(): void {
       return dateA - dateB; 
     }
   });
+}
+onLike(id){
+alert("Like clicked")
+}
+onComment(id){
+  alert("comment clicked")
 }
 }

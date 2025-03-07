@@ -1,254 +1,234 @@
-/* Container for search and select box */
 .search-sort-container {
   display: flex;
-  justify-content: center; /* Center the search box */
-  align-items: center; /* Vertically center items */
-  gap: 20px; /* Space between search and select box */
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
   position: relative;
-  top:2.5rem;/* For positioning the select box */
-  padding: 0px 20px 0px 20px
+  top: 2.5rem;
+  padding: 0 20px;
 }
 
-/* Search input styling */
-#search {
-  width: 300px; /* Fixed width for the search input */
-  padding: 10px 15px; /* Padding for better spacing */
-  border: 2px solid #ccc; /* Light border */
-  border-radius: 25px; /* Rounded corners */
-  font-size: 16px; /* Font size */
-  outline: none; /* Remove default outline */
-  transition: all 0.3s ease; /* Smooth transition for hover/focus effects */
-
-  &:focus {
-    border-color: #007bff; /* Blue border on focus */
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* Subtle shadow on focus */
-  }
-
-  &::placeholder {
-    color: #999; /* Placeholder text color */
+@media (max-width: 680px) {
+  .search-sort-container {
+    gap: 10px;
   }
 }
 
-/* Select box styling */
-#sortOrder {
-  padding: 10px 15px; /* Padding for better spacing */
-  border: 2px solid #ccc; /* Light border */
-  border-radius: 25px; /* Rounded corners */
-  font-size: 16px; /* Font size */
-  outline: none; /* Remove default outline */
-  background-color: white; /* White background */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: all 0.3s ease; /* Smooth transition for hover/focus effects */
-  position: relative; /* Position the select box */
+.custom-button {
+  background: #fff;
+  border-radius: .375rem;
+  border: .125rem solid;
+  color: #212121;
+  cursor: pointer;
+  font-family: Circular, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: .5rem .9rem;
+  transition: transform .2s;
+  user-select: none;
+}
 
-  &:hover {
-    border-color: #007bff; /* Blue border on hover */
-  }
+.custom-button:hover {
+  transform: scale(1.05);
+}
 
-  &:focus {
-    border-color: #007bff; /* Blue border on focus */
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* Subtle shadow on focus */
+.custom-button:active {
+  transform: scale(1.05) translateY(.125rem);
+}
+
+.custom-button:focus {
+  outline: none;
+}
+
+@media (max-width: 680px) {
+  .custom-update,.custom-delete {
+    margin: 0px 10px 10px 0px;
   }
 }
 
-/* Optional: Add a modern touch to the select box arrow */
-#sortOrder {
-  appearance: none; /* Remove default arrow */
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+.custom-search, .custom-select {
+  padding: 10px 10px 10px 0px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.custom-search:hover, .custom-select:hover {
+  background-color: #f8f8f8;
+}
+
+.custom-search:focus, .custom-select:focus {
+  border-color: #333;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.custom-search::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+@media (max-width: 680px) {
+  .custom-search {
+    width: 80px;
+  }
+  .custom-select {
+    min-width: 80px;
+  }
+}
+
+.custom-select {
+  appearance: none;
+  cursor: pointer;
+  font-weight: 600;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='black' d='M7 10l5 5 5-5H7z'/></svg>");
   background-repeat: no-repeat;
-  background-position: right 10px center; /* Position the arrow */
-  background-size: 12px; /* Size of the arrow */
-  padding-right: 35px; /* Space for the arrow */
+  background-position: right -3px center;
+  background-size: 16px;
 }
+
 .post-grid {
   display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 15px;
-    margin: 0 auto;
-    position: relative;
-    padding: 20px;
-    top: 4rem;
-// .post-card {
-//   border: 1px solid #ddd;
-//   border-radius: 8px;
-//   padding: 15px;
-//   background-color: #fff;
-//   text-align: center;
-//   margin-bottom: 15px;
-//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+  margin: 0 auto;
+  padding: 20px;
+  top: 4rem;
+  position: relative;
+  justify-items: center;
+}
 
-//   .post-photo {
-//     width: 80px;
-//     height: 80px;
-//     border-radius: 50%;
-//     object-fit: cover;
-//     margin-bottom: 10px;
-//     cursor: pointer;
-
-//     &:hover {
-//       transform: scale(1.1);
-//       transition: 0.3s ease;
-//     }
-//   }
-
-//   .post-info {
-//     h3 {
-//       margin: 0;
-//       font-size: 18px;
-//     }
-
-//     p {
-//       margin: 5px 0 10px;
-//       color: #777;
-//       font-size: 14px;
-//     }
-
-//     .actions {
-//       display: flex;
-//       justify-content: center;
-//       gap: 10px;
-
-//       button {
-//         padding: 5px 10px;
-//         border: none;
-//         border-radius: 5px;
-//         cursor: pointer;
-//         font-size: 14px;
-
-//         &.btn-update {
-//           background-color: #007bff;
-//           color: #fff;
-
-//           &:hover {
-//             background-color: #0056b3;
-//           }
-//         }
-
-//         &.btn-delete {
-//           background-color: #dc3545;
-//           color: #fff;
-
-//           &:hover {
-//             background-color: #a71d2a;
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
 .post-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 0; /* Remove padding for Instagram-like layout */
-  background-color: #fff;
-  text-align: left; /* Align content to the left */
-  margin-bottom: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Prevent content overflow */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  cursor: pointer;
+  max-width: 400px;
+  min-width: 300px;
+}
 
-  .post-photo {
-    width: 100%; /* Make the image fill the card width */
-    height: 300px; /* Set a fixed height */
-    object-fit: cover; /* Ensure the image scales and crops appropriately */
-    cursor: pointer;
-  }
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
 
+.post-photo {
+  width: 100%;  
+  height: 350px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+  border-radius: 8px 8px 0 0;
+}
+
+.post-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+@media (max-width: 680px) {
   .post-info {
-    padding: 15px; /* Add padding around the text content */
-
-    h3 {
-      margin: 0 0 10px; /* Add space below the content */
-      font-size: 18px;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: space-between; /* Space out the buttons */
-      gap: 10px;
-      margin-top: 10px; /* Add space above the buttons */
-
-      button {
-        flex: 1; /* Make buttons take equal width */
-        padding: 10px; /* Add more padding for larger buttons */
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 14px;
-        text-align: center;
-
-        &.btn-update {
-          background-color: #007bff;
-          color: #fff;
-
-          &:hover {
-            background-color: #0056b3;
-          }
-        }
-
-        &.btn-delete {
-          background-color: #dc3545;
-          color: #fff;
-
-          &:hover {
-            background-color: #a71d2a;
-          }
-        }
-      }
-    }
+    padding: 10px;
+  }
+  .post-card{
+    width:350px;
   }
 }
 
+.content h3 {
+  font-size: 1.4rem;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
 
-.image-modal {
+.content h4 {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.content small {
+  color: #888;
+  font-size: 0.85rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.engagement {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.engagement span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.engagement span:hover {
+  color: #ff0000;
+}
+
+.engagement i {
+  font-size: 1.2rem;
+  color: #272727;
+}
+.buttons{
+  display: flex;
+  gap:10px;
+}
+.image-modal, .loader-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
   z-index: 1000;
-
-  img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 10px;
-  }
 }
-    .loader-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
 
-    .loader {
-      width: 50px;
-      height: 50px;
-      border: 5px solid #fff;
-      border-top-color: transparent;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+.image-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
 }
-.post-card .btn-read-more {
-  background: none;
-  border: none;
-  color: #007bff;
-  cursor: pointer;
-  text-decoration: underline;
-  font-size: 14px;
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #000;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

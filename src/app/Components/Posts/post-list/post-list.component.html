@@ -1,66 +1,69 @@
 <div class="search-sort-container">
-  <input id="search" type="text" [(ngModel)]="searchTerm" (input)="filterPosts()" placeholder="Enter title...">
-  <select id="sortOrder" [(ngModel)]="sortOrder" (change)="sortPostsByDate()">
+  <input
+    id="search"
+    class="custom-search"
+    type="text"
+    [(ngModel)]="searchTerm"
+    
+    (input)="filterPosts()"
+    placeholder="Search..."
+  />
+  <select id="sortOrder" class="custom-select"[(ngModel)]="sortOrder" (change)="sortPostsByDate()">
     <option value="newest">Newest</option>
     <option value="oldest">Oldest</option>
   </select>
+  <button class="custom-button" role="button" (click)="getAllpost()">AllPosts</button>
+  <button class="custom-button" role="button" (click)="getMypost()">MyPosts</button>
+  
 </div>
-
 
 <div class="post-grid">
-  <div class="post-card" *ngFor="let post of filteredPosts, let i = index">
-      <img
-        [src]="post.imagePath"
-        alt="User Photo"
-        class="post-photo"
-        (click)="openImage(post.imagePath)"
-      />
-      <div class="post-info">
+  <div class="post-card" *ngFor="let post of filteredPosts; let i = index">
+    <img
+      [src]="post.imagePath"
+      alt="User Photo"
+      class="post-photo"
+      (click)="openImage(post.imagePath)"
+    />
+    <div class="post-info">
+      <div class="content">
         <h3>{{ post.title }}</h3>
-        <h4>
-          {{ post.content }}
-        </h4>
-        <small>{{ post.creationDate | date: 'short' }}</small>
-        <div class="actions">
-          <button class="btn-update" *ngIf="isauthenticated && userId===post.creator" (click)="onEdit(post.id)">Update</button>
-          <button class="btn-delete" *ngIf="isauthenticated && userId===post.creator" (click)="onDelete(post.id)">Delete</button>
+        <h4>{{ post.content }}</h4>
+        <small>{{ post.creationDate | date : "short" }}</small>
+      </div>
+
+      <div class="actions">
+        <div class="engagement">
+          <span (click)="onLike(post.id)">
+            <i class="fa-regular fa-heart"></i> {{ post.likes }}
+          </span>
+          <span (click)="onComment(post.id)">
+            <i class="fa-regular fa-comment"></i> {{ post.comments }}
+          </span>
+        </div>
+        <div class="buttons">
+          <button
+            class="custom-button" id="custom-update"
+            *ngIf="userId === post.creator"
+            (click)="onEdit(post.id)"
+          >
+            Update
+          </button>
+          <button
+            class="custom-button"id="custom-delete"
+            *ngIf=" userId === post.creator"
+            (click)="onDelete(post.id)"
+          >
+            Delete
+          </button>
         </div>
       </div>
-  </div>
-  <div
-    class="image-modal"
-    *ngIf="selectedImage"
-    (click)="closeImage()"
-  >
-    <img [src]="selectedImage" alt="Enlarged Image" />
-  </div>
-  <div *ngIf="loaderservice.loading$ | async" class="loader-overlay">
-    <div class="loader"></div>
-  </div>
-</div>
-  <!-- <div class="user-card" *ngFor="let user of users">
-    <img
-      [src]="user.photoUrl"
-      alt="User Photo"
-      class="user-photo"
-      (click)="openImage(user.photoUrl)"
-    />
-    <div class="user-info">
-      <h3>{{ user.name }}</h3>
-      <p>{{ user.description }}</p>
-      <div class="actions">
-        <button class="btn-update" (click)="updatePost(user)">Update</button>
-        <button class="btn-delete" (click)="deletePost(user)">Delete</button>
-      </div>
+    </div>
+    <div class="image-modal" *ngIf="selectedImage" (click)="closeImage()">
+      <img [src]="selectedImage" alt="Enlarged Image" />
     </div>
   </div>
-  
-   Modal for Enlarged Image -->
-  <!-- <div
-    class="image-modal"
-    *ngIf="selectedImage"
-    (click)="closeImage()"
-  >
-    <img [src]="selectedImage" alt="Enlarged Image" />
-  </div> --> 
-  
+</div>
+<div *ngIf="loaderservice.loading$ | async" class="loader-overlay">
+  <div class="loader"></div>
+</div>
