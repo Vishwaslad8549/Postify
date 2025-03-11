@@ -69,6 +69,7 @@ export class LoginComponent implements AfterViewInit,OnInit {
           this.authservice.userName=res.userName;
           localStorage.setItem("token", res.token);
           localStorage.setItem("userId",res.userId)
+          localStorage.setItem("userName",res.userName)
           this.routingObs.next(true)
           this.ngZone.run(() => {
             this.userData = res.user;

@@ -4,7 +4,7 @@ export interface Post {
     content: string;
     image?:any,
     imagePath:string|null,
-    isExpanded?:boolean
+    isExpanded?:boolean,
     creator:string,
     creationDate:string
     likes:string[];

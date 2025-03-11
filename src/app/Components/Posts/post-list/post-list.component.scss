@@ -233,30 +233,12 @@
   100% { transform: rotate(360deg); }
 }
 
-
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* Background overlay */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
 .popup-content{
-  position: relative;
     background: #fff;
     width: 100%;
-    max-width: 500px;
-    max-height: 80vh;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
 
     @media (max-width: 600px) {
       max-width: 95%;
@@ -305,8 +287,6 @@
       padding: 12px;
       background: #f7f7f7;
       border-top: 1px solid #eee;
-      position: absolute;
-      bottom: 10px;
 
       input {
         flex: 1;

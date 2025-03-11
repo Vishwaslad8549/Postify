@@ -28,6 +28,7 @@ export class PostListComponent {
   selectedPostId: string | null = null;
   newComment: string;
   commentsMap: { [postId: string]: BehaviorSubject<any[]> } = {};
+  userName:string=""
 constructor(private postservice:PostService,public loaderservice:LoaderService,private router:Router,private authService:ServiceService,private http:HttpClient){
 }
 selectedImage: string | null = null;
@@ -61,7 +62,7 @@ ngOnInit() {
     this.isauthenticated=isauth
     //console.log(isauth)
   })
-
+  this.userName=localStorage.getItem('userName')
     
   
 }
@@ -79,12 +80,16 @@ getMypost(){
   
   this.filteredPosts=[...this.filteredPosts.filter(user=>user.creator==localStorage.getItem('userId'))]
 }
+getCurrentDate(): number {
+  return Date.now();
+}
 getAllpost(){
   this.filteredPosts=[...this.Posts];
   this.sortPostsByDate(); 
 }
-toggleReadMore(index: number) {
-  this.Posts[index].isExpanded = !this.Posts[index].isExpanded;
+trackPostBy(index: number, post: any): string {
+  console.log('trackBy called with post:', post);
+  return post._id; // Tracking posts by their unique ID
 }
 ngOnDestroy(): void {
   this.postsSub.unsubscribe()

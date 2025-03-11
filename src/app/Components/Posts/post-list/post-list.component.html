@@ -14,11 +14,10 @@
   </select>
   <button class="custom-button" role="button" (click)="getAllpost()">AllPosts</button>
   <button class="custom-button" role="button" (click)="getMypost()">MyPosts</button>
-  
 </div>
 
 <div class="post-grid">
-  <div class="post-card" *ngFor="let post of filteredPosts; let i = index">
+  <div class="post-card" *ngFor="let post of filteredPosts; let i = index;trackBy: trackPostBy">
     <img
       [src]="post.imagePath"
       alt="User Photo"
@@ -69,7 +68,6 @@
 </div>
 
 <ng-template [ngIf]="isCommentPopup">
-  <div class="popup-overlay">
     <!-- <div class="popup-content">
         <h3>Add a Comment</h3>
         <textarea placeholder="Write your comment here..."></textarea>
@@ -85,7 +83,7 @@
           <div class="comments-list" *ngFor="let comment of (commentsMap[selectedPostId]?.asObservable() | async)">
             <div class="comment-item">
               <p class="comment-text">{{comment.text}}</p>
-              <span class="comment-time">{{comment.createdAt | date:'short'}}</span>
+              <span class="comment-time">{{ comment?.createdAt ? (comment.createdAt | date:'short') : (getCurrentDate() | date:'short') }}</span>
             </div>
           </div>
         </div>
@@ -96,5 +94,4 @@
         </div>
       </div>
     </app-popup>
-</div>
 </ng-template>

@@ -37,7 +37,7 @@ export class PostService {
             content: post.content,
             id: post._id,
             imagePath:post.imagePath,
-            creator:post.creator,
+            creator:post.creator._id,
             creationDate:post.creationDate,
             comments:post.comments,
             likes:post.likes
@@ -52,7 +52,7 @@ export class PostService {
   }
   getPost(id: string) {
     return this.http.get<{ _id: string; title: string; content: string,imagePath:string,creator:string,creationDate:string,comments:string[],likes:string[]}>(
-      url+"cloud/"+ id
+      url+"posts/"+ id
     );
 
   }
@@ -91,7 +91,10 @@ export class PostService {
       })
   }
   deletePost(id: string) {
-    this.http.delete(url +"posts/" + id)
+    const options = { body: { userId:localStorage.getItem('userId') } }; 
+    
+    
+    this.http.delete(url +"posts/" + id, options)
       .subscribe(() => {
 
         const updatedpost = this.posts.filter(post => post.id !== id)

@@ -74,12 +74,11 @@ export class ServiceService {
           this.isauthenticated=true;
           this.userId=response.userId;
           this.userName=response.userName;
-          console.log(this.userName)
           this.setAuthTimer(expiresInDuration);
           const now = new Date();
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
           //console.log(expirationDate);
-          this.saveAuthData(this.token, expirationDate,this.userId);
+          this.saveAuthData(this.token, expirationDate,this.userId,this.userName);
           this.loaderService.hide();
           this.router.navigate(["home"]);
           
@@ -135,10 +134,11 @@ export class ServiceService {
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date,userId:string) {
+  private saveAuthData(token: string, expirationDate: Date,userId:string,userName:string) {
     localStorage.setItem("token", token);
     localStorage.setItem("expiration", expirationDate.toISOString());
     localStorage.setItem("userId", userId);
+    localStorage.setItem("userName",userName)
   }
 
   private clearAuthData() {
