@@ -16,6 +16,10 @@ label {
   font-weight: bold;
   margin-bottom: 8px;
   color: #333;
+  span{
+    color:red;
+    font-weight:400
+  }
 }
 
 input[type="text"], textarea, input[type="file"] {
@@ -56,15 +60,17 @@ textarea {
 }
 
 button[type="submit"] {
-  width: 100%;
-padding: 10px;
-background-color: #000000; /* White button background */
-color: #ffffff; /* Black text */
-border: none;
-border-radius: 5px;
-font-size: 16px;
-cursor: pointer;
-transition: background-color 0.3s, color 0.3s;
+  width: 30%;
+  padding: 10px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  position: relative;
+  left: 35%;
 }
 button[type="submit"]:hover {
   background-color: #444; /* Dark gray on hover */
@@ -103,11 +109,37 @@ button[type="submit"]:hover {
     max-width: 100px;
     align-self: center;
   }
+  button[type="submit"] {
+    width: 30%;
+    padding: 10px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+    left: 35%;
+  }
 }
 
 @media (max-width: 768px) {
   form{
     padding: 15px;
+  }
+  button[type="submit"] {
+    width: 30%;
+    padding: 10px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+    left: 35%;
   }
 }
 .loader-overlay {
