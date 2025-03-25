@@ -114,9 +114,26 @@ sortPostsByDate(): void {
     }
   });
 }
-onLike(id){
-alert("Like clicked")
+onLike(postId: string) {
+  if (!this.userId) {
+    // If user is not logged in, redirect to login
+    this.router.navigate(['/login']);
+    return;
+  }
+
+  this.postservice.toggleLike(postId).subscribe({
+    error: (error) => {
+      console.error('Error toggling like:', error);
+    }
+  });
 }
+
+isPostLiked(postId: string): boolean {
+  if (!this.userId) return false;
+  const post = this.Posts.find(p => p.id === postId);
+  return post ? post.likes.includes(this.userId) : false;
+}
+
 onCommentClick(id){
   // alert("comment clicked")
   this.isCommentPopup=!this.isCommentPopup

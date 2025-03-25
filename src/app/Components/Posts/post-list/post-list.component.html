@@ -33,8 +33,9 @@
 
       <div class="actions">
         <div class="engagement">
-          <span (click)="onLike(post.id)">
-            <i class="fa-regular fa-heart"></i> 
+          <span (click)="onLike(post.id)" [class.liked]="isPostLiked(post.id)">
+            <i class="fa-regular fa-heart"></i>
+            <span class="like-count">{{ post.likes?.length || 0 }}</span>
           </span>
           <span (click)="onCommentClick(post.id)">
             <i class="fa-regular fa-comment"></i> 

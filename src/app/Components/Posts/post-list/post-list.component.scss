@@ -177,26 +177,53 @@
   align-items: center;
   gap: 15px;
   margin-top: 10px;
+
+  span {
+    cursor: pointer;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease;
+    color: #272727;
+    
+    &.liked {
+      color: #ff4444 !important;
+      
+      i {
+        color: #ff4444 !important;
+        font-weight: 900;
+      }
+      
+      .like-count {
+        color: #ff4444 !important;
+      }
+    }
+    
+    .like-count {
+      font-size: 14px;
+      color: #666;
+    }
+  }
 }
 
-.engagement span {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.9rem;
-  color: #555;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.engagement span:hover {
+.engagement span:not(.liked):hover {
   color: #ff0000;
+  
+  i {
+    color: #ff0000;
+  }
+  
+  .like-count {
+    color: #ff0000;
+  }
 }
 
 .engagement i {
   font-size: 1.2rem;
-  color: #272727;
+  //color: #272727;
 }
+
 .buttons{
   display: flex;
   gap:10px;
