@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { API_URL } from '../app.constants';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http'
 import { Router } from '@angular/router';
-import { Subject, catchError, map, throwError } from 'rxjs';
+import { Subject, BehaviorSubject, catchError, map, throwError, tap } from 'rxjs';
 import { Post } from '../models/posts';
 import { environment } from 'src/environments/environment';
 import { LoaderService } from './loader.service';
@@ -24,6 +24,7 @@ export class PostService {
 
   private posts: Post[] = []
   private postsUpdated = new Subject<Post[]>();
+  public uploadError = new BehaviorSubject<string | null>(null);
 
 
   getPosts() {
@@ -65,30 +66,42 @@ export class PostService {
     postData.append("title", Post.title)
     postData.append("content", Post.content)
     postData.append("image", Post.image, Post.title)
-     this.http.post<{ message: string, post: Post }>(url+"posts", postData)
-     .pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.log("Error occurred while adding post:", error.message);
-        return throwError(() => error);
-      })
-    )
-      .subscribe(responsedata => {
-        this.loaderService.hide();
-        const post: Post = {
-          id: responsedata.post.id,
-          title: responsedata.post.title,
-          content: responsedata.post.content,
-          imagePath:responsedata.post.imagePath,
-          creator:responsedata.post.creator,
-          creationDate:responsedata.post.creationDate,
-          comments:[],
-          likes:[]
-        }
-        //console.log(post)
-        this.posts.push(post);
-        this.postsUpdated.next([...this.posts]);
-        
-      })
+    // clear previous upload error
+    this.uploadError.next(null);
+    return this.http.post(url+"posts", postData)
+      .pipe(
+        tap((responsedata:any)=> {
+          // success side-effect: hide loader and update local posts
+          this.loaderService.hide();
+          const postId = responsedata._id ?? responsedata.id;
+          const post: Post = {
+            id: postId,
+            title: responsedata.title,
+            content: responsedata.content,
+            imagePath: responsedata.imagePath,
+            creator: responsedata.creator,
+            creationDate: responsedata.creationDate,
+            comments: [],
+            likes: []
+          };
+          this.posts.push(post);
+          this.postsUpdated.next([...this.posts]);
+        }),
+        catchError((error: HttpErrorResponse) => {
+          // stop loader and surface a friendly message
+          this.loaderService.hide();
+          let message = 'Something went wrong. Please try again.';
+          if (error.status === 413 || (error.error && error.error.error === 'FILE_TOO_LARGE')) {
+            const allowed = error.error?.allowedSizeReadable ?? (error.error?.allowedSize ? `${error.error.allowedSize} bytes` : 'the allowed limit');
+            message = `${error.error?.message || 'File size exceeds the maximum allowed limit'} (Max: ${allowed}).`;
+          } else if (error.error?.message) {
+            message = error.error.message;
+          }
+          this.uploadError.next(message);
+          console.error("Error occurred while adding post:", error);
+          return throwError(() => error);
+        })
+      );
   }
   deletePost(id: string) {
     const options = { body: { userId:localStorage.getItem('userId') } }; 
@@ -108,14 +121,28 @@ export class PostService {
     postData.append("title", Post.title)
     postData.append("content", Post.content)
     postData.append("image", Post.image)
-    //const post: Post = { id: id, title: Post.title, content: Post.content,imagePath:Post.imagePath,creator:null };
-    //console.log(post)
-    this.http
+    // clear previous upload error
+    this.uploadError.next(null);
+    return this.http
       .put(url +"posts/" + id, postData)
-      .subscribe(response => {
-        console.log(response)
-        this.loaderService.hide();  
-      });
+      .pipe(
+        tap(response => {
+          // any post-update side-effects can go here
+          this.loaderService.hide();
+        }),
+        catchError((error: HttpErrorResponse) => {
+          this.loaderService.hide();
+          let message = 'Something went wrong. Please try again.';
+          if (error.status === 413 || (error.error && error.error.error === 'FILE_TOO_LARGE')) {
+            const allowed = error.error?.allowedSizeReadable ?? (error.error?.allowedSize ? `${error.error.allowedSize} bytes` : 'the allowed limit');
+            message = `${error.error?.message || 'File size exceeds the maximum allowed limit'} (Max: ${allowed})`;
+          } else if (error.error?.message) {
+            message = error.error.message;
+          }
+          this.uploadError.next(message);
+          return throwError(() => error);
+        })
+      );
   }
   getcloudImage(){
     

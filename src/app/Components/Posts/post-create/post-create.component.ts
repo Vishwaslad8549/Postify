@@ -1,17 +1,19 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models/posts';
 import { LoaderService } from 'src/app/services/loader.service';
 import { PostService } from 'src/app/services/post.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-post-create',
   templateUrl: './post-create.component.html',
   styleUrls: ['./post-create.component.scss']
 })
-export class PostCreateComponent implements OnInit{
+export class PostCreateComponent implements OnInit, OnDestroy{
   Posts:Post[]=[];
   Post:Post={
     id: '',
@@ -28,7 +30,9 @@ export class PostCreateComponent implements OnInit{
   formdata= new FormData
   private postId!:string;
   imagePreview!: string | ArrayBuffer;
-  constructor(private fb: FormBuilder,private postsService:PostService,private http:HttpClient,private activateroute:ActivatedRoute,private router:Router,public loaderService: LoaderService){
+  errorMessage: string | null = null;
+  private uploadErrorSub?: Subscription;
+  constructor(private fb: FormBuilder,private postsService:PostService,private http:HttpClient,private activateroute:ActivatedRoute,private router:Router,public loaderService: LoaderService, private notificationService: NotificationService){
     //this.postsService.mode="create"
   }
   ngOnInit(): void {
@@ -37,6 +41,11 @@ export class PostCreateComponent implements OnInit{
       content: ['', Validators.required],
       image: [null, Validators.required] // This will be used for the file input
     });
+    // subscribe to any upload errors from the service
+    this.uploadErrorSub = this.postsService.uploadError.subscribe(err => {
+      this.errorMessage = err;
+    });
+
     this.activateroute.paramMap.subscribe(params=>{
             if(params.has('id')){
                this.postId=params.get('id') as string
@@ -77,27 +86,60 @@ export class PostCreateComponent implements OnInit{
     this.Post.title= this.reactiveForm.get('name').value;
     this.Post.content = this.reactiveForm.get('content').value;
     this.Post.image = this.reactiveForm.get('image').value;
+    // clear previous errors before submitting
+    this.postsService.uploadError.next(null);
     //console.log(this.Post)
     if (this.mode === "create") {
             this.loaderService.show();
-            this.postsService.addPost(this.Post);
-            
+            this.postsService.addPost(this.Post).subscribe({
+              next: (res) => {
+                // clear previous upload error so stale messages don't remain
+                this.postsService.uploadError.next(null);
+                this.errorMessage = null;
+                this.notificationService.show('Post created successfully', 'success');
+                this.reactiveForm.reset();
+                this.loaderService.hide();
+              },
+              error: (err) => {
+                const msg = this.postsService.uploadError.value ?? err?.error?.message ?? 'Upload failed';
+                this.notificationService.show(msg, 'error');
+                this.loaderService.hide();
+              }
+            });
           } else {
             this.loaderService.show();
             this.postsService.updatePost(
               this.postId,
               this.Post
-            );
-           
+            ).subscribe({
+              next: (res) => {
+                // clear previous upload error so stale messages don't remain
+                this.postsService.uploadError.next(null);
+                this.errorMessage = null;
+                this.notificationService.show('Post updated successfully', 'success');
+                this.reactiveForm.reset();
+                this.loaderService.hide();
+              },
+              error: (err) => {
+                const msg = this.postsService.uploadError.value ?? err?.error?.message ?? 'Update failed';
+                this.notificationService.show(msg, 'error');
+                this.loaderService.hide();
+              }
+            });
           }
           //this.router.navigateByUrl('/home/list');
-          //this.reactiveForm.reset()
          
           
   }
   onUpload(event: any) {
     const file = event.target.files[0];
     this.reactiveForm.get('image').setValue(file);
+  }
+
+  ngOnDestroy(): void {
+    if (this.uploadErrorSub) {
+      this.uploadErrorSub.unsubscribe();
+    }
   }
 }
 
