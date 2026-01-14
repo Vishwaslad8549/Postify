@@ -17,11 +17,40 @@ export class GoogleAuthService {
     });
   }
 
+  private waitForGoogle(maxAttempts = 50, intervalMs = 100): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (typeof google !== 'undefined' && google?.accounts?.id) {
+        resolve();
+        return;
+      }
+      let attempts = 0;
+      const id = setInterval(() => {
+        attempts++;
+        if (typeof google !== 'undefined' && google?.accounts?.id) {
+          clearInterval(id);
+          resolve();
+        } else if (attempts >= maxAttempts) {
+          clearInterval(id);
+          reject(new Error('Google API not loaded'));
+        }
+      }, intervalMs);
+    });
+  }
+
   attachSignin(element: HTMLElement, callback: (response: any) => void): void {
-    this.initializeGoogleLogin(callback);
-    google.accounts.id.renderButton(element, {
-      theme: 'outline',
-      size: 'large'
+    if (!element) {
+      console.warn('GoogleAuthService.attachSignin: target element is null');
+      return;
+    }
+
+    this.waitForGoogle().then(() => {
+      this.initializeGoogleLogin(callback);
+      google.accounts.id.renderButton(element, {
+        theme: 'outline',
+        size: 'large'
+      });
+    }).catch((err) => {
+      console.warn('GoogleAuthService.attachSignin: Google API not available', err);
     });
   }
 
