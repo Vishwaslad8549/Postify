@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { API_URL } from '../app.constants';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http'
 import { Router } from '@angular/router';
-import { Subject, catchError, map, throwError } from 'rxjs';
+import { Subject, catchError, map, throwError, tap, finalize } from 'rxjs';
 import { Post } from '../models/posts';
 import { environment } from 'src/environments/environment';
 import { LoaderService } from './loader.service';
@@ -65,30 +65,28 @@ export class PostService {
     postData.append("title", Post.title)
     postData.append("content", Post.content)
     postData.append("image", Post.image, Post.title)
-     this.http.post<{ message: string, post: Post }>(url+"posts", postData)
-     .pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.log("Error occurred while adding post:", error.message);
-        return throwError(() => error);
-      })
-    )
-      .subscribe(responsedata => {
-        this.loaderService.hide();
-        const post: Post = {
-          id: responsedata.post.id,
-          title: responsedata.post.title,
-          content: responsedata.post.content,
-          imagePath:responsedata.post.imagePath,
-          creator:responsedata.post.creator,
-          creationDate:responsedata.post.creationDate,
-          comments:[],
-          likes:[]
-        }
-        //console.log(post)
-        this.posts.push(post);
-        this.postsUpdated.next([...this.posts]);
-        
-      })
+    return this.http.post<{ message: string, post: any }>(url+"posts", postData)
+      .pipe(
+        tap(responsedata => {
+          const post: Post = {
+            id: responsedata.post.id,
+            title: responsedata.post.title,
+            content: responsedata.post.content,
+            imagePath: responsedata.post.imagePath,
+            creator: responsedata.post.creator,
+            creationDate: responsedata.post.creationDate,
+            comments: [],
+            likes: []
+          };
+          this.posts.push(post);
+          this.postsUpdated.next([...this.posts]);
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.log("Error occurred while adding post:", error.message);
+          return throwError(() => error);
+        }),
+        finalize(() => this.loaderService.hide())
+      );
   }
   deletePost(id: string) {
     const options = { body: { userId:localStorage.getItem('userId') } }; 
