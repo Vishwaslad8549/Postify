@@ -6,7 +6,7 @@ declare const google: any;
   providedIn: 'root'
 })
 export class GoogleAuthService {
-  private clientId = environment.clientId // Replace with your actual Client ID
+  private clientId = environment.GoogleclientId // Replace with your actual Client ID
 
   constructor() {}
 
