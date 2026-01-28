@@ -28,6 +28,8 @@ export class PostCreateComponent implements OnInit{
   formdata= new FormData
   private postId!:string;
   imagePreview!: string | ArrayBuffer;
+  imageError: string = '';
+  private allowedImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
   constructor(private fb: FormBuilder,private postsService:PostService,private http:HttpClient,private activateroute:ActivatedRoute,private router:Router,public loaderService: LoaderService){
     //this.postsService.mode="create"
   }
@@ -80,8 +82,16 @@ export class PostCreateComponent implements OnInit{
     //console.log(this.Post)
     if (this.mode === "create") {
             this.loaderService.show();
-            this.postsService.addPost(this.Post);
-            
+            this.postsService.addPost(this.Post).subscribe({
+              next: () => {
+                this.loaderService.hide();
+                // success handled in service (state update)
+              },
+              error: (err) => {
+                this.loaderService.hide();
+                console.error(err);
+              }
+            });
           } else {
             this.loaderService.show();
             this.postsService.updatePost(
@@ -97,7 +107,16 @@ export class PostCreateComponent implements OnInit{
   }
   onUpload(event: any) {
     const file = event.target.files[0];
-    this.reactiveForm.get('image').setValue(file);
+    
+    if (file) {
+      if (!this.allowedImageTypes.includes(file.type)) {
+        this.imageError = `Invalid image type. Allowed types: JPEG, PNG, JPG.`;
+        this.reactiveForm.get('image').reset();
+        return;
+      }
+      this.imageError = '';
+      this.reactiveForm.get('image').setValue(file);
+    }
   }
 }
 

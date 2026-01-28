@@ -27,12 +27,7 @@ export class LoginComponent implements AfterViewInit,OnInit {
   //url="http://localhost:3000/api/"
   constructor(private http:HttpClient,private router: Router,public authservice:ServiceService,private googleAuthService: GoogleAuthService, private ngZone: NgZone,public loaderService: LoaderService) { }
   ngOnInit(): void {
-    this.googleAuthService.attachSignin(
-      document.getElementById('googleSignInBtn') as HTMLElement,
-      (response) => {
-          this.loaderService.show();
-          this.handleCredentialResponse(response)
-  });
+    // Attachment moved to ngAfterViewInit to ensure view is rendered
   }
 
   handleLogin(formvalue:NgForm) {
@@ -54,8 +49,13 @@ export class LoginComponent implements AfterViewInit,OnInit {
         this.authservice.setisAuth(true)
         this.authservice.authStatusListener.next(true);
       }
-  })
-    
+    })
+
+    const googleBtn = document.getElementById('googleSignInBtn') as HTMLElement;
+    this.googleAuthService.attachSignin(googleBtn, (response) => {
+      this.loaderService.show();
+      this.handleCredentialResponse(response);
+    });
   }
 
   handleCredentialResponse(response: any): void {
