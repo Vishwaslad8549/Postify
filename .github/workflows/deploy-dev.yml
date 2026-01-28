@@ -1,4 +1,4 @@
-name: Deploy Frontend - DEV
+name: Deploy DEV
 
 on:
   push:
@@ -10,23 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout code
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Setup Node.js (Angular 16 compatible)
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      # 3. Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # 4. Build Angular app (DEV)
       - name: Build Angular (DEV)
-        run: npx ng build --configuration development
+        run: npm run build
+
+      - name: Debug build output
+        run: ls -la dist
 
       # 5. Deploy to DEV S3 bucket
       - name: Deploy to DEV S3
