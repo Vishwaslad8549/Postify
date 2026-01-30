@@ -1,0 +1,72 @@
+footer.footer {
+  background-color: black; /* Black background */
+  color: white; /* White text */
+  padding: 10px 20px 10px 20px; /* Add padding around the footer */
+  display: flex; /* Use flexbox for alignment */
+  justify-content: space-between; /* Space between About and Follow Us sections */
+  align-items: center; /* Align items vertically */
+}
+
+footer.footer .about {
+  max-width: 50%; /* Limit the width of the About section */
+}
+
+footer.footer .about h3,
+footer.footer .social-media h3 {
+  font-size: 18px; /* Adjust heading font size */
+  margin-bottom: 10px; /* Add spacing below the heading */
+}
+
+footer.footer .about p {
+  font-size: 14px; /* Adjust paragraph font size */
+  line-height: 1.6; /* Improve readability with line height */
+  width:25rem;  
+}
+
+footer.footer .social-media {
+  text-align: right; /* Align Follow Us section to the right */
+}
+footer.footer .social-media .follow{
+  position: relative;
+  right:20px
+}
+
+footer.footer .social-media a {
+  margin-left: 10px; /* Add spacing between social media icons */
+  display: inline-block; /* Ensure proper spacing between icons */
+}
+
+footer.footer .social-media img {
+  width: 32px; /* Set fixed size for icons */
+  height: 32px; /* Ensure icons are square */
+  object-fit: contain; /* Prevent distortion */
+  transition: transform 0.3s ease; /* Add hover effect */
+  background: none; /* Remove background */
+}
+footer.footer .social-media img:hover {
+  transform: scale(1.2); /* Enlarge icon slightly on hover */
+  filter: brightness(1.2); /* Make icon slightly brighter on hover */
+}
+@media(max-width:768px){
+  footer.footer .about p{
+    font-size: 10px; /* Adjust paragraph font size */
+  line-height: 1.6; /* Improve readability with line height */
+  width:12rem;
+  }
+  footer.footer .social-media img {
+    width: 20px; /* Set fixed size for icons */
+    height: 20px; /* Ensure icons are square */
+    object-fit: contain; /* Prevent distortion */
+    transition: transform 0.3s ease; /* Add hover effect */
+    background: none; /* Remove background */
+  }
+  footer.footer .social-media img:hover {
+    transform: scale(1.2); /* Enlarge icon slightly on hover */
+    filter: brightness(1.2); /* Make icon slightly brighter on hover */
+  }
+  footer.footer .social-media .follow{
+    position: relative;
+    left: 1px;
+    bottom: 15px;
+  }
+}

@@ -1,0 +1,336 @@
+.search-sort-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  top: 2.5rem;
+  padding: 0 20px;
+}
+
+@media (max-width: 680px) {
+  .search-sort-container {
+    gap: 10px;
+  }
+}
+
+.custom-button {
+  background: #fff;
+  border-radius: .375rem;
+  border: .125rem solid;
+  color: #212121;
+  cursor: pointer;
+  font-family: Circular, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: .5rem .9rem;
+  transition: transform .2s;
+  user-select: none;
+}
+
+.custom-button:hover {
+  transform: scale(1.05);
+}
+
+.custom-button:active {
+  transform: scale(1.05) translateY(.125rem);
+}
+
+.custom-button:focus {
+  outline: none;
+}
+
+@media (max-width: 680px) {
+  .custom-update,.custom-delete {
+    margin: 0px 10px 10px 0px;
+  }
+}
+
+.custom-search, .custom-select {
+  padding: 10px 10px 10px 0px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.custom-search:hover, .custom-select:hover {
+  background-color: #f8f8f8;
+}
+
+.custom-search:focus, .custom-select:focus {
+  border-color: #333;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.custom-search::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+@media (max-width: 680px) {
+  .custom-search {
+    width: 80px;
+  }
+  .custom-select {
+    min-width: 80px;
+  }
+}
+
+.custom-select {
+  appearance: none;
+  cursor: pointer;
+  font-weight: 600;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='black' d='M7 10l5 5 5-5H7z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right -3px center;
+  background-size: 16px;
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+  margin: 0 auto;
+  padding: 20px;
+  top: 4rem;
+  position: relative;
+  justify-items: center;
+}
+
+.post-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  cursor: pointer;
+  max-width: 400px;
+  min-width: 350px;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.post-photo {
+  width: 100%;  
+  height: 350px;
+  width:350px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+  border-radius: 8px 8px 0 0;
+}
+
+.post-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+@media (max-width: 680px) {
+  .post-info {
+    padding: 10px;
+  }
+  .post-card{
+    width:350px;
+  }
+}
+
+.content h3 {
+  font-size: 1.4rem;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.content h4 {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.content small {
+  color: #888;
+  font-size: 0.85rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.engagement {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.engagement span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.engagement span:hover {
+  color: #ff0000;
+}
+
+.engagement i {
+  font-size: 1.2rem;
+  color: #272727;
+}
+.buttons{
+  display: flex;
+  gap:10px;
+}
+.image-modal, .loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.image-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #000;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.popup-content{
+    background: #fff;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+
+    @media (max-width: 600px) {
+      max-width: 95%;
+    }
+    .comments-container {
+      flex: 1;
+      overflow-y: auto;
+      max-height: 50vh;  // Scroll after 50vh
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #fafafa;
+
+      .comments-list {
+        background: #fff;
+        padding: 5px;
+        border: 1px solid #e1e1e1;
+        border-radius: 8px;
+
+        .comment-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 10px;
+
+          .comment-text {
+            font-size: 14px;
+            color: #333;
+            position: relative;
+            top:7px;
+            word-break: break-word;
+          }
+
+          .comment-time {
+            font-size: 12px;
+            color: #888;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+
+    .comment-input {
+      display: flex;
+      padding: 12px;
+      background: #f7f7f7;
+      border-top: 1px solid #eee;
+
+      input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+
+        &:focus {
+          outline: none;
+          border-color: #007bff;
+        }
+      }
+
+      button {
+        padding: 10px 16px;
+        margin-left: 8px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.2s;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #888;
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }

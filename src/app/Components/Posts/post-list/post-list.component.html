@@ -1,0 +1,97 @@
+<div class="search-sort-container">
+  <input
+    id="search"
+    class="custom-search"
+    type="text"
+    [(ngModel)]="searchTerm"
+    
+    (input)="filterPosts()"
+    placeholder="Search..."
+  />
+  <select id="sortOrder" class="custom-select"[(ngModel)]="sortOrder" (change)="sortPostsByDate()">
+    <option value="newest">Newest</option>
+    <option value="oldest">Oldest</option>
+  </select>
+  <button class="custom-button" role="button" (click)="getAllpost()">AllPosts</button>
+  <button class="custom-button" role="button" (click)="getMypost()">MyPosts</button>
+</div>
+
+<div class="post-grid">
+  <div class="post-card" *ngFor="let post of filteredPosts; let i = index;trackBy: trackPostBy">
+    <img
+      [src]="post.imagePath"
+      alt="User Photo"
+      class="post-photo"
+      (click)="openImage(post.imagePath)"
+    />
+    <div class="post-info">
+      <div class="content">
+        <h3>{{ post.title }}</h3>
+        <h4>{{ post.content }}</h4>
+        <small>{{ post.creationDate | date : "short" }}</small>
+      </div>
+
+      <div class="actions">
+        <div class="engagement">
+          <span (click)="onLike(post.id)">
+            <i class="fa-regular fa-heart"></i> 
+          </span>
+          <span (click)="onCommentClick(post.id)">
+            <i class="fa-regular fa-comment"></i> 
+          </span>
+        </div>
+        <div class="buttons">
+          <button
+            class="custom-button" id="custom-update"
+            *ngIf="userId === post.creator"
+            (click)="onEdit(post.id)"
+          >
+            Update
+          </button>
+          <button
+            class="custom-button"id="custom-delete"
+            *ngIf=" userId === post.creator"
+            (click)="onDelete(post.id)"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="image-modal" *ngIf="selectedImage" (click)="closeImage()">
+      <img [src]="selectedImage" alt="Enlarged Image" />
+    </div>
+  </div>
+</div>
+<div *ngIf="loaderservice.loading$ | async" class="loader-overlay">
+  <div class="loader"></div>
+</div>
+
+<ng-template [ngIf]="isCommentPopup">
+    <!-- <div class="popup-content">
+        <h3>Add a Comment</h3>
+        <textarea placeholder="Write your comment here..."></textarea>
+        <div class="popup-actions">
+            <button >Submit</button>
+            <button (click)="closeCommentPopup()">Close</button>
+        </div>
+    </div> -->
+    <app-popup [isOpen]="isCommentPopup" (close)="closepopup($event)">
+      <!-- Comment List -->
+      <div class="popup-content">
+        <div class="comments-container">
+          <div class="comments-list" *ngFor="let comment of (commentsMap[selectedPostId]?.asObservable() | async)">
+            <div class="comment-item">
+              <p class="comment-text">{{comment.text}}</p>
+              <span class="comment-time">{{ comment?.createdAt ? (comment.createdAt | date:'short') : (getCurrentDate() | date:'short') }}</span>
+            </div>
+          </div>
+        </div>
+        <!-- Input for New Comment -->
+        <div class="comment-input">
+          <input type="text" [(ngModel)]="newComment" placeholder="Add a comment..." />
+          <button (click)="addComment()">Add</button>
+        </div>
+      </div>
+    </app-popup>
+</ng-template>

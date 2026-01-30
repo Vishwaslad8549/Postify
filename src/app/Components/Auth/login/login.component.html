@@ -1,0 +1,43 @@
+<div class="login-page">
+  <div class="login-container">
+    <h2>Login</h2>
+    <form (submit)="handleLogin(loginForm)" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" placeholder="Enter your E-Mail" name="email"
+        ngModel
+        type="email"
+        #emailInput="ngModel"
+        required/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" placeholder="Enter your password" type="password"
+        name="password"
+        ngModel
+        placeholder="Password"
+        #passwordInput="ngModel"
+        required />
+      </div>
+      <button type="submit" class="login-button">Login</button>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </form>
+    <p class="signup-link">
+      Don't have an account? <a routerLink="/signup">Sign up</a>
+    </p>
+    <div id="googleSignInBtn" class="googlebtn"></div>
+
+    <!-- User Info -->
+    <div *ngIf="userData">
+      <h3>Welcome, {{ userData.name }}</h3>
+      <img [src]="userData.picture" alt="Profile Image" />
+      <p>Email: {{ userData.email }}</p>
+    </div>
+  </div>
+  <div *ngIf="loaderService.loading$ | async" class="loader-overlay">
+    <div class="loader"></div>
+  </div>
+
+</div>

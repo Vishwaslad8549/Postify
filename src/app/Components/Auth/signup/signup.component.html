@@ -1,0 +1,36 @@
+<div class="signup-page">
+    <div class="signup-container">
+      <h2>Signup</h2>
+      <form (submit)="handleSignup(signupForm)" #signupForm="ngForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" placeholder="Enter your Name" name="name"
+          ngModel
+          type="text"
+          #nameInput="ngModel"
+          required/>
+          <label for="email">Email</label>
+          <input id="email" placeholder="Enter your E-Mail" name="email"
+          ngModel
+          type="email"
+          #emailInput="ngModel"
+          required/>
+        
+          <label for="password">Password</label>
+          <input id="password" placeholder="Enter your password" type="password"
+          name="password"
+          ngModel
+          placeholder="Password"
+          #passwordInput="ngModel"
+          required />
+        </div>
+        <button type="submit" class="signup-button">Signup</button>
+      </form>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="isSignup" class="popup">
+        <p>Your account has been created successfully</p>
+      </div>
+    </div>
+  </div>

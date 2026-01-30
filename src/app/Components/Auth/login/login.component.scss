@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+.login-page {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  min-height: 100vh; // Ensure it takes the full height of the viewport
+  padding: 1rem;
+  font-family: 'Poppins', sans-serif;
+
+  .login-container {
+    background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+    backdrop-filter: blur(10px); /* Blur effect */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    max-width: 400px;
+
+    @media (max-width: 768px) {
+      width: 90%; 
+    }
+
+    
+    @media (max-width: 480px) {
+      width: 80%;
+        position: relative;
+        align-self: center;
+        left: 0rem;
+    }
+    h2 {
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+
+      label {
+        display: block;
+        color: #d4d4d4;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        text-align: left;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        font-size: 1rem;
+        font-family: 'Poppins', sans-serif;
+
+        &:focus {
+          outline: none;
+          border: 2px solid #4facfe;
+          box-shadow: 0 0 8px rgba(79, 172, 254, 0.5);
+        }
+        @media (max-width: 480px) {
+          width: 90%; 
+          padding: 1rem; 
+        }
+      }
+    }
+    .error-message {
+      color: red;
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .login-button {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      color: #ffffff;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      margin-bottom: 1rem;
+
+      &:hover {
+        transform: scale(1.05);
+        filter: brightness(1.2);
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .signup-link {
+      margin-top: 1rem;
+      color: #d4d4d4;
+      font-size: 0.9rem;
+
+      a {
+        color: #4facfe;
+        text-decoration: none;
+        font-weight: 500;
+
+        &:hover {
+          text-decoration: underline;
+          color: #00f2fe;
+        }
+      }
+    }
+    .googlebtn{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
