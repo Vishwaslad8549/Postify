@@ -97,14 +97,20 @@ export class PostCreateComponent implements OnInit{
             this.postsService.updatePost(
               this.postId,
               this.Post
-            );
-           
+            ).subscribe({
+              next: () => {
+                this.loaderService.hide();
+                
+              },
+              error: (err) => {
+                this.loaderService.hide();
+                console.error(err);
+              }
+            });
           }
-          //this.router.navigateByUrl('/home/list');
-          //this.reactiveForm.reset()
-         
-          
+          this.reactiveForm.reset();
   }
+  
   onUpload(event: any) {
     const file = event.target.files[0];
     
