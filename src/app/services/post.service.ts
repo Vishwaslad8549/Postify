@@ -108,14 +108,6 @@ export class PostService {
     postData.append("image", Post.image)
     //const post: Post = { id: id, title: Post.title, content: Post.content,imagePath:Post.imagePath,creator:null };
     //console.log(post)
-    this.http
-      .put(url +"posts/" + id, postData)
-      .subscribe(response => {
-        console.log(response)
-        this.loaderService.hide();  
-      });
-  }
-  getcloudImage(){
-    
+    return this.http.put(url +"posts/" + id, postData)
   }
 }
