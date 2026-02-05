@@ -21,6 +21,7 @@ constructor(public authservice:ServiceService){
     })
     this.istoken=localStorage.getItem('token')?true:false;
     console.log(this.istoken)
+    this.authservice.userName= localStorage.getItem('userName');
   }
   ngOnDestroy(): void {
       this.authSubs.unsubscribe()
