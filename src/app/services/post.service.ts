@@ -46,8 +46,10 @@ export class PostService {
       }))
       .subscribe((transformedPost: Post[]) => {
         this.posts = transformedPost;
-        //console.log(this.posts)
         this.postsUpdated.next([...this.posts])
+      },
+      (error)=>{
+        this.loaderService.hide();
       });
   }
   getPost(id: string) {
