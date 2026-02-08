@@ -9,6 +9,7 @@ import { PostListComponent } from './Posts/post-list/post-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { PopupComponent } from './reusable/popup/popup.component';
+import { PopoverComponent } from './reusable/popover/popover.component';
 
 
 
@@ -20,7 +21,8 @@ import { PopupComponent } from './reusable/popup/popup.component';
         PostListComponent,
         NavbarComponent,
         FooterComponent,
-        PopupComponent               
+        PopupComponent,  
+        PopoverComponent             
     ],
     imports:[
         
@@ -36,7 +38,8 @@ import { PopupComponent } from './reusable/popup/popup.component';
         PostCreateComponent,
         PostListComponent,
         NavbarComponent,
-        FooterComponent]
+        FooterComponent,
+        PopoverComponent]
 })
 
 export class ComponentsModule { }
