@@ -6,7 +6,10 @@ import { Post } from 'src/app/models/posts';
 import { ServiceService } from 'src/app/services/auth/service.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { PostService } from 'src/app/services/post.service';
-const url="http://localhost:3000/api/"
+import { environment } from 'src/environments/environment';
+
+// const url="http://localhost:3000/api/"
+const url =environment.apiUrl;
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',

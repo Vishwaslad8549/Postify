@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { API_URL } from '../app.constants';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http'
 import { Router } from '@angular/router';
-import { Subject, BehaviorSubject, catchError, map, throwError, tap } from 'rxjs';
+import { Subject, BehaviorSubject, catchError, map, throwError, tap, finalize} from 'rxjs';
 import { Post } from '../models/posts';
 import { environment } from 'src/environments/environment';
 import { LoaderService } from './loader.service';
@@ -47,8 +47,10 @@ export class PostService {
       }))
       .subscribe((transformedPost: Post[]) => {
         this.posts = transformedPost;
-        //console.log(this.posts)
         this.postsUpdated.next([...this.posts])
+      },
+      (error)=>{
+        this.loaderService.hide();
       });
   }
   getPost(id: string) {
@@ -66,6 +68,7 @@ export class PostService {
     postData.append("title", Post.title)
     postData.append("content", Post.content)
     postData.append("image", Post.image, Post.title)
+
     // clear previous upload error
     this.uploadError.next(null);
     return this.http.post(url+"posts", postData)
@@ -100,7 +103,9 @@ export class PostService {
           this.uploadError.next(message);
           console.error("Error occurred while adding post:", error);
           return throwError(() => error);
-        })
+        }),
+        finalize(() => this.loaderService.hide())
+
       );
   }
   deletePost(id: string) {
@@ -145,6 +150,5 @@ export class PostService {
       );
   }
   getcloudImage(){
-    
   }
 }

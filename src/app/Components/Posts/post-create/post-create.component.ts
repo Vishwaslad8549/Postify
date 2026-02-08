@@ -32,8 +32,9 @@ export class PostCreateComponent implements OnInit, OnDestroy{
   imagePreview!: string | ArrayBuffer;
   errorMessage: string | null = null;
   private uploadErrorSub?: Subscription;
+  imageError: string = '';
+  private allowedImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
   constructor(private fb: FormBuilder,private postsService:PostService,private http:HttpClient,private activateroute:ActivatedRoute,private router:Router,public loaderService: LoaderService, private notificationService: NotificationService){
-    //this.postsService.mode="create"
   }
   ngOnInit(): void {
     this.reactiveForm = this.fb.group({
@@ -104,6 +105,7 @@ export class PostCreateComponent implements OnInit, OnDestroy{
                 const msg = this.postsService.uploadError.value ?? err?.error?.message ?? 'Upload failed';
                 this.notificationService.show(msg, 'error');
                 this.loaderService.hide();
+
               }
             });
           } else {
@@ -128,12 +130,22 @@ export class PostCreateComponent implements OnInit, OnDestroy{
             });
           }
           //this.router.navigateByUrl('/home/list');
-         
-          
+          this.reactiveForm.reset();
+
   }
+  
   onUpload(event: any) {
     const file = event.target.files[0];
-    this.reactiveForm.get('image').setValue(file);
+    
+    if (file) {
+      if (!this.allowedImageTypes.includes(file.type)) {
+        this.imageError = `Invalid image type. Allowed types: JPEG, PNG, JPG.`;
+        this.reactiveForm.get('image').reset();
+        return;
+      }
+      this.imageError = '';
+      this.reactiveForm.get('image').setValue(file);
+    }
   }
 
   ngOnDestroy(): void {
