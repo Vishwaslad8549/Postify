@@ -1,5 +1,6 @@
 export interface Post {
     id:string|null,
+    _id?:string|null,
     title: string;
     content: string;
     image?:any,
