@@ -34,10 +34,12 @@
       <div class="actions">
         <div class="engagement">
           <span (click)="onLike(post.id)">
-            <i class="fa-regular fa-heart"></i> 
+            <i [ngClass]="isPostLiked(post) ? 'fa-solid fa-heart' : 'fa-regular fa-heart'" class="like" [class.liked]="isPostLiked(post)"></i>
+            <p>{{post.likes.length}}</p>
           </span>
           <span (click)="onCommentClick(post.id)">
             <i class="fa-regular fa-comment"></i> 
+            <p>{{post.comments.length}}</p>
           </span>
         </div>
         <div class="buttons">

@@ -91,7 +91,6 @@ getAllpost(){
   this.sortPostsByDate(); 
 }
 trackPostBy(index: number, post: any): string {
-  console.log('trackBy called with post:', post);
   return post._id; // Tracking posts by their unique ID
 }
 ngOnDestroy(): void {
@@ -117,8 +116,33 @@ sortPostsByDate(): void {
     }
   });
 }
-onLike(id){
-alert("Like clicked")
+
+isPostLiked(post: Post): boolean {
+  const userId = localStorage.getItem('userId');
+  return post.likes && post.likes.includes(userId);
+}
+
+onLike(id: string) {
+  const userId = localStorage.getItem('userId');
+  const post = this.Posts.find(p => p.id === id);
+  
+  if (!post) return;
+  
+  if (post.likes.includes(userId)) {
+    post.likes = post.likes.filter(id => id !== userId);
+  } else {
+    post.likes.push(userId);
+  }
+  
+  // Call API to update like
+  this.http.post(url + 'posts/' + id + '/like', { userId }).subscribe(
+    (response: any) => {
+      console.log('Like updated:', response);
+    },
+    (error) => {
+      console.error('Error updating like:', error);
+    }
+  );
 }
 onCommentClick(id){
   // alert("comment clicked")
