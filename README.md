@@ -76,4 +76,4 @@ src/
 
 ## 🔗 Related Repository
 
-> 🔙 Backend repo: [PostifyBE](https://github.com/Vishwaslad8549/PostifyBE) *(update with actual link)*
+> 🔙 Backend repo: [PostifyBE](https://github.com/Vishwaslad8549/PostifyBE)
