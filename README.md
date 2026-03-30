@@ -4,7 +4,7 @@
 Postify is a full-stack social media web application built with the **MEAN Stack**, enabling users to connect, share content, and engage with a community in real time.
 
 ---
-
+## Live http://postify-fe.s3-website.ap-south-1.amazonaws.com 
 ## 🌟 Features
 
 - 🔐 **Authentication & Authorization** — Secure JWT-based login, signup, and role-based access control
